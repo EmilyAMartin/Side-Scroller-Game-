@@ -2,14 +2,42 @@
     padding: 0;
     margin: 0;
     overflow: hidden;
-    background-color: #FFFFFF;
+
 }
 .game{
-    width: 964px;
-    height: 719px;
+    width: 980px;
+    height: 730px;
     margin: auto;
-    background-image: url("Background\ Resize.png");
+    background-image: url("Background.png");
     background-repeat: no-repeat;
+}
+#sprit{
+    width: 75px;
+    height: 75px;
+    position: fixed;
+    top: 620px;
+    left: 520px;
+    background-image: url(Sprit.png);
+
+}
+#butterfly{
+    width:115px;
+    height:115px;
+    position: relative;
+    top: 450px;
+    left: 650px;
+    background-image: url(Butterfly.png);
+
+}
+#plant{
+    width:120px;
+    height:260px;
+    position: relative;
+    top: 360px;
+    left: 400px;
+    background-image: url(Plant.png);
+ 
+    
 }
 h1{
     text-align: center;
