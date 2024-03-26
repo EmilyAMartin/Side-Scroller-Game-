@@ -8,7 +8,7 @@
     width: 980px;
     height: 730px;
     margin: auto;
-    background-image: url("Background.png");
+    background-image: url(Images/Background.png);
     background-repeat: no-repeat;
 }
 #sprit{
@@ -17,27 +17,29 @@
     position: fixed;
     top: 620px;
     left: 520px;
-    background-image: url(Sprit.png);
-
+    background-image: url(Images/Sprit.png);
 }
-#butterfly{
-    width:115px;
-    height:115px;
-    position: relative;
-    top: 450px;
-    left: 650px;
-    background-image: url(Butterfly.png);
-
+.animate{
+    animation: jump 0.3s linear;
+}
+@keyframes jump {
+    0%{top: 150px;}
+    30%{top: 100px;}
+    70%{top: 100px;}
+    100%{top: 150px;}
 }
 #plant{
     width:120px;
     height:260px;
     position: relative;
-    top: 360px;
+    top: 450px;
     left: 400px;
-    background-image: url(Plant.png);
- 
-    
+    background-image: url(Images/Plant.png);
+    animation: plant 1.0s infinite linear;
+}
+@keyframes plant{
+    0%{left: 400px}
+    100%{left:-20px}
 }
 h1{
     text-align: center;
@@ -48,5 +50,10 @@ h1{
     font-style: normal;
 }
 p{
-    text-align: center;
+    font-size: 1.2rem;
+    font-family:'Courier New', Courier, monospace;
+    position: relative;
+    color: #FFFFFF;
+    bottom: 240px;
+    left: 750px;
 }
