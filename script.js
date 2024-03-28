@@ -1,74 +1,60 @@
-//Canvas//
-let board;
-let boardWidth = 980;
-let boardHeight = 730;
-let context;
+var spiritCharacter;
 
-//Sprit character//
-let spritWidth = 75;
-let spritHeight = 75;
-let spritX = 75
-let spritY = 500
-let spritImg;
-
-let sprit = {
-    x : spritX,
-    y : spritY,
-    width : spritWidth,
-    height : spritHeight
+function startGame (){
+    spiritCharacter = new component(30, 30, "Spirit.png", 10, 120, "image");
+    gameArea.start();
 }
 
-//Plant obstacle//
-let plantWidth = 120;
-let plantHeight = 260;
-let plantX = 150;
-let plantY = 500;
-let plantImg;
-
-//Butterfly obstacle//
-let butterflyWidth = 115;
-let butterflyHeight = 115;
-let butterflyX = 150;
-let butterflyY = 500;
-let butterflyImg;
-
-//Game operations//
-let velocityX = 0;
-let velocityY = 0;
-let gravity = 0;
-
-let gameOver = false;
-let score = 0;
-
-// When the screen initial loads it will draw  the background and sprit (Possibly animate so it looks as if it is floating)//
-window.onload = function () {
-    board = document.getElementById("board");
-    board.height = boardHeight;
-    board.width = boardWidth;
-    context = board.getContext("2d");
-    
-    spritImg = new Image();
-    spritImg.src = "./Images/Sprit.png";
-    spritImg.onload = function() {
-    context.drawImage(spritImg, sprit.x, sprit.y, sprit.width, sprit.height); // This pulls the infomation from the section Sprit Character//
+var gameArea = {
+    canvas: document.createElement("canvas"),
+    start: function () {
+        this.canvas.width = 980;
+        this.canvas.height = 730;
+        this.context = 
+        this .canvas.getContext("2d");
+        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+        this.frameNo = 0;
+        this.interval = setInterval(updateGame, 20);
+        },
+        clear : function() {
+            this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        },
+        stop: function () {
+            clearInterval(this.interval);
+        } 
     }
 
-//Spawn Plant Obstacle//
-    plantImg = new Image();
-    plantImg.scr = "./Images/Plant.png";
-
-    butterflyImg = new Image();
-    butterflyImg.scr = "./Images/Butterfly.png"
-
-    requestAnimationFrame(update);
-    setInterval(placePlant, 1000)
-    document.addEventListener("keydown". moveSprit);}
-
-    function update() {
-    //Score//
-    context.fillStyle="black";
-    context.font="25px courier";
-    score++;
-    context.fillText(score, 15, 30);
+    function component(width, height, color, x, y, type) {
+        this.type = type;
+        if (type == "image") {
+            this.image = new Image();
+            this.image.scr = color;
+        }
+        this.width = width;
+        this.height = height;
+        this.speedX = 0;
+        this.speedY - 0;
+        this.x = x;
+        this.y = y;
+        this.update = function() {
+            ctx = gameArea.context;
+            if (type == "image") {
+                ctx.drawImage(this.image, 
+                    this.x,
+                    this.y,
+                    this.width, this.height);
+            } else {
+                ctx.fillStyle = color;
+                ctx.fillRect(this.x, this.y, this.width, this.height);
+            }
+        }
+        this.newPos = function (){
+            this.x += this.speedX;
+            this.y += this.speedY;
+        }
     }
-   
+    function updateGameArea(){
+        gameArea.clear();
+        spiritCharacter.newPos();
+        spiritCharacter.update();
+    }

@@ -4,6 +4,6 @@ body {
     text-align: center;
     background-color: #9cc1bb;
 }
-#board {
+canvas {
     background-image: url(Images/Background.png);
 }
