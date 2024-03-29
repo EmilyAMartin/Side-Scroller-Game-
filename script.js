@@ -1,61 +1,75 @@
-//Game objects//
-var spiritCharacter;
-var plantObstacle;
-var gameArea = {
-    canvas : document.createElement("canvas"),
-    start : function() {
-        this.canvas.width = 980;
-        this.canvas.height = 730;
-        this.context = this.canvas.getContext("2d");
-        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
-        this.interval = setInterval(updateGameArea, 20);
-        window.addEventListener('keydown', function (e) {
-            gameArea.keys = (gameArea.keys || []);
-            gameArea.keys[e.keyCode] = (e.type == "keydown");
-        })
-        window.addEventListener('keyup', function (e) {
-            gameArea.keys[e.keyCode] = (e.type == "keydown");            
-        })
-    }, 
-    clear : function(){
-        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    }
-}
-//Start game//
-function startGame() {
-    gameArea.start();
-    spiritCharacter = new component(75, 75, "lightgray", 100, 500); //Controls the size and location of spirit character//
-    plantObstacle = new component(120, 260, "green", 350, 450); //Controls the size and location of plant obstacle//
-}
-//This adds components to the game area//
-function component(width, height, color, x, y) {
-    this.gamearea = gameArea;
-    this.width = width;
-    this.height = height;
-    this.speedX = 0;
-    this.speedY = 0;    
-    this.x = x;
-    this.y = y;    
-    this.update = function() {
-        ctx = gameArea.context;
-        ctx.fillStyle = color;
-        ctx.fillRect(this.x, this.y, this.width, this.height);
-    }
-    this.newPos = function() {
-        this.x += this.speedX;
-        this.y += this.speedY;        
-    }    
-}
+//Game Variables// 
+//Canvas//
+let board;
+let boardWidth = 980;
+let boardHeight = 730;
+let context;
 
-function updateGameArea() {
-    gameArea.clear();
-    spiritCharacter.speedX = 0;
-    spiritCharacter.speedY = 0;
-    if (gameArea.keys && gameArea.keys[37]) {spiritCharacter.speedX = -1; }
-    if (gameArea.keys && gameArea.keys[39]) {spiritCharacter.speedX = 1; }
-    if (gameArea.keys && gameArea.keys[38]) {spiritCharacter.speedY = -1; }
-    if (gameArea.keys && gameArea.keys[40]) {spiritCharacter.speedY = 1; }
-    plantObstacle.update();
-    spiritCharacter.newPos();
-    spiritCharacter.update();
-  }
+//Spirit character//
+let spiritImg;
+let spiritWidth = 75;
+let spiritHeight = 75;
+let spiritX = 75;
+let spiritY = 500;
+
+//Spirit object//
+let sprit = {
+    x : spiritX,
+    y : spiritY,
+    width : spiritWidth,
+    height : spiritHeight
+} 
+
+//Plant obstacle//
+let plantImg;
+let plantWidth = 120;
+let plantHeight = 260;
+let plantX = 150;
+let plantY = 500;
+
+//Butterfly obstacle//
+let butterflyImg;
+let butterflyWidth = 115;
+let butterflyHeight = 115;
+let butterflyX = 150;
+let butterflyY = 500;
+
+//Game Physics and Operations//
+let velocityX = 0;
+let velocityY = 0;
+let gravity = 0;
+let gameOver = false;
+let score = 0;
+
+//Game Functions//
+// When Screen Loads// *Possibly animate the spirit so it floating
+window.onload = function () {
+    board = document.getElementById("board");
+    board.height = boardHeight;
+    board.width = boardWidth;
+    context = board.getContext("2d"); //This draws the game background//
+    
+    spritImg = new Image();
+    spritImg.src = "./Images/Spirit.png";
+    spritImg.onload = function() {
+    context.drawImage(spritImg, sprit.x, sprit.y, sprit.width, sprit.height); // This draws the spirit character//
+    }
+
+//Plant Obstacle//
+    plantImg = new Image();
+    plantImg.scr = "./Images/Plant.png";
+
+    butterflyImg = new Image();
+    butterflyImg.scr = "./Images/Butterfly.png"
+
+    requestAnimationFrame(update);
+    setInterval(placePlant, 1000)
+    document.addEventListener("keydown". moveSprit);} //This will tell the browser that you want to perform an animation//
+
+    function update() {
+    //Score//
+    context.fillStyle="black";
+    context.font="25px courier";
+    score++;
+    context.fillText(score, 15, 30);
+    }

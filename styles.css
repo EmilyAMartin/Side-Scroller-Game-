@@ -4,6 +4,17 @@ body {
     text-align: center;
     background-color: #9cc1bb;
 }
-canvas {
+
+button {
+ font-size: 3.0rem;
+ border-radius: 10%;
+ border-color:lightgray;
+}
+#board {
     background-image: url(Images/Background.png);
+}
+.rectangle {
+    width: 980px;
+    height: 730px;
+    background-color: #445545;
 }
