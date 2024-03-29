@@ -2,8 +2,9 @@ body {
     font-family: "Amatic SC", sans-serif;
     font-size: 1.5rem;
     text-align: center;
-    background-color: #9cc1bb;
 }
-#board {
-    background-image: url(Images/Background.png);
+.rectangle {
+    width: 980px;
+    height: 730px;
+    background-color: #9cc1bb;
 }
