@@ -1,3 +1,22 @@
+//Game Menu//
+let runGame = function(){
+    document.getElementById("newGame").style.display = "none";
+    document.getElementById("theHead").style.display = "none";      
+    document.getElementById("main").style.display = "block";
+    document.getElementById("instructionsBtn").style.display = "none";
+  };
+ let showInstructions = function(){
+   document.getElementById("theHead").style.display = "none";
+   document.getElementById("instructionsBtn").style.display = "none";
+   document.getElementById("newGame").style.display = "none";
+   document.getElementById("backBtn").style.display = "block";
+ }; 
+let goBack = function(){
+  document.getElementById("backBtn").style.display = "none";
+  document.getElementById("theHead").style.display = "block";
+  document.getElementById("newGame").style.display = "block";
+  document.getElementById("instructionsBtn").style.display = "block";
+};
 //Game Variables// 
 //Canvas//
 let board;

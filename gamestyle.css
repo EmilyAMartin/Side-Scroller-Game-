@@ -1,0 +1,35 @@
+body {
+    background: #9cc1b8;
+    color: #fff;
+    font-family: "Amatic SC", sans-serif;
+    font-size: 2em;
+    text-align: center;
+  }
+  #main{
+    display: none;
+  }
+  #newGame, #instructionsBtn, #backBtn{
+    text-align: center;
+    vertical-align: middle;
+    border: 2px solid #39483c;
+    border-radius: 7px;
+    background-color:#638b7e;
+    color: #000000;
+    font-size: 2rem;
+    font-weight: bold;
+    font-family: "Amatic SC", sans-serif;
+    width: 5em;
+    margin: 5px auto; 
+  }
+  #theHead{
+    margin: auto;
+    color: #000000;
+    font-size: 2em;
+    font-family: "Amatic SC", sans-serif;
+  }
+  #backBtn{
+    display: none;
+  }
+  #board {
+    background-image: url(Images/Background.png);
+}

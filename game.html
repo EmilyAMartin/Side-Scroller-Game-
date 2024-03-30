@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will-o-the-wisp Game</title>
+    <link rel="stylesheet" href="gamestyle.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap" rel="stylesheet">
+    <script src="script.js"></script>
+</head>
+<body>
+    <div id="theHead">Will-o-the-Wisp Game</div>
+    <div id="newGame" onclick="runGame()" onmouseover="this.style.backgroundColor = 'gray'">New Game</div>
+    <div id="instructionsBtn" onmouseover="this.style.backgroundColor = 'lightgray'" onclick="showInstructions()">Insturctions</div>
+    <div id="backBtn" onmouseover="this.style.backgroundColor = 'lightgray'" onclick="goBack()">Back</div>
+    <div id="main">
+    <canvas id="board"></canvas> 
+</body>
+</html>
