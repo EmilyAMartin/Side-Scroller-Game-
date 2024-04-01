@@ -1,7 +1,8 @@
 //Game Menu//
 let runGame = function(){
     document.getElementById("newGame").style.display = "none";
-    document.getElementById("theHead").style.display = "none";      
+    document.getElementById("theHead").style.display = "none";    
+    document.getElementById("instructions").style.display = "none";
     document.getElementById("main").style.display = "block";
     document.getElementById("instructionsBtn").style.display = "none";
   };
@@ -9,10 +10,12 @@ let runGame = function(){
    document.getElementById("theHead").style.display = "none";
    document.getElementById("instructionsBtn").style.display = "none";
    document.getElementById("newGame").style.display = "none";
+   document.getElementById("instructions").style.display = "block";
    document.getElementById("backBtn").style.display = "block";
  }; 
 let goBack = function(){
   document.getElementById("backBtn").style.display = "none";
+  document.getElementById("instructions").style.display = "none";
   document.getElementById("theHead").style.display = "block";
   document.getElementById("newGame").style.display = "block";
   document.getElementById("instructionsBtn").style.display = "block";
@@ -100,7 +103,7 @@ window.onload = function () {
         for (let i = 0; i < obstacleArray.length; i++) {
             let obstacle = obstacleArray[i];
             obstacle.x += velocityX;
-            context.drawImage(obstacle.img, obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+            context.drawImage(obstacle.img, obstacle.X, obstacle.Y, obstacle.width, obstacle.height);
     
             if (detectCollision(spirit, obstacle)) {
                 gameOver = true;

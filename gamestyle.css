@@ -30,6 +30,15 @@ body {
   #backBtn{
     display: none;
   }
+  #instructions{
+    margin: auto;
+    color: #39483c;
+    font-size: 1rem;
+    font-family: "Amatic SC", sans-serif;
+    display: none;
+    background-color: inherit;
+  }
   #board {
     background-image: url(Images/Background.png);
-}
+    margin-top: 80px;
+  }
