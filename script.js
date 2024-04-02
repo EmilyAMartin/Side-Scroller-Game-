@@ -43,17 +43,19 @@ let spirit = {
 } 
 
 //Obstacles//
-let obstacleArray = [];
+let plantImg;
+let plantWidth = 75;
+let plantHeight = 75;
+let plantX = 75;
+let plantY = 500;
 
-let obstacle1Width = 120;
-let obstacle2Width = 115; 
-
-let obstacleHeight = 260;
-let obstacleX = 700;
-let obstacleY = boardHeight - obstacleHeight;
-
-let obstacle1Img;
-let obstacle2Img;
+//Spirit object//
+let plant = {
+    x : plantX,
+    y : plantY,
+    width : plantWidth,
+    height : plantHeight
+} 
 
 //Game Physics and Operations//
 let velocityX = -8;
@@ -77,12 +79,9 @@ window.onload = function () {
     context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height); // This draws the spirit character//
     }
 
-    //Obstacles//
-    obstacle1Img = new Image();
-    obstacle1Img.scr = "./Images/Plant.png";
-
-    obstacle2Img = new Image();
-    obstacle2Img.scr = "./Images/Butterfly.png"
+    //Obstacle//
+    plantImg = new Image();
+    plantImg.scr = "./Images/Plant.png";
 
     requestAnimationFrame(update);
     setInterval(placePlant, 1000)
@@ -100,12 +99,12 @@ window.onload = function () {
         context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height);
     
         //Obstacles//
-        for (let i = 0; i < obstacleArray.length; i++) {
-            let obstacle = obstacleArray[i];
-            obstacle.x += velocityX;
-            context.drawImage(obstacle.img, obstacle.X, obstacle.Y, obstacle.width, obstacle.height);
+        for (let i = 0; i < plantImg; i++) {
+            let plant = plantImg[i];
+            plant.x += velocityX;
+            context.drawImage(plantImg, plant.x, plant.y, plant.width, plant.height);
     
-            if (detectCollision(spirit, obstacle)) {
+            if (detectCollision(spirit, plant)) {
                 gameOver = true;
             }
         }
@@ -130,4 +129,34 @@ function moveSpirit(e) {
         //duck
     }
 
+}
+
+function placePlant() {
+    if (gameOver) {
+        return;
+    }
+
+    //place plant
+    let plant = {
+        img : null,
+        x : plantX,
+        y : plantY,
+        width : null,
+        height: plantHeight
+    }
+
+    let placePlantChance = Math.random(); //0 - 0.9999...
+
+    if (placePlantChance > .90) { //10% you get cactus3
+        plant.img = cactus3Img;
+        plant.width = plantWidth;
+        plant.push(plant);
+    }
+}
+
+function detectCollision(a, b) {
+    return a.x < b.x + b.width &&   //a's top left corner doesn't reach b's top right corner
+           a.x + a.width > b.x &&   //a's top right corner passes b's top left corner
+           a.y < b.y + b.height &&  //a's top left corner doesn't reach b's bottom left corner
+           a.y + a.height > b.y;    //a's bottom left corner passes b's top left corner
 }
