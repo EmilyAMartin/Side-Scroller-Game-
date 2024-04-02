@@ -28,11 +28,11 @@ let boardHeight = 730;
 let context;
 
 //Spirit character//
-let spiritImg;
 let spiritWidth = 75;
 let spiritHeight = 75;
 let spiritX = 75;
-let spiritY = 500;
+let spiritY = boardHeight - spiritHeight;
+let spiritImg;
 
 //Spirit object//
 let spirit = {
@@ -41,26 +41,24 @@ let spirit = {
     width : spiritWidth,
     height : spiritHeight
 } 
-
 //Obstacles//
-let plantImg;
-let plantWidth = 75;
-let plantHeight = 75;
-let plantX = 75;
-let plantY = 500;
+let obstacleArray = [];
 
-//Spirit object//
-let plant = {
-    x : plantX,
-    y : plantY,
-    width : plantWidth,
-    height : plantHeight
-} 
+let obstacle1Width = 120;
+let obstacle2Width = 115; 
+
+let obstacleHeight = 260;
+let obstacleX = 700;
+let obstacleY = boardHeight - obstacleHeight;
+
+let obstacle1Img;
+let obstacle2Img;
 
 //Game Physics and Operations//
 let velocityX = -8;
 let velocityY = 0;
 let gravity = .4;
+
 let gameOver = false;
 let score = 0;
 
@@ -74,18 +72,21 @@ window.onload = function () {
 
 //Draws spirit character//
     spiritImg = new Image();
-    spiritImg.src = "./Images/Spirit.png";
+    spiritImg.src = "./img/spirit.png";
     spiritImg.onload = function() {
     context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height); // This draws the spirit character//
     }
 
-    //Obstacle//
-    plantImg = new Image();
-    plantImg.scr = "./Images/Plant.png";
+    //Obstacles//
+    obstacle1Img = new Image();
+    obstacle1Img.scr = "./img/obstacle1.png";
+
+    obstacle2Img = new Image();
+    obstacle2Img.scr = "./img/obstacle2.png"
 
     requestAnimationFrame(update);
-    setInterval(placePlant, 1000)
-    document.addEventListener("keydown". moveSpirit); //This will tell the browser that you want to perform an animation//
+    setInterval(placeObstacle, 1000)
+    document.addEventListener("keydown", moveSpirit); //This will tell the browser that you want to perform an animation//
 }
     function update() {
         if (gameOver) {
@@ -99,12 +100,12 @@ window.onload = function () {
         context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height);
     
         //Obstacles//
-        for (let i = 0; i < plantImg; i++) {
-            let plant = plantImg[i];
-            plant.x += velocityX;
-            context.drawImage(plantImg, plant.x, plant.y, plant.width, plant.height);
+        for (let i = 0; i < obstacleArray.length; i++) {
+            let obstacle = obstacleArray[i];
+            obstacle.x += velocityX;
+            context.drawImage(obstacle.img, obstacle.x, obstacle.y, obstacle.width, obstacle.height);
     
-            if (detectCollision(spirit, plant)) {
+            if (detectCollision(spirit, obstacle)) {
                 gameOver = true;
             }
         }
@@ -113,9 +114,7 @@ window.onload = function () {
         context.font="20px courier";
         score++;
         context.fillText(score, 5, 20);
-    }
-
-    
+    }   
 function moveSpirit(e) {
     if (gameOver) {
         return;
@@ -131,26 +130,33 @@ function moveSpirit(e) {
 
 }
 
-function placePlant() {
+function placeObstacle() {
     if (gameOver) {
         return;
     }
-
-    //place plant
-    let plant = {
+    let obstacle = {
         img : null,
-        x : plantX,
-        y : plantY,
+        x : obstacleX,
+        y : obstacleY,
         width : null,
-        height: plantHeight
+        height: obstacleHeight
     }
 
-    let placePlantChance = Math.random(); //0 - 0.9999...
+    let placeObstacleChance = Math.random(); //0 - 0.9999...
 
-    if (placePlantChance > .90) { //10% you get cactus3
-        plant.img = cactus3Img;
-        plant.width = plantWidth;
-        plant.push(plant);
+    if (placeObstacleChance > .50) { //10% you get cactus3
+        obstacle.img = obstacle2Img;
+        obstacle.width = obstacle2Width;
+        obstacleArray.push(obstacle);
+    }
+    else if (placeObstacleChance > .30) { //30% you get cactus2
+        obstacle.img = obstacle2Img;
+        obstacle.width = obstacle2Width;
+        obstacleArray.push(obstacle);
+    }
+
+    if (obstacleArray.length > 5) {
+        obstacleArray.shift(); //remove the first element from the array so that the array doesn't constantly grow
     }
 }
 

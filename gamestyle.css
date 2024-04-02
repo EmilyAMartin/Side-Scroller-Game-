@@ -1,5 +1,5 @@
 body {
-    background: #ffffff;
+    background-color: #9cc1bb;
     color: #000000;
     font-family: "Amatic SC", sans-serif;
     font-size: 2em;
@@ -11,7 +11,7 @@ body {
   #game{
     width: 980px;
     height: 730px;
-    background-image: url(Images/Menu.png);
+    background-image: url(img/menu.png);
     margin: 80px auto;
   }
   #newGame, #instructionsBtn, #backBtn{
@@ -45,5 +45,5 @@ body {
     background-color: inherit;
   }
   #board {
-    background-image: url(Images/Background.png);
+    background-image: url(img/background.png);
   }
