@@ -15,7 +15,12 @@
         <div id="instructionsBtn" onmouseover="this.style.backgroundColor = 'lightgray'" onmouseout="this.style.backgroundColor = '#9cc1b8'" onclick="showInstructions()">Insturctions</div>
         <div id="instructions"> Here is where the game instructions will be written</div>
         <div id="backBtn" onmouseover="this.style.backgroundColor = 'lightgray'" onmouseout="this.style.backgroundColor = '#9cc1b8'" onclick="goBack()">Back</div>
-        <div id="main"><canvas id="board"></canvas></div>
+        <div id="main">
+            <canvas id="board"></canvas>
+            <button id="soundbutton" onclick="toggleMuted()">Mute | Unmute</button>
+            <audio id="sound" autoplay="autoplay" loop="loop"><source src="song.mp3" type="audio/mp3"></audio>
+        </div>
+        
     </div>
 </body>
 </html>

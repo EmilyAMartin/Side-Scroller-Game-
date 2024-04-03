@@ -45,11 +45,11 @@ let spirit = {
 let obstacleArray = [];
 
 let obstacle1Width = 120;
-let obstacle2Width = 115; 
+let obstacle2Width = 115;
 
-let obstacleHeight = 260;
+let obstacleHeight = 230;
 let obstacleX = 700;
-let obstacleY = boardHeight - obstacleHeight;
+let obstacleY = 500;
 
 let obstacle1Img;
 let obstacle2Img;
@@ -79,16 +79,22 @@ window.onload = function () {
 
     //Obstacles//
     obstacle1Img = new Image();
-    obstacle1Img.scr = "./img/obstacle1.png";
+    obstacle1Img.src = "./img/obstacle1.png";
 
     obstacle2Img = new Image();
-    obstacle2Img.scr = "./img/obstacle2.png"
+    obstacle2Img.src = "./img/obstacle2.png";
 
     requestAnimationFrame(update);
-    setInterval(placeObstacle, 1000)
-    document.addEventListener("keydown", moveSpirit); //This will tell the browser that you want to perform an animation// 
-    //*Possibly animate the spirit so it floating or use multi button movement contorls//
-}
+    setInterval(placeObstacle, 1000); //1000 milliseconds = 1 second
+    document.addEventListener("keydown", moveSpirit);
+   
+    function toggleMuted() {
+        let sound = document.getElementById('sound');
+        sound.muted = !sound.muted;
+      }
+} 
+//This will tell the browser that you want to perform an animation// 
+//*Possibly animate the spirit so it floating or use multi button movement contorls//
     function update() {
         requestAnimationFrame(update);
         if (gameOver) {
@@ -105,7 +111,7 @@ window.onload = function () {
         for (let i = 0; i < obstacleArray.length; i++) {
             let obstacle = obstacleArray[i];
             obstacle.x += velocityX;
-            context.drawImage(obstacle.img, obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+            context.drawImage(obstacle.img, obstacle.x, obstacle.y, obstacle.width, obstacle.height)
     
             if (detectCollision(spirit, obstacle)) {
                 gameOver = true;
@@ -141,6 +147,8 @@ function placeObstacle() {
     if (gameOver) {
         return;
     }
+
+    //place obstacle
     let obstacle = {
         img : null,
         x : obstacleX,
@@ -151,7 +159,7 @@ function placeObstacle() {
 
     let placeObstacleChance = Math.random();
 
-    if (placeObstacleChance > .70) {
+    if (placeObstacleChance > .50) { 
         obstacle.img = obstacle2Img;
         obstacle.width = obstacle2Width;
         obstacleArray.push(obstacle);
@@ -168,7 +176,7 @@ function placeObstacle() {
 }
 
 function detectCollision(a, b) {
-    return a.x < b.x + b.width &&  
+    return a.x < b.x + b.width &&   
            a.x + a.width > b.x &&   
            a.y < b.y + b.height &&  
            a.y + a.height > b.y;    
