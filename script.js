@@ -48,7 +48,7 @@ let obstacle1Width = 120;
 let obstacle2Width = 115;
 
 let obstacleHeight = 230;
-let obstacleX = 700;
+let obstacleX = 980;
 let obstacleY = 500;
 
 let obstacle1Img;
@@ -60,6 +60,7 @@ let velocityY = 0;
 let gravity = .4;
 
 let gameOver = false;
+let downPressed = false;
 let score = 0;
 
 //Game Functions//
@@ -101,7 +102,7 @@ window.onload = function () {
             return;
         }
         context.clearRect(0, 0, board.width, board.height); //This clears the canvas//
-       
+        
         //Spirit Character// 
         velocityY += gravity;
         spirit.y = Math.min(spirit.y + velocityY, spiritY); // Applies gravity to spirit
@@ -180,4 +181,14 @@ function detectCollision(a, b) {
            a.x + a.width > b.x &&   
            a.y < b.y + b.height &&  
            a.y + a.height > b.y;    
+}
+
+function drawDeath() {
+    canvas.getContext("2d").font = "20px Courier New";
+    canvas.getContext("2d").textAlign = 'center';
+    canvas.getContext("2d").fillStyle = "#000000";
+    canvas.getContext("2d").fillText("HAHA YU LOOZD (pres doun arouw tu x-it)", canvas.width/2, canvas.height/2);
+    if (downPressed == true)
+    document.location.reload();
+    if (!gameOver) requestAnimationFrame(draw)
 }
