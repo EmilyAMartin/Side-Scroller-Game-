@@ -124,22 +124,37 @@ window.onload = function () {
             }
         }
     
-        //score
+        //Score on screen//
         context.fillStyle="black";
         context.font="20px courier";
         score++;
         context.fillText(score, 5, 20);
+       
+        //Gameover on screen message//
+        if(gameOver) {
+            context.fillStyle="white";
+            context.font="50px courier";
+            context.fillText("GAME OVER", 360, 360,);
+        }
     } 
 
 //*Possibly animate the spirit so it floating or use multi button movement contorls//
 function moveSpirit(e) {
-    if (gameOver) {
-        return;
-    }
-
     if ((e.code == "Space" || e.code == "ArrowUp") && spirit.y == spiritY) {
         //jump
         velocityY = -10;
+    }
+   // Resets the Game// 
+    if(gameOver){
+        spirit.y = spiritY;
+        obstacleArray = [];
+        score = 0;
+        gameOver = false;
+        spiritImg = new Image();
+        spiritImg.src = "./img/spirit.png";
+        spiritImg.onload = function() {
+        context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height); // This draws the spirit character//
+        }
     }
 
 }
@@ -181,14 +196,5 @@ function detectCollision(a, b) {
            a.x + a.width > b.x &&   
            a.y < b.y + b.height &&  
            a.y + a.height > b.y;    
-}
-
-function drawDeath() {
-    canvas.getContext("2d").font = "20px Courier New";
-    canvas.getContext("2d").textAlign = 'center';
-    canvas.getContext("2d").fillStyle = "#000000";
-    canvas.getContext("2d").fillText("HAHA YU LOOZD (pres doun arouw tu x-it)", canvas.width/2, canvas.height/2);
-    if (downPressed == true)
-    document.location.reload();
-    if (!gameOver) requestAnimationFrame(draw)
+           
 }
