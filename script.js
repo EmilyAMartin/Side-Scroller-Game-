@@ -31,7 +31,7 @@ let context;
 let spiritWidth = 75;
 let spiritHeight = 75;
 let spiritX = 75;
-let spiritY = boardHeight - spiritHeight;
+let spiritY = 500;
 let spiritImg;
 
 //Spirit object//
@@ -63,7 +63,7 @@ let gameOver = false;
 let score = 0;
 
 //Game Functions//
-// When Screen Loads// *Possibly animate the spirit so it floating or use multi button movement contorls
+// When Screen Loads// 
 window.onload = function () {
     board = document.getElementById("board");
     board.height = boardHeight;
@@ -86,20 +86,22 @@ window.onload = function () {
 
     requestAnimationFrame(update);
     setInterval(placeObstacle, 1000)
-    document.addEventListener("keydown", moveSpirit); //This will tell the browser that you want to perform an animation//
+    document.addEventListener("keydown", moveSpirit); //This will tell the browser that you want to perform an animation// 
+    //*Possibly animate the spirit so it floating or use multi button movement contorls//
 }
     function update() {
+        requestAnimationFrame(update);
         if (gameOver) {
             return;
         }
         context.clearRect(0, 0, board.width, board.height); //This clears the canvas//
        
-        //Spirit Character
+        //Spirit Character// 
         velocityY += gravity;
-        spirit.y = Math.min(spirit.y + velocityY, spiritY); //apply gravity to current spirit.y so it doesn't exceed the ground//
+        spirit.y = Math.min(spirit.y + velocityY, spiritY); // Applies gravity to spirit
         context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height);
     
-        //Obstacles//
+        //Drawing Obstacles and Game over//
         for (let i = 0; i < obstacleArray.length; i++) {
             let obstacle = obstacleArray[i];
             obstacle.x += velocityX;
@@ -107,14 +109,22 @@ window.onload = function () {
     
             if (detectCollision(spirit, obstacle)) {
                 gameOver = true;
+                spiritImg.src = "./img/spirit-dead.png";
+                spiritImg.onload = function() {
+                    context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height);
+                //Add a game over image and an option to try again//
+                }
             }
         }
+    
         //score
         context.fillStyle="black";
         context.font="20px courier";
         score++;
         context.fillText(score, 5, 20);
-    }   
+    } 
+
+//*Possibly animate the spirit so it floating or use multi button movement contorls//
 function moveSpirit(e) {
     if (gameOver) {
         return;
@@ -123,9 +133,6 @@ function moveSpirit(e) {
     if ((e.code == "Space" || e.code == "ArrowUp") && spirit.y == spiritY) {
         //jump
         velocityY = -10;
-    }
-    else if (e.code == "ArrowDown" && spirit.y == spiritY) {
-        //duck
     }
 
 }
@@ -142,27 +149,27 @@ function placeObstacle() {
         height: obstacleHeight
     }
 
-    let placeObstacleChance = Math.random(); //0 - 0.9999...
+    let placeObstacleChance = Math.random();
 
-    if (placeObstacleChance > .50) { //10% you get cactus3
+    if (placeObstacleChance > .70) {
         obstacle.img = obstacle2Img;
         obstacle.width = obstacle2Width;
         obstacleArray.push(obstacle);
     }
-    else if (placeObstacleChance > .30) { //30% you get cactus2
-        obstacle.img = obstacle2Img;
-        obstacle.width = obstacle2Width;
+    else if (placeObstacleChance > .50) { 
+        obstacle.img = obstacle1Img;
+        obstacle.width = obstacle1Width;
         obstacleArray.push(obstacle);
     }
 
     if (obstacleArray.length > 5) {
-        obstacleArray.shift(); //remove the first element from the array so that the array doesn't constantly grow
+        obstacleArray.shift(); //Keeps array from growing//
     }
 }
 
 function detectCollision(a, b) {
-    return a.x < b.x + b.width &&   //a's top left corner doesn't reach b's top right corner
-           a.x + a.width > b.x &&   //a's top right corner passes b's top left corner
-           a.y < b.y + b.height &&  //a's top left corner doesn't reach b's bottom left corner
-           a.y + a.height > b.y;    //a's bottom left corner passes b's top left corner
+    return a.x < b.x + b.width &&  
+           a.x + a.width > b.x &&   
+           a.y < b.y + b.height &&  
+           a.y + a.height > b.y;    
 }
