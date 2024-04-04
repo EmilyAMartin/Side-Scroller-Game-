@@ -1,3 +1,69 @@
+//Game Variables// 
+let canvas = document.getElementById("canvas");
+let cxt = canvas.getContext("2d"); 
+let bg1 = {
+    width:980,
+    height:730,
+    x:0,
+    y:0,
+}
+let bg2 = {
+    width:980,
+    height:730,
+    x:980,
+    y:0,
+}
+let bg3 = {
+    width:980,
+    height:730,
+    x:1960,
+    y:0,
+}
+let interval = setInterval(function() {
+    bg1.x -= 20;
+    bg2.x -= 20;
+    bg3.x -= 20;
+    if (bg1.x + bg1.width <= 0) {
+        bg1.x = bg3.x + bg3.width;
+    }
+    if (bg2.x + bg2.width <= 0) {
+        bg2.x = bg1.x + bg1.width;
+    }
+    if (bg3.x + bg3.width <= 0) {
+        bg3.x = bg2.x + bg2.width;
+    }
+}, 50);
+
+let spiritWidth = 75;
+let spiritHeight = 75;
+let spiritX = 75;
+let spiritY = 500;
+let spiritImg;
+let spirit = {
+    x : spiritX,
+    y : spiritY,
+    width : spiritWidth,
+    height : spiritHeight
+} 
+
+let obstacleArray = [];
+let obstacle1Width = 120;
+let obstacle2Width = 115;
+let obstacleHeight = 230;
+let obstacleX = 980;
+let obstacleY = 500;
+let obstacle1Img;
+let obstacle2Img;
+
+//Game Physics and Operations//
+let velocityX = -8;
+let velocityY = 0;
+let gravity = .4;
+
+let gameOver = false;
+let downPressed = false;
+let score = 0;
+
 //Game Menu//
 let runGame = function(){
     document.getElementById("newGame").style.display = "none";
@@ -24,116 +90,63 @@ let goBack = function(){
   document.getElementById("instructionsBtn").style.display = "block";
 };
 
-//Game Variables// 
-//Canvas//
-let board;
-let boardWidth = 980;
-let boardHeight = 730;
-let context;
-
-//Spirit Character//
-let spiritWidth = 75;
-let spiritHeight = 75;
-let spiritX = 75;
-let spiritY = 500;
-let spiritImg;
-let spirit = {
-    x : spiritX,
-    y : spiritY,
-    width : spiritWidth,
-    height : spiritHeight
-} 
-//Obstacles//
-let obstacleArray = [];
-let obstacle1Width = 120;
-let obstacle2Width = 115;
-let obstacleHeight = 230;
-let obstacleX = 980;
-let obstacleY = 500;
-let obstacle1Img;
-let obstacle2Img;
-
-//Game Physics and Operations//
-let velocityX = -8;
-let velocityY = 0;
-let gravity = .4;
-
-let gameOver = false;
-let downPressed = false;
-let score = 0;
-
 //Game Functions//
-// When Screen Loads// 
 window.onload = function () {
-    board = document.getElementById("board");
-    board.height = boardHeight;
-    board.width = boardWidth;
-    context = board.getContext("2d"); //This draws the game background//
-
-//Draws spirit character//
-    spiritImg = new Image();
+   
+    spiritImg = new Image(); // This draws the spirit character//
     spiritImg.src = "./img/spirit.png";
     spiritImg.onload = function() {
-    context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height); // This draws the spirit character//
+    context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height); 
     }
 
-    //Obstacles//
     obstacle1Img = new Image();
     obstacle1Img.src = "./img/obstacle1.png";
-
     obstacle2Img = new Image();
     obstacle2Img.src = "./img/obstacle2.png";
 
     requestAnimationFrame(update);
     setInterval(placeObstacle, 1000); //1000 milliseconds = 1 second
     document.addEventListener("keydown", moveSpirit);
-   
-    function toggleMuted() {
-        let sound = document.getElementById('sound');
-        sound.muted = !sound.muted;
-      }
 } 
-//This will tell the browser that you want to perform an animation// 
-//*Possibly animate the spirit so it floating or use multi button movement contorls//
-    function update() {
-        requestAnimationFrame(update);
-        if (gameOver) {
+
+function update() { //This will tell the browser that you want to perform an animation// 
+    requestAnimationFrame(update);
+    if (gameOver) {
             return;
-        }
-        context.clearRect(0, 0, board.width, board.height); //This clears the canvas//
+    }
+    context.clearRect(0, 0, board.width, board.height); //This clears the canvas//
         
-        //Spirit Character// 
-        velocityY += gravity;
-        spirit.y = Math.min(spirit.y + velocityY, spiritY); // Applies gravity to spirit
-        context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height);
+    //Spirit Character// 
+    velocityY += gravity;
+    spirit.y = Math.min(spirit.y + velocityY, spiritY); // Applies gravity to spirit
+    context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height);
     
-        //Drawing Obstacles and Game over//
-        for (let i = 0; i < obstacleArray.length; i++) {
-            let obstacle = obstacleArray[i];
-            obstacle.x += velocityX;
-            context.drawImage(obstacle.img, obstacle.x, obstacle.y, obstacle.width, obstacle.height)
+    //Drawing Obstacles and Game over//
+    for (let i = 0; i < obstacleArray.length; i++) {
+        let obstacle = obstacleArray[i];
+        obstacle.x += velocityX;
+        context.drawImage(obstacle.img, obstacle.x, obstacle.y, obstacle.width, obstacle.height)
     
-            if (detectCollision(spirit, obstacle)) {
-                gameOver = true;
-                spiritImg.src = "./img/spirit-dead.png";
-                spiritImg.onload = function() {
-                    context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height);
-                //Add a game over image and an option to try again//
+    if (detectCollision(spirit, obstacle)) {
+        gameOver = true;
+        spiritImg.src = "./img/spirit-dead.png";
+        spiritImg.onload = function() {
+        context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height); //Add a game over image and an option to try again//
                 }
             }
         }
     
-        //Score on screen//
+    //Score on screen//
         context.fillStyle="white";
         context.font="20px courier";
         score++;
         context.fillText(score, 15, 30);
        
-        //Gameover on screen message//
-        if(gameOver) {
-            context.fillStyle="white";
-            context.font="50px courier";
-            context.fillText("GAME OVER", 360, 360,);
+    //Gameover on screen message//
+    if(gameOver) {
+        context.fillStyle="white";
+        context.font="50px courier";
+        context.fillText("GAME OVER", 360, 360,);
         }
     } 
 
