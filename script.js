@@ -5,12 +5,14 @@ let runGame = function(){
     document.getElementById("instructions").style.display = "none";
     document.getElementById("main").style.display = "block";
     document.getElementById("instructionsBtn").style.display = "none";
+    document.getElementById("soundBtn").style.display = "none";
   };
  let showInstructions = function(){
    document.getElementById("theHead").style.display = "none";
    document.getElementById("instructionsBtn").style.display = "none";
    document.getElementById("newGame").style.display = "none";
    document.getElementById("instructions").style.display = "block";
+   document.getElementById("soundBtn").style.display = "block";
    document.getElementById("backBtn").style.display = "block";
  }; 
 let goBack = function(){
@@ -18,8 +20,10 @@ let goBack = function(){
   document.getElementById("instructions").style.display = "none";
   document.getElementById("theHead").style.display = "block";
   document.getElementById("newGame").style.display = "block";
+  document.getElementById("soundBtn").style.display = "block";
   document.getElementById("instructionsBtn").style.display = "block";
 };
+
 //Game Variables// 
 //Canvas//
 let board;
@@ -27,14 +31,12 @@ let boardWidth = 980;
 let boardHeight = 730;
 let context;
 
-//Spirit character//
+//Spirit Character//
 let spiritWidth = 75;
 let spiritHeight = 75;
 let spiritX = 75;
 let spiritY = 500;
 let spiritImg;
-
-//Spirit object//
 let spirit = {
     x : spiritX,
     y : spiritY,
@@ -43,14 +45,11 @@ let spirit = {
 } 
 //Obstacles//
 let obstacleArray = [];
-
 let obstacle1Width = 120;
 let obstacle2Width = 115;
-
 let obstacleHeight = 230;
 let obstacleX = 980;
 let obstacleY = 500;
-
 let obstacle1Img;
 let obstacle2Img;
 
@@ -125,10 +124,10 @@ window.onload = function () {
         }
     
         //Score on screen//
-        context.fillStyle="black";
+        context.fillStyle="white";
         context.font="20px courier";
         score++;
-        context.fillText(score, 5, 20);
+        context.fillText(score, 15, 30);
        
         //Gameover on screen message//
         if(gameOver) {
@@ -140,7 +139,7 @@ window.onload = function () {
 
 //*Possibly animate the spirit so it floating or use multi button movement contorls//
 function moveSpirit(e) {
-    if ((e.code == "Space" || e.code == "ArrowUp") && spirit.y == spiritY) {
+    if ((e.code == "ArrowUp") && spirit.y == spiritY) {
         //jump
         velocityY = -10;
     }
