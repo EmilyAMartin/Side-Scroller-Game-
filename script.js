@@ -1,38 +1,34 @@
+//Game Menu//
+let runGame = function(){
+    document.getElementById("newGame").style.display = "none";
+    document.getElementById("theHead").style.display = "none";    
+    document.getElementById("instructions").style.display = "none";
+    document.getElementById("main").style.display = "block";
+    document.getElementById("instructionsBtn").style.display = "none";
+    document.getElementById("soundBtn").style.display = "none";
+  };
+ let showInstructions = function(){
+   document.getElementById("theHead").style.display = "none";
+   document.getElementById("instructionsBtn").style.display = "none";
+   document.getElementById("newGame").style.display = "none";
+   document.getElementById("instructions").style.display = "block";
+   document.getElementById("soundBtn").style.display = "block";
+   document.getElementById("backBtn").style.display = "block";
+ }; 
+let goBack = function(){
+  document.getElementById("backBtn").style.display = "none";
+  document.getElementById("instructions").style.display = "none";
+  document.getElementById("theHead").style.display = "block";
+  document.getElementById("newGame").style.display = "block";
+  document.getElementById("soundBtn").style.display = "block";
+  document.getElementById("instructionsBtn").style.display = "block";
+};
+
 //Game Variables// 
-let canvas = document.getElementById("canvas");
-let cxt = canvas.getContext("2d"); 
-let bg1 = {
-    width:980,
-    height:730,
-    x:0,
-    y:0,
-}
-let bg2 = {
-    width:980,
-    height:730,
-    x:980,
-    y:0,
-}
-let bg3 = {
-    width:980,
-    height:730,
-    x:1960,
-    y:0,
-}
-let interval = setInterval(function() {
-    bg1.x -= 20;
-    bg2.x -= 20;
-    bg3.x -= 20;
-    if (bg1.x + bg1.width <= 0) {
-        bg1.x = bg3.x + bg3.width;
-    }
-    if (bg2.x + bg2.width <= 0) {
-        bg2.x = bg1.x + bg1.width;
-    }
-    if (bg3.x + bg3.width <= 0) {
-        bg3.x = bg2.x + bg2.width;
-    }
-}, 50);
+let board;
+let boardWidth = 980;
+let boardHeight = 730;
+let context;
 
 let spiritWidth = 75;
 let spiritHeight = 75;
@@ -64,35 +60,12 @@ let gameOver = false;
 let downPressed = false;
 let score = 0;
 
-//Game Menu//
-let runGame = function(){
-    document.getElementById("newGame").style.display = "none";
-    document.getElementById("theHead").style.display = "none";    
-    document.getElementById("instructions").style.display = "none";
-    document.getElementById("main").style.display = "block";
-    document.getElementById("instructionsBtn").style.display = "none";
-    document.getElementById("soundBtn").style.display = "none";
-  };
- let showInstructions = function(){
-   document.getElementById("theHead").style.display = "none";
-   document.getElementById("instructionsBtn").style.display = "none";
-   document.getElementById("newGame").style.display = "none";
-   document.getElementById("instructions").style.display = "block";
-   document.getElementById("soundBtn").style.display = "block";
-   document.getElementById("backBtn").style.display = "block";
- }; 
-let goBack = function(){
-  document.getElementById("backBtn").style.display = "none";
-  document.getElementById("instructions").style.display = "none";
-  document.getElementById("theHead").style.display = "block";
-  document.getElementById("newGame").style.display = "block";
-  document.getElementById("soundBtn").style.display = "block";
-  document.getElementById("instructionsBtn").style.display = "block";
-};
-
 //Game Functions//
 window.onload = function () {
-   
+    board = document.getElementById("board");//This draws the game background//
+    board.height = boardHeight;
+    board.width = boardWidth;
+    context = board.getContext("2d"); 
     spiritImg = new Image(); // This draws the spirit character//
     spiritImg.src = "./img/spirit.png";
     spiritImg.onload = function() {
@@ -207,6 +180,6 @@ function detectCollision(a, b) {
     return a.x < b.x + b.width &&   
            a.x + a.width > b.x &&   
            a.y < b.y + b.height &&  
-           a.y + a.height > b.y;    
-           
+           a.y + a.height > b.y;  
 }
+           
