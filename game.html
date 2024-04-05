@@ -9,15 +9,15 @@
     <script src="script.js"></script>
 </head>
 <body>
-    <div id="game">
-        <div id="theHead">Will-o-the-Wisp</div>
-        <div id="newGame" onclick="runGame()" onmouseover="this.style.backgroundColor = 'lightgray'" onmouseout="this.style.backgroundColor = '#9cc1b8'" >New Game</div>
-        <div id="instructionsBtn" onmouseover="this.style.backgroundColor = 'lightgray'" onmouseout="this.style.backgroundColor = '#9cc1b8'" onclick="showInstructions()">Insturctions</div>
-        <div id="instructions"> Here is where the game instructions will be written</div>
-        <div id="backBtn" onmouseover="this.style.backgroundColor = 'lightgray'" onmouseout="this.style.backgroundColor = '#9cc1b8'" onclick="goBack()">Back</div>
-        <div id="soundBtn" onclick="this.style.backgroundColor = 'pink'" onclick="toggleMuted()">Mute | Unmute</div>
-        <div id="main">
-            <canvas id="board"></canvas>
+    <div class="game" id="game">
+        <div class="theHeader" id="theHeader">Will-o-the-Wisp</div>
+        <div class="newGame" id="newGame" onclick="runGame()">New Game</div>
+        <div class="instructionsBtn" id="instructionsBtn" onclick="showInstructions()">Insturctions</div>
+        <div class="instructions" id="instructions"> Here is where the game instructions will be written</div>
+        <div class="backBtn" id="backBtn" onclick="goBack()">Back</div>
+        <div class="soundBtn" id="soundBtn" onclick="toggleMuted()">Mute | Unmute</div>
+        <div class="main" id="main">
+            <canvas class="canvas" id="canvas"></canvas>
         </div>
         
     </div>

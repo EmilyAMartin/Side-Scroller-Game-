@@ -1,7 +1,38 @@
+//Game Menu//
+let runGame = function(){
+    document.getElementById("newGame").style.display = "none";
+    document.getElementById("theHeader").style.display = "none";    
+    document.getElementById("instructions").style.display = "none";
+    document.getElementById("main").style.display = "block";
+    document.getElementById("instructionsBtn").style.display = "none";
+    document.getElementById("soundBtn").style.display = "none";
+};
+let newGame  = document.getElementById('newGame')
+    newGame.addEventListener('onclick',function(event){
+        event.runGame()
+    })
+
+let showInstructions = function(){
+    document.getElementById("theHeader").style.display = "none";
+    document.getElementById("instructionsBtn").style.display = "none";
+    document.getElementById("newGame").style.display = "none";
+    document.getElementById("instructions").style.display = "block";
+    document.getElementById("soundBtn").style.display = "block";
+    document.getElementById("backBtn").style.display = "block";
+}; 
+let goBack = function(){
+    document.getElementById("backBtn").style.display = "none";
+    document.getElementById("instructions").style.display = "none";
+    document.getElementById("theHeader").style.display = "block";
+    document.getElementById("newGame").style.display = "block";
+    document.getElementById("soundBtn").style.display = "block";
+    document.getElementById("instructionsBtn").style.display = "block";
+};
+
 //Game Variables// 
-let board;
-let boardWidth = 980;
-let boardHeight = 730;
+let canvas;
+let canvasWidth = 980;
+let canvasHeight = 730;
 let context;
 
 let spiritWidth = 75;
@@ -15,7 +46,6 @@ let spirit = {
     width : spiritWidth,
     height : spiritHeight
 } 
-
 let obstacleArray = [];
 let obstacle1Width = 120;
 let obstacle2Width = 115;
@@ -31,41 +61,14 @@ let velocityY = 0;
 let gravity = .4;
 
 let gameOver = false;
-let downPressed = false;
 let score = 0;
-
-//Game Menu//
-let runGame = function(){
-    document.getElementById("newGame").style.display = "none";
-    document.getElementById("theHead").style.display = "none";    
-    document.getElementById("instructions").style.display = "none";
-    document.getElementById("main").style.display = "block";
-    document.getElementById("instructionsBtn").style.display = "none";
-    document.getElementById("soundBtn").style.display = "none";
-  };
- let showInstructions = function(){
-   document.getElementById("theHead").style.display = "none";
-   document.getElementById("instructionsBtn").style.display = "none";
-   document.getElementById("newGame").style.display = "none";
-   document.getElementById("instructions").style.display = "block";
-   document.getElementById("soundBtn").style.display = "block";
-   document.getElementById("backBtn").style.display = "block";
- }; 
-let goBack = function(){
-  document.getElementById("backBtn").style.display = "none";
-  document.getElementById("instructions").style.display = "none";
-  document.getElementById("theHead").style.display = "block";
-  document.getElementById("newGame").style.display = "block";
-  document.getElementById("soundBtn").style.display = "block";
-  document.getElementById("instructionsBtn").style.display = "block";
-};
 
 //Game Functions//
 window.onload = function () {
-    board = document.getElementById("board");//This draws the game background//
-    board.height = boardHeight;
-    board.width = boardWidth;
-    context = board.getContext("2d"); 
+    canvas = document.getElementById("canvas");//This draws the game background//
+    canvas.height = canvasHeight;
+    canvas.width = canvasWidth;
+    context = canvas.getContext("2d"); 
     spiritImg = new Image(); // This draws the spirit character//
     spiritImg.src = "./img/spirit.png";
     spiritImg.onload = function() {
@@ -87,7 +90,7 @@ function update() { //This will tell the browser that you want to perform an ani
     if (gameOver) {
             return;
     }
-    context.clearRect(0, 0, board.width, board.height); //This clears the canvas//
+    context.clearRect(0, 0, canvas.width, canvas.height); //This clears the canvas//
         
     //Spirit Character// 
     velocityY += gravity;
