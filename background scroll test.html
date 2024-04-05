@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+    <canvas id="canvas" width="980" height="730"></canvas>
+    <script>
+        let canvas = document.getElementById('canvas');
+        let ctx = canvas.getContext("2d");
+        let bgImage = new Image();
+        bgImage.src = "backgroundcopy.png";
+
+    let bg1 = {
+    width:980,
+    height:730,
+    x:0,
+    y:0
+}
+    let bg2 = {
+    width:980,
+    height:730,
+    x:980,
+    y:0
+}
+    let bg3 = {
+    width:980,
+    height:730,
+    x:1960,
+    y:0
+}
+let interval = setInterval(function() {
+    bg1.x -= 2;
+    bg2.x -= 2;
+    bg3.x -= 2;
+    if (bg1.x + bg1.width <= 0) {
+        bg1.x = bg3.x + bg3.width;
+    }
+    if (bg2.x + bg2.width <= 0) {
+        bg2.x = bg1.x + bg1.width;
+    }
+    if (bg3.x + bg3.width <= 0) {
+        bg3.x = bg2.x + bg2.width;
+    }
+    ctx.drawImage(bgImage, bg1.x, bg1.y);
+    ctx.drawImage(bgImage, bg2.x, bg2.y);
+    ctx.drawImage(bgImage, bg3.x, bg3.y);
+}, 50);
+    </script>
+</body>
+</html>

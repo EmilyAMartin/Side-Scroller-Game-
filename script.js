@@ -1,29 +1,3 @@
-//Game Menu//
-let runGame = function(){
-    document.getElementById("newGame").style.display = "none";
-    document.getElementById("theHead").style.display = "none";    
-    document.getElementById("instructions").style.display = "none";
-    document.getElementById("main").style.display = "block";
-    document.getElementById("instructionsBtn").style.display = "none";
-    document.getElementById("soundBtn").style.display = "none";
-  };
- let showInstructions = function(){
-   document.getElementById("theHead").style.display = "none";
-   document.getElementById("instructionsBtn").style.display = "none";
-   document.getElementById("newGame").style.display = "none";
-   document.getElementById("instructions").style.display = "block";
-   document.getElementById("soundBtn").style.display = "block";
-   document.getElementById("backBtn").style.display = "block";
- }; 
-let goBack = function(){
-  document.getElementById("backBtn").style.display = "none";
-  document.getElementById("instructions").style.display = "none";
-  document.getElementById("theHead").style.display = "block";
-  document.getElementById("newGame").style.display = "block";
-  document.getElementById("soundBtn").style.display = "block";
-  document.getElementById("instructionsBtn").style.display = "block";
-};
-
 //Game Variables// 
 let board;
 let boardWidth = 980;
@@ -59,6 +33,32 @@ let gravity = .4;
 let gameOver = false;
 let downPressed = false;
 let score = 0;
+
+//Game Menu//
+let runGame = function(){
+    document.getElementById("newGame").style.display = "none";
+    document.getElementById("theHead").style.display = "none";    
+    document.getElementById("instructions").style.display = "none";
+    document.getElementById("main").style.display = "block";
+    document.getElementById("instructionsBtn").style.display = "none";
+    document.getElementById("soundBtn").style.display = "none";
+  };
+ let showInstructions = function(){
+   document.getElementById("theHead").style.display = "none";
+   document.getElementById("instructionsBtn").style.display = "none";
+   document.getElementById("newGame").style.display = "none";
+   document.getElementById("instructions").style.display = "block";
+   document.getElementById("soundBtn").style.display = "block";
+   document.getElementById("backBtn").style.display = "block";
+ }; 
+let goBack = function(){
+  document.getElementById("backBtn").style.display = "none";
+  document.getElementById("instructions").style.display = "none";
+  document.getElementById("theHead").style.display = "block";
+  document.getElementById("newGame").style.display = "block";
+  document.getElementById("soundBtn").style.display = "block";
+  document.getElementById("instructionsBtn").style.display = "block";
+};
 
 //Game Functions//
 window.onload = function () {
@@ -180,6 +180,6 @@ function detectCollision(a, b) {
     return a.x < b.x + b.width &&   
            a.x + a.width > b.x &&   
            a.y < b.y + b.height &&  
-           a.y + a.height > b.y;  
-}
+           a.y + a.height > b.y;    
            
+}
