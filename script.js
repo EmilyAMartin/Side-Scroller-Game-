@@ -5,13 +5,8 @@ let runGame = function(){
     document.getElementById("instructions").style.display = "none";
     document.getElementById("main").style.display = "block";
     document.getElementById("instructionsBtn").style.display = "none";
-    document.getElementById("soundBtn").style.display = "none";
+    document.getElementById("soundBtn").style.display = "none";   
 };
-let newGame  = document.getElementById('newGame')
-    newGame.addEventListener('onclick',function(event){
-        event.runGame()
-    })
-
 let showInstructions = function(){
     document.getElementById("theHeader").style.display = "none";
     document.getElementById("instructionsBtn").style.display = "none";
@@ -28,6 +23,9 @@ let goBack = function(){
     document.getElementById("soundBtn").style.display = "block";
     document.getElementById("instructionsBtn").style.display = "block";
 };
+let toggleMuted = function(){
+document.getElementById("soundBtn").muted = true;
+}
 
 //Game Variables// 
 let canvas;

@@ -8,7 +8,6 @@ body {
 .canvas {
   background-image: url(img/background.png);
 }
-
 .main{
   display: none;
 }
