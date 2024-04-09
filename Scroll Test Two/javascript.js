@@ -6,15 +6,15 @@ let ctx = canvas.getContext('2d');
 
 let img = new Image();
     img.src = "background.png";
- 
-
-window.onload = function() {
     let imgWidth = 0;
-    let scrollSpeed = 2;
-    function loop()
-    {
-        ctx.drawImage(img, 0, imgWidth);
-        ctx.drawImage(img, 0, imgWidth - canvas.width);
+
+let scrollSpeed = 2;
+
+window.onload = function() {  
+function loop()
+{
+        ctx.drawImage(img, imgWidth, 25); //Background 1
+        ctx.drawImage(img, imgWidth, 0 - canvas.width); //Background 2
         imgWidth += scrollSpeed;
  
         if (imgWidth == canvas.width)
