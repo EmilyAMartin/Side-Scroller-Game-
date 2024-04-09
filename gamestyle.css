@@ -5,18 +5,31 @@ body {
   font-size: 2em;
   text-align: center;
 }
+
 .canvas {
   background-image: url(img/background.png);
 }
+
 .main{
   display: none;
 }
+
 .game{
   width: 980px;
   height: 730px;
   background-image: url(img/menu.png);
   margin: 80px auto;
 }
+.theHeader{
+  margin: auto;
+  color: #000000;
+  font-size: 2em;
+  font-family: "Amatic SC", sans-serif;
+  position: relative;
+  left: 20px;
+  top:140px;
+}
+
 .newGame, .instructionsBtn, .backBtn {
   text-align: center;
   vertical-align: middle;
@@ -28,25 +41,28 @@ body {
   font-weight: bold;
   font-family: "Amatic SC", sans-serif;
   width: 5em;
-  margin: 5px auto; 
+  margin: 5px auto;  
 }
-.theHeader{
-  margin: auto;
-  color: #000000;
-  font-size: 2em;
-  font-family: "Amatic SC", sans-serif;
+.newGame {
+  position: relative;
+  left: 20px;
+  top:150px;
 }
-.backBtn{
-  display: none;
+
+.newGame:hover{
+  background-color: #9cc1bb;
 }
-.instructions{
-  margin: auto;
-  color: #39483c;
-  font-size: 1.5rem;
-  font-family: "Amatic SC", sans-serif;
-  display: none;
-  background-color: inherit;
+
+.instructionsBtn {
+  position: relative;
+  left: 20px;
+  top:160px;
 }
+
+.instructionsBtn:hover{
+  background-color: #9cc1bb;
+}
+
 .soundBtn{
   text-align: center;
   vertical-align: middle;
@@ -59,4 +75,31 @@ body {
   font-family: "Amatic SC", sans-serif;
   width: 5em;
   margin: 5px auto;
+  position: relative;
+  left: 20px;
+  top:170px;
 }
+.soundBtn:focus{
+  background-color: pink;
+}
+
+.instructions{
+  margin: auto;
+  color: #39483c;
+  font-size: 1.5rem;
+  font-family: "Amatic SC", sans-serif;
+  display: none;
+  background-color: inherit;
+}
+
+.backBtn {
+  position: relative;
+  left: 20px;
+  top:20px;
+  display: none;
+}
+
+.backBtn:hover{
+  background-color: #9cc1bb;
+}
+

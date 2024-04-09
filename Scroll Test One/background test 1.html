@@ -7,6 +7,21 @@
 <script>
     let canvas = document.getElementById("canvas");
     let ctx = canvas.getContext("2d");
+    
+    let spiritWidth = 75;
+    let spiritHeight = 75;
+    let spiritX = 75;
+    let spiritY = 500;
+    let spiritImg = new Image();
+    spiritImg.src = "spiritcopy.png";
+
+    let spirit = {
+    x : spiritX,
+    y : spiritY,
+    width : spiritWidth,
+    height : spiritHeight
+    } 
+    
     let bgImage = new Image();
     bgImage.src = "backgroundcopy.png";
 
@@ -28,10 +43,11 @@
     x:1960,
     y:0
 }
+
 let interval = setInterval(function() {
-    bg1.x -= 2;
-    bg2.x -= 2;
-    bg3.x -= 2;
+    bg1.x -= 1.5;
+    bg2.x -= 1.5;
+    bg3.x -= 1.5;
     if (bg1.x + bg1.width <= 0) {
         bg1.x = bg3.x + bg3.width;
     }
@@ -44,62 +60,17 @@ let interval = setInterval(function() {
     ctx.drawImage(bgImage, bg1.x, bg1.y);
     ctx.drawImage(bgImage, bg2.x, bg2.y);
     ctx.drawImage(bgImage, bg3.x, bg3.y);
-    ctx.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height); 
 }, 50);
 
-//Sprit//
-let spiritWidth = 75;
-let spiritHeight = 75;
-let spiritX = 75;
-let spiritY = 500;
-let spiritImg = new Image();
-spiritImg.src = "spiritcopy.png";
-
-let spirit = {
-    x : spiritX,
-    y : spiritY,
-    width : spiritWidth,
-    height : spiritHeight
-} 
-//Obstacle//
-let obstacleArray = [];
-let obstacle1Width = 120;
-let obstacle2Width = 115;
-let obstacleHeight = 230;
-let obstacleX = 980;
-let obstacleY = 500;
-let obstacle1Img = new Image();
-obstacle1Img.src = "./img/obstacle1.png";
-let obstacle2Img = new Image();
-obstacle2Img.src = "./img/obstacle2.png";
-
-//Game Physics and Operations//
-let velocityX = -8;
-let velocityY = 0;
-let gravity = .4;
-
-let gameOver = false;
-let score = 0;
-    requestAnimationFrame(update);
-    setInterval(placeObstacle, 1000); //1000 milliseconds = 1 second
-    document.addEventListener("keydown", moveSpirit);
-
-
-function update() { //This will tell the browser that you want to perform an animation// 
-    requestAnimationFrame(update);
-    if (gameOver) {
-            return;
-    }
-    velocityY += gravity;
-    spirit.y = Math.min(spirit.y + velocityY, spiritY); // Applies gravity to spirit
-}
-function moveSpirit(e) {
-    if ((e.code == "ArrowUp") && spirit.y == spiritY) {
-        //jump
-        velocityY = -10;
+window.onload = function () {
+    canvas = document.getElementById("canvas");//This draws the game background//
+    ctx = canvas.getContext("2d"); 
+    spiritImg = new Image(); // This draws the spirit character//
+    spiritImg.src = "./img/spirit.png";
+    spiritImg.onload = function() {
+    ctx.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height); 
     }
 }
-
 </script>
 </body>
 </html>

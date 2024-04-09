@@ -12,7 +12,7 @@ let showInstructions = function(){
     document.getElementById("instructionsBtn").style.display = "none";
     document.getElementById("newGame").style.display = "none";
     document.getElementById("instructions").style.display = "block";
-    document.getElementById("soundBtn").style.display = "block";
+    document.getElementById("soundBtn").style.display = "none";
     document.getElementById("backBtn").style.display = "block";
 }; 
 let goBack = function(){
