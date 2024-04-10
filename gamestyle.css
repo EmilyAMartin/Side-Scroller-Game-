@@ -25,12 +25,12 @@ body {
   color: #000000;
   font-size: 2em;
   font-family: "Amatic SC", sans-serif;
+  font-weight: bolder;
   position: relative;
-  left: 20px;
-  top:140px;
+  top:180px;
 }
 
-.newGame, .instructionsBtn, .backBtn {
+.newGame, .instructionsBtn, .backBtn, .soundBtn {
   text-align: center;
   vertical-align: middle;
   border: 2px solid #39483c;
@@ -43,44 +43,33 @@ body {
   width: 5em;
   margin: 5px auto;  
 }
-.newGame {
+
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   position: relative;
-  left: 20px;
-  top:150px;
+  top: 200px;
 }
 
 .newGame:hover{
   background-color: #9cc1bb;
 }
 
-.instructionsBtn {
-  position: relative;
-  left: 20px;
-  top:160px;
-}
-
 .instructionsBtn:hover{
   background-color: #9cc1bb;
 }
 
-.soundBtn{
-  text-align: center;
-  vertical-align: middle;
-  border: 2px solid #39483c;
-  border-radius: 7px;
-  background-color: #638b7e;
-  color: #000000;
-  font-size: 2rem;
-  font-weight: bold;
-  font-family: "Amatic SC", sans-serif;
-  width: 5em;
-  margin: 5px auto;
-  position: relative;
-  left: 20px;
-  top:170px;
-}
-.soundBtn:focus{
+.soundBtn:active{
   background-color: pink;
+}
+
+.backBtn {
+  display: none;
+}
+
+.backBtn:hover{
+  background-color: #9cc1bb;
 }
 
 .instructions{
@@ -91,15 +80,3 @@ body {
   display: none;
   background-color: inherit;
 }
-
-.backBtn {
-  position: relative;
-  left: 20px;
-  top:20px;
-  display: none;
-}
-
-.backBtn:hover{
-  background-color: #9cc1bb;
-}
-

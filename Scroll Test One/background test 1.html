@@ -8,20 +8,7 @@
     let canvas = document.getElementById("canvas");
     let ctx = canvas.getContext("2d");
     
-    let spiritWidth = 75;
-    let spiritHeight = 75;
-    let spiritX = 75;
-    let spiritY = 500;
-    let spiritImg = new Image();
-    spiritImg.src = "spiritcopy.png";
 
-    let spirit = {
-    x : spiritX,
-    y : spiritY,
-    width : spiritWidth,
-    height : spiritHeight
-    } 
-    
     let bgImage = new Image();
     bgImage.src = "backgroundcopy.png";
 
@@ -62,15 +49,24 @@ let interval = setInterval(function() {
     ctx.drawImage(bgImage, bg3.x, bg3.y);
 }, 50);
 
-window.onload = function () {
-    canvas = document.getElementById("canvas");//This draws the game background//
-    ctx = canvas.getContext("2d"); 
-    spiritImg = new Image(); // This draws the spirit character//
-    spiritImg.src = "./img/spirit.png";
-    spiritImg.onload = function() {
-    ctx.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height); 
+let spiritWidth = 75;
+    let spiritHeight = 75;
+    let spiritX = 75;
+    let spiritY = 500;
+    let spiritImg = new Image();
+    spiritImg.src = "spiritcopy.png";
+
+
+    let spirit = {
+    x : spiritX,
+    y : spiritY,
+    width : spiritWidth,
+    height : spiritHeight
+    } 
+
+    let drawspirit = function(){
+        ctx.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height); 
     }
-}
 </script>
 </body>
 </html>
