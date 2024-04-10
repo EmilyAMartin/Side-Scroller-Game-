@@ -29,10 +29,10 @@ document.getElementById("soundBtn").muted = true;
 
 //Game Variables// 
 //Scrolling Background//
-const canvas = document.getElementById("canvas");
-let ctx = canvas.getContext('2d');
-    canvas.width = 980;
-    canvas.height = 730;
+let canvas;
+let canvasWidth = 980;
+let canvasHeight = 730;
+let context;
 
 let img = new Image();
     img.src = "./img/background.png";
@@ -69,34 +69,40 @@ let gameOver = false;
 let score = 0;
 
 //Game Functions//
-window.onload = function() {
-        function loop()
-        {
-                ctx.drawImage(img, -backgroundWidth, 0); //Background 1
-                ctx.drawImage(img, -backgroundWidth + canvas.width, 0); //Background 2
-                backgroundWidth += scrollSpeed;
-         
-                if (backgroundWidth == canvas.width)
-                    backgroundWidth = 0;
-                    window.requestAnimationFrame(loop);
-            }
-            loop();
-        }
-   
+window.onload = function () {
+    canvas = document.getElementById("canvas");//This draws the game background//
+    canvas.height = canvasHeight;
+    canvas.width = canvasWidth;
+    context = canvas.getContext("2d"); 
     spiritImg = new Image(); // This draws the spirit character//
     spiritImg.src = "./img/spirit.png";
+    
     spiritImg.onload = function() {
-    ctx.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height); 
+    context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height); 
     }
 
+    function background()
+    {
+            context.drawImage(img, -backgroundWidth, 0); //Background 1
+            context.drawImage(img, -backgroundWidth + canvas.width, 0); //Background 2
+            backgroundWidth += scrollSpeed;
+             
+            if (backgroundWidth == canvas.width)
+                backgroundWidth = 0;
+                window.requestAnimationFrame(background);
+        }
+        background();
+        
     obstacle1Img = new Image();
     obstacle1Img.src = "./img/obstacle1.png";
     obstacle2Img = new Image();
     obstacle2Img.src = "./img/obstacle2.png";
-
+    
     requestAnimationFrame(update);
     setInterval(placeObstacle, 1000); //1000 milliseconds = 1 second
-    document.addEventListener("keydown", moveSpirit);
+    document.addEventListener("keydown", moveSpirit);   
+} 
+
 
 function update() { //This will tell the browser that you want to perform an animation// 
     requestAnimationFrame(update);
