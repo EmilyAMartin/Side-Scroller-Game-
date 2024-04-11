@@ -14,6 +14,7 @@ let showInstructions = function(){
     document.getElementById("instructions").style.display = "block";
     document.getElementById("soundBtn").style.display = "none";
     document.getElementById("backBtn").style.display = "block";
+  
 }; 
 let goBack = function(){
     document.getElementById("backBtn").style.display = "none";
@@ -22,6 +23,7 @@ let goBack = function(){
     document.getElementById("newGame").style.display = "block";
     document.getElementById("soundBtn").style.display = "block";
     document.getElementById("instructionsBtn").style.display = "block";
+   
 };
 let toggleMuted = function(){
 document.getElementById("soundBtn").muted = true;
@@ -139,6 +141,24 @@ function update() {
     } 
        
 //*Possibly animate the spirit so it floating or use multi button movement contorls//
+function moveSpirit(e) {
+    if ((e.code == "ArrowUp") && spirit.y == spiritY) {
+        //jump
+        velocityY = -10;
+    }
+   // Resets the Game// 
+   if(gameOver){
+    spirit.y = spiritY;
+    obstacleArray = [];
+    score = 0;
+    gameOver = false;
+    spiritImg = new Image();
+    spiritImg.src = "./img/spirit.png";
+    spiritImg.onload = function() {
+    context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height); // This draws the spirit character//
+    }
+}
+}
 function moveSpirit(e) {
     if ((e.code == "ArrowUp") && spirit.y == spiritY) {
         //jump
