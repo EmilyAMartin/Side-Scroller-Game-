@@ -34,8 +34,8 @@ let canvasWidth = 980;
 let canvasHeight = 730;
 let context;
 
-let img = new Image();
-    img.src = "./img/background.png";
+let backgroundimg = new Image();
+    backgroundimg.src = "./img/background.png";
 let backgroundWidth = 0;
 let scrollSpeed = 2;
 
@@ -74,15 +74,15 @@ let score = 0;
 
 //Game Functions//
 window.onload = function () {
-    canvas = document.getElementById("canvas");//This draws the game background//
+    canvas = document.getElementById("canvas");
     canvas.height = canvasHeight;
     canvas.width = canvasWidth;
     context = canvas.getContext("2d"); 
    
     function background()
     {
-            context.drawImage(img, -backgroundWidth, 0); //Background 1
-            context.drawImage(img, -backgroundWidth + canvas.width, 0); //Background 2
+            context.drawImage(backgroundimg, -backgroundWidth, 0); //Background 1
+            context.drawImage(backgroundimg, -backgroundWidth + canvas.width, 0); //Background 2
             backgroundWidth += scrollSpeed;
              
             if (backgroundWidth == canvas.width)
@@ -97,20 +97,21 @@ window.onload = function () {
     
 } 
 
-function update() { //This will tell the browser that you want to perform an animation// 
+function update() { 
     requestAnimationFrame(update);        
     
-    //Spirit Character// 
+    //Draws Spirit Character & Mouvement// 
     velocityY += gravity;
-    spirit.y = Math.min(spirit.y + velocityY, spiritY); // Applies gravity to spirit
+    spirit.y = Math.min(spirit.y + velocityY, spiritY); 
     context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height);
     
-    //Drawing Obstacles and Game over//
+    //Drawing Obstacles//
     for (let i = 0; i < obstacleArray.length; i++) {
         let obstacle = obstacleArray[i];
         obstacle.x += velocityX;
         context.drawImage(obstacle.img, obstacle.x, obstacle.y, obstacle.width, obstacle.height)
     
+    //Object Collision//
     if (detectCollision(spirit, obstacle)) {
         gameOver = true;
         spiritImg.src = "./img/spirit-dead.png";
@@ -119,26 +120,24 @@ function update() { //This will tell the browser that you want to perform an ani
                 }
             }
         }
-        
+    
     //Score on screen//
         context.fillStyle="white";
         context.font="20px courier";
         score++;
         context.fillText(score, 15, 30);
-       
+    
     //Gameover//
     if (gameOver) {
-        context.clearRect(0, 0, canvas.width, canvas.height);
-        score = 0;
-        context.drawImage(img, 0, 0, 980, 730)
+        context.drawImage(backgroundimg, 0, 0, 980, 730)
         context.fillStyle="white";
         context.font="50px courier";
         context.fillText("GAME OVER", 360, 360,);
         spiritImg.src = "./img/spirit-dead.png";
-        context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height);
-        
+        context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height);     
       }
     } 
+       
 //*Possibly animate the spirit so it floating or use multi button movement contorls//
 function moveSpirit(e) {
     if ((e.code == "ArrowUp") && spirit.y == spiritY) {
@@ -146,25 +145,20 @@ function moveSpirit(e) {
         velocityY = -10;
     }
    // Resets the Game// 
-    if(gameOver){
-        spirit.y = spiritY;
-        obstacleArray = [];
-        score = 0;
-        gameOver = false;
-        spiritImg = new Image();
-        spiritImg.src = "./img/spirit.png";
-        spiritImg.onload = function() {
-        context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height); // This draws the spirit character//
-        }
+   if(gameOver){
+    spirit.y = spiritY;
+    obstacleArray = [];
+    score = 0;
+    gameOver = false;
+    spiritImg = new Image();
+    spiritImg.src = "./img/spirit.png";
+    spiritImg.onload = function() {
+    context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height); // This draws the spirit character//
     }
-
+}
 }
 
 function placeObstacle() {
-    if (gameOver) {
-        return;
-    }
-
     //place obstacle
     let obstacle = {
         img : null,
@@ -173,15 +167,14 @@ function placeObstacle() {
         width : null,
         height: obstacleHeight
     }
-
     let placeObstacleChance = Math.random();
 
-    if (placeObstacleChance > .50) { 
+    if (placeObstacleChance > .10) { 
         obstacle.img = obstacle2Img;
         obstacle.width = obstacle2Width;
         obstacleArray.push(obstacle);
     }
-    else if (placeObstacleChance > .50) { 
+    else if (placeObstacleChance > .10) { 
         obstacle.img = obstacle1Img;
         obstacle.width = obstacle1Width;
         obstacleArray.push(obstacle);
