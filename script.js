@@ -32,13 +32,13 @@ document.getElementById("soundBtn").muted = true;
 //Game Variables// 
 //Scrolling Background//
 let canvas;
-let canvasWidth = 980;
-let canvasHeight = 730;
+let canvasWidth = 1010;
+let canvasHeight = 715;
 let context;
 const windowWidth = window.innerWidth;
 
 let backgroundimg = new Image();
-    backgroundimg.src = "./img/background.png";
+    backgroundimg.src = "./img/bg.png";
 let backgroundWidth = 0;
 let scrollSpeed = 2;
 
@@ -146,7 +146,7 @@ function update() {
     
     //Gameover//
     if (gameOver) {
-        context.drawImage(backgroundimg, 0, 0, 980, 730)
+        context.drawImage(backgroundimg, 0, 0, 1010, 715)
         context.fillStyle="white";
         context.font="50px courier";
         context.fillText("GAME OVER", 360, 360,);
