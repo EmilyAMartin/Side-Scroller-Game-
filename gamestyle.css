@@ -11,9 +11,6 @@ body {
 }
 
 .game{
-  width: 980px;
-  height: 730px;
-  background-image: url(img/menu.png);
   margin: 80px auto;
 }
 .theHeader{

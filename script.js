@@ -35,6 +35,7 @@ let canvas;
 let canvasWidth = 980;
 let canvasHeight = 730;
 let context;
+const windowWidth = window.innerWidth;
 
 let backgroundimg = new Image();
     backgroundimg.src = "./img/background.png";
@@ -55,6 +56,7 @@ let spirit = {
     width : spiritWidth,
     height : spiritHeight
 } 
+
 let obstacleArray = [];
 let obstacle1Width = 120;
 let obstacle2Width = 115;
@@ -74,8 +76,21 @@ let gravity = .4;
 let gameOver = false;
 let score = 0;
 
+
 //Game Functions//
+function checkMobile() {
+    console.log(windowWidth)
+if  (windowWidth < 1000) {
+    return true;
+} else {
+    return false;
+}
+}
 window.onload = function () {
+   if (checkMobile()){
+    canvasWidth = 390;
+    canvasHeight = 844;
+   }
     canvas = document.getElementById("canvas");
     canvas.height = canvasHeight;
     canvas.width = canvasWidth;
@@ -142,25 +157,7 @@ function update() {
        
 //*Possibly animate the spirit so it floating or use multi button movement contorls//
 function moveSpirit(e) {
-    if ((e.code == "ArrowUp") && spirit.y == spiritY) {
-        //jump
-        velocityY = -10;
-    }
-   // Resets the Game// 
-   if(gameOver){
-    spirit.y = spiritY;
-    obstacleArray = [];
-    score = 0;
-    gameOver = false;
-    spiritImg = new Image();
-    spiritImg.src = "./img/spirit.png";
-    spiritImg.onload = function() {
-    context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height); // This draws the spirit character//
-    }
-}
-}
-function moveSpirit(e) {
-    if ((e.code == "ArrowUp") && spirit.y == spiritY) {
+    if ((e.code == "Enter") && spirit.y == spiritY) {
         //jump
         velocityY = -10;
     }
