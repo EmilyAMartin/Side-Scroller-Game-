@@ -72,6 +72,7 @@ let obstacle2Img = new Image();
 let velocityX = -8;
 let velocityY = 0;
 let gravity = .4;
+let adjustBy = 1.4; //Overlaps the characters collison//
 
 let gameOver = false;
 let score = 0;
@@ -115,7 +116,12 @@ window.onload = function () {
 } 
 
 function update() { 
-    requestAnimationFrame(update);        
+    requestAnimationFrame(update);     
+    //Score on screen//
+    context.fillStyle="white";
+    context.font="20px courier";
+    score++;
+    context.fillText(score, 15, 30);   
     
     //Draws Spirit Character & Mouvement// 
     velocityY += gravity;
@@ -137,21 +143,14 @@ function update() {
                 }
             }
         }
-    
-    //Score on screen//
-        context.fillStyle="white";
-        context.font="20px courier";
-        score++;
-        context.fillText(score, 15, 30);
-    
     //Gameover//
     if (gameOver) {
-        context.drawImage(backgroundimg, 0, 0, 1010, 715)
         context.fillStyle="white";
         context.font="50px courier";
         context.fillText("GAME OVER", 360, 360,);
         spiritImg.src = "./img/spirit-dead.png";
         context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height);     
+        obstacleArray = [];
       }
     } 
        
@@ -186,12 +185,12 @@ function placeObstacle() {
     }
     let placeObstacleChance = Math.random();
 
-    if (placeObstacleChance > .10) { 
+    if (placeObstacleChance > .15) { 
         obstacle.img = obstacle2Img;
         obstacle.width = obstacle2Width;
         obstacleArray.push(obstacle);
     }
-    else if (placeObstacleChance > .10) { 
+    else if (placeObstacleChance > .15) { 
         obstacle.img = obstacle1Img;
         obstacle.width = obstacle1Width;
         obstacleArray.push(obstacle);
@@ -203,10 +202,10 @@ function placeObstacle() {
 }
 
 function detectCollision(a, b) {
-    return a.x < b.x + b.width &&   
-           a.x + a.width > b.x &&   
-           a.y < b.y + b.height &&  
-           a.y + a.height > b.y;    
+    return a.x < b.x + b.width / adjustBy &&   
+           a.x + a.width / adjustBy > b.x &&   
+           a.y < b.y + b.height / adjustBy &&  
+           a.y + a.height / adjustBy > b.y;    
            
 }
 
