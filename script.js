@@ -77,16 +77,26 @@ let adjustBy = 1.4; //Overlaps the characters collison//
 let gameOver = false;
 let score = 0;
 
-    //Mobile Touch//
-    window.addEventListener('touchstart', e => {
-        console.log ('start');
-    });
-    window.addEventListener('touchmove', e => {
-        console.log ('moving');
-    });
-    window.addEventListener('touchend', e => {
-        console.log ('end');
-    });
+//Mobile Touch//
+let touchY = '';
+let touchTreshold = 30;
+
+window.addEventListener('touchstart', e => {
+this.touchY = e.changedTouches[0].pageY
+});
+
+window.addEventListener('touchmove', e => {
+const swipeDistance = e.changedTouches[0].pageY -touchY;
+if (swipeDistance < -touchTreshold && this.keys.indexOf('swipe up') === -1) this.keys.push('swipe up');
+else if (swipeDistance > touchTreshold && this.keys,indexOf('swipe down') === -1) this.keys.push('swipe down');
+if (gameOver) restartGame();
+});
+
+window.addEventListener('touchend', e => {
+this.keys.splice(this.keys.indexOf('swipe up'), 1);
+this.keys.splice(this.keys.indexOf('swipe down'), 1);
+
+});
 
 window.onload = function () {
    
@@ -109,17 +119,10 @@ window.onload = function () {
         }
         background();
 
-
-
     requestAnimationFrame(update);
     setInterval(placeObstacle, 1000); //1000 milliseconds = 1 second
     document.addEventListener("keydown", moveSpirit);      
-    
-
-
 } 
-
-
 
 function update() { 
     requestAnimationFrame(update);     
@@ -163,7 +166,7 @@ function update() {
        
 //*Possibly animate the spirit so it floating or use multi button movement contorls//
 function moveSpirit(e) {
-    if ((e.code == "Enter") && spirit.y == spiritY) {
+    if ((e.code == "Enter" || input.keys.indexOf('swipe up')) && spirit.y == spiritY) {
         //jump
         velocityY = -10;
     }
