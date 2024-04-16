@@ -32,8 +32,8 @@ document.getElementById("soundBtn").muted = true;
 //Game Variables// 
 //Scrolling Background//
 let canvas;
-let canvasWidth = 1010;
-let canvasHeight = 715;
+let canvasWidth = 1040;
+let canvasHeight = 740;
 let context;
 const windowWidth = window.innerWidth;
 
@@ -80,7 +80,6 @@ let score = 0;
 
 //Game Functions//
 function checkMobile() {
-    console.log(windowWidth)
 if  (windowWidth < 1000) {
     return true;
 } else {
@@ -151,6 +150,7 @@ function update() {
         spiritImg.src = "./img/spirit-dead.png";
         context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height);     
         obstacleArray = [];
+        score = 0;
       }
     } 
        
