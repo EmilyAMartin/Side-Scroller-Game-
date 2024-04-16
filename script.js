@@ -35,7 +35,7 @@ let canvas;
 let canvasWidth = 1040;
 let canvasHeight = 740;
 let context;
-const windowWidth = window.innerWidth;
+
 
 let backgroundimg = new Image();
     backgroundimg.src = "./img/bg.png";
@@ -77,24 +77,25 @@ let adjustBy = 1.4; //Overlaps the characters collison//
 let gameOver = false;
 let score = 0;
 
+    //Mobile Touch//
+    window.addEventListener('touchstart', e => {
+        console.log ('start');
+    });
+    window.addEventListener('touchmove', e => {
+        console.log ('moving');
+    });
+    window.addEventListener('touchend', e => {
+        console.log ('end');
+    });
 
-//Game Functions//
-function checkMobile() {
-if  (windowWidth < 1000) {
-    return true;
-} else {
-    return false;
-}
-}
 window.onload = function () {
-   if (checkMobile()){
-    canvasWidth = 390;
-    canvasHeight = 844;
-   }
+   
     canvas = document.getElementById("canvas");
     canvas.height = canvasHeight;
     canvas.width = canvasWidth;
     context = canvas.getContext("2d"); 
+    
+ 
    
     function background()
     {
@@ -108,11 +109,17 @@ window.onload = function () {
         }
         background();
 
+
+
     requestAnimationFrame(update);
     setInterval(placeObstacle, 1000); //1000 milliseconds = 1 second
-    document.addEventListener("keydown", moveSpirit);   
+    document.addEventListener("keydown", moveSpirit);      
     
+
+
 } 
+
+
 
 function update() { 
     requestAnimationFrame(update);     

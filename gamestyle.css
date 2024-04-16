@@ -1,25 +1,26 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 body {
   background-color: #9cc1bb;
   color: #000000;
   font-family: "Amatic SC", sans-serif;
   font-size: 2em;
   text-align: center;
-
-  user-select: none;
-  touch-action: none;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  outline: none;
-  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 }
-
 
 .main{
   display: none;
+}
+.canvas{
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%, -50%);
+  max-width: 100%;
+  max-height: 100%;
 }
 
 .game{
