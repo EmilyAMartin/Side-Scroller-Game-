@@ -86,18 +86,11 @@ window.onload = function () {
     context = canvas.getContext("2d"); 
     
     //Mobile//
-    window.addEventListener('touchmove', function (e) {
-        canvas.x = e.touches[0].screenX;
-        canvas.y = e.touches[0].screenY;
-      })
-      if (canvas.x && canvas.y) {
-        spirit.x = canvas.x;
-        spirit.y = canvas.y;
-      }
-      console.log('touchmove');
-     
- 
-   
+    document.addEventListener("touchmove", (event) => {
+
+
+    });
+
     function background()
     {
             context.drawImage(backgroundimg, -backgroundWidth, 0); //Background 1
@@ -110,12 +103,12 @@ window.onload = function () {
         }
         background();
 
-    requestAnimationFrame(update);
+    requestAnimationFrame(animationLoop);
     setInterval(placeObstacle, 1000); //1000 milliseconds = 1 second
     document.addEventListener("keydown", moveSpirit);      
 } 
-function update() { 
-    requestAnimationFrame(update);     
+function animationLoop() { 
+    requestAnimationFrame(animationLoop);     
     //Score on screen//
     context.fillStyle="white";
     context.font="20px courier";
