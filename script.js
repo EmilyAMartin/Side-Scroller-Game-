@@ -77,12 +77,7 @@ let gameOver = false;
 let score = 0;
 
 //Mobile Touch//
-document.addEventListener('touchstart', mobileTouch);
-document.addEventListener('touchmove', mobileTouch);
-document.addEventListener('touchend', mobileTouch);
-function mobileTouch(e) {
-    console.log(e.touches);
-}
+
 
 window.onload = function () {
    
