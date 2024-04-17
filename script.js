@@ -77,16 +77,12 @@ let gameOver = false;
 let score = 0;
 
 //Mobile Touch//
-document.addEventListener("touchstart", touchHandler);
-document.addEventListener("touchmove", touchHandler);
-
-function touchHandler(e) {
-    if (e.touches) {
-      playerX = e.touches[0].pageX;
-      playerY = e.touches[0].pageY;
-      e.preventDefault();
-    }
-  }
+document.addEventListener('touchstart', mobileTouch);
+document.addEventListener('touchmove', mobileTouch);
+document.addEventListener('touchend', mobileTouch);
+function mobileTouch(e) {
+    console.log(e.touches);
+}
 
 window.onload = function () {
    
@@ -143,12 +139,12 @@ function update() {
         }
     //Gameover//
     if (gameOver) {
+        obstacleArray = [];
         context.fillStyle="white";
         context.font="50px courier";
         context.fillText("GAME OVER", 360, 360,);
         spiritImg.src = "./img/spirit-dead.png";
         context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height);     
-        obstacleArray = [];
         score = 0;
       }
     } 
