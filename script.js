@@ -76,7 +76,6 @@ let adjustBy = 1.4; //Overlaps the characters collison//
 let gameOver = false;
 let score = 0;
 
-//Mobile Touch//
 
 
 window.onload = function () {
@@ -86,6 +85,17 @@ window.onload = function () {
     canvas.width = canvasWidth;
     context = canvas.getContext("2d"); 
     
+    //Mobile//
+    window.addEventListener('touchmove', function (e) {
+        canvas.x = e.touches[0].screenX;
+        canvas.y = e.touches[0].screenY;
+      })
+      if (canvas.x && canvas.y) {
+        spirit.x = canvas.x;
+        spirit.y = canvas.y;
+      }
+      console.log('touchmove');
+     
  
    
     function background()
@@ -132,6 +142,7 @@ function update() {
                 }
             }
         }
+        
     //Gameover//
     if (gameOver) {
         obstacleArray = [];
@@ -143,6 +154,7 @@ function update() {
         score = 0;
       }
     } 
+    
        
 //*Possibly animate the spirit so it floating or use multi button movement contorls//
 function moveSpirit(e) {
@@ -150,6 +162,7 @@ function moveSpirit(e) {
         //jump
         velocityY = -10;
     }
+ 
    // Resets the Game// 
    if(gameOver){
     spirit.y = spiritY;
