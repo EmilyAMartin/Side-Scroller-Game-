@@ -10,11 +10,12 @@ body {
   font-family: "Amatic SC", sans-serif;
   font-size: 2em;
   text-align: center;
+  background-image: url(orb.png);
+  background-size: cover;
 }
 
 .main{
   display: none;
-
 }
 .canvas{
   position: absolute;
@@ -25,26 +26,28 @@ body {
   max-height: 100%;
 
 }
-
 .game{
   margin: 80px auto;
+}
 
-}
-.rectangle{
-  width: 400px;
-  height: 440px;
-  background-color: white;
-  opacity: 50%;
-}
 .theHeader{
   margin: auto;
   color: #000000;
-  font-size: 2em;
+  font-size: 5rem;
   font-family: "Amatic SC", sans-serif;
   position: relative;
 
 }
-
+.openBtn, .closeBtn{
+  border: 2px solid #39483c;
+  border-radius: 7px;
+  background-color:#638b7e;
+  color: #000000;
+  font-size: 2rem;
+  font-family: "Amatic SC", sans-serif;
+  width: 160px;
+  margin: 5px auto; 
+}
 .newGame, .instructionsBtn, .backBtn, .soundBtn, .restartBtn{
   text-align: center;
   vertical-align: middle;
@@ -53,9 +56,8 @@ body {
   background-color:#638b7e;
   color: #000000;
   font-size: 2rem;
-  font-weight: bold;
   font-family: "Amatic SC", sans-serif;
-  width: 5em;
+  width: 160px;
   margin: 5px auto;  
 }
 

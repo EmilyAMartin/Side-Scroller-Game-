@@ -76,21 +76,12 @@ let adjustBy = 1.4; //Overlaps the characters collison//
 let gameOver = false;
 let score = 0;
 
-
-
-window.onload = function () {
-   
+window.onload = function () {   
     canvas = document.getElementById("canvas");
     canvas.height = canvasHeight;
     canvas.width = canvasWidth;
     context = canvas.getContext("2d"); 
     
-    //Mobile//
-    document.addEventListener("touchmove", (event) => {
-
-
-    });
-
     function background()
     {
             context.drawImage(backgroundimg, -backgroundWidth, 0); //Background 1
@@ -107,6 +98,44 @@ window.onload = function () {
     setInterval(placeObstacle, 1000); //1000 milliseconds = 1 second
     document.addEventListener("keydown", moveSpirit);      
 } 
+    //Full Screen//
+    var screen = document.documentElement;
+    function openFullscreen(){
+        if (screen.requestFullscreen) {
+            screen.requestFullscreen();
+        } else if (screen.webkitRequestFullscreen) {
+            screen.webkitRequestFullscreen();
+        } else if (screen.msRequestFullscreen) {
+            screen.msRequestFullscreen();
+        }
+    }
+    function closeFullscreen() {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+        }
+
+// Mobile Touch Event//
+canvas.addEventListener('touchstart', (e) => { touchstart(e) }, false);
+canvas.addEventListener('touchend', (e) => { touchend(e) }, false);
+canvas.addEventListener('touchmove', (e) => { touchmove(e) }, false);
+
+function touchstart(canvas, e) {
+  
+}
+
+function touchend(e) {
+
+}
+
+function touchmove(e) {
+ 
+}
+}
+
 function animationLoop() { 
     requestAnimationFrame(animationLoop);     
     //Score on screen//
