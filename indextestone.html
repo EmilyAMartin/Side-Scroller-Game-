@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 150px;
+            height: 150px;
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
+    <div class="box" id="box"></div>
+    <script>
+    var box = document.querySelector(".box");
+   
+    document.ontouchstart=(event)=>{
+        var x = event.touches[0].clientX;
+        var y = event.touches[0].clientY;
+        box.style.left=x+"px";
+        box.style.top=y+"px";
+        console.log("touchstart");
+        }
+    </script>
+</body>
+</html>
