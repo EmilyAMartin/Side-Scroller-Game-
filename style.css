@@ -97,3 +97,6 @@ body {
   display: none;
   background-color: inherit;
 }
+.gameover{
+  display: none;
+}

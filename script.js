@@ -57,13 +57,19 @@ let spirit = {
 } 
 
 let obstacleArray = [];
-let obstacle1Width = 120;
-let obstacle2Width = 115;
-let obstacleHeight = 230;
-let obstacleX = 980;
-let obstacleY = 500;
+//Bird//
+let obstacle1Width = 150;
+let obstacle1Height = 150;
+let obstacle1X = 980;
+let obstacle1Y = 500;
 let obstacle1Img = new Image();
     obstacle1Img.src = "./img/obstacle1.png";
+
+//Plant//
+let obstacle2Width = 150;
+let obstacle2Height = 300;
+let obstacle2X = 980;
+let obstacle2Y = 700;
 let obstacle2Img = new Image();
     obstacle2Img.src = "./img/obstacle2.png";
 
@@ -126,24 +132,32 @@ function placeObstacle() {
     //place obstacle
     let obstacle = {
         img : null,
-        x : obstacleX,
-        y : obstacleY,
+        x : obstacle1X,
+        y : obstacle1Y,
         width : null,
-        height: obstacleHeight
+        height: obstacle1Height, 
     }
+    
+    let test = {
+        img : null,
+        x : obstacle2X,
+        y : obstacle2Y,
+        width : null,
+        height: obstacle2Height, 
+    }
+
     let placeObstacleChance = Math.random();
 
     if (placeObstacleChance > .15) { 
+        obstacle.img = obstacle1Img;
+        obstacle.width = obstacle1Width;
+        obstacleArray.push(test);
+    }
+    else if (placeObstacleChance > .15) { 
         obstacle.img = obstacle2Img;
         obstacle.width = obstacle2Width;
         obstacleArray.push(obstacle);
-    }
-    else if (placeObstacleChance > .15) { 
-        obstacle.img = obstacle1Img;
-        obstacle.width = obstacle1Width;
-        obstacleArray.push(obstacle);
-    }
-
+    } 
     if (obstacleArray.length > 5) {
         obstacleArray.shift(); //Keeps array from growing//
     }
@@ -195,9 +209,9 @@ function gameLoop() {
         context.fillText("GAME OVER", 360, 360,);
         spiritImg.src = "./img/spirit-dead.png";
         context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height);     
-        score = 0;
+        score = 0;  
       }
     } 
-           
+
 
 
