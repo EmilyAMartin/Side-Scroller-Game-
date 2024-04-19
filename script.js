@@ -96,7 +96,14 @@ window.onload = function () {
 
     requestAnimationFrame(animationLoop);
     setInterval(placeObstacle, 1000); //1000 milliseconds = 1 second
-    document.addEventListener("keydown", moveSpirit);      
+   
+    //Keyboard//
+    document.addEventListener("keydown", moveSpirit);  
+   
+
+    //Touch// 
+    canvas.addEventListener("touchstart", moveSpirit); 
+   ; 
 } 
     //Full Screen//
     var screen = document.documentElement;
@@ -117,24 +124,7 @@ window.onload = function () {
         } else if (document.msExitFullscreen) {
             document.msExitFullscreen();
         }
-
-// Mobile Touch Event//
-canvas.addEventListener('touchstart', (e) => { touchstart(e) }, false);
-canvas.addEventListener('touchend', (e) => { touchend(e) }, false);
-canvas.addEventListener('touchmove', (e) => { touchmove(e) }, false);
-
-function touchstart(canvas, e) {
-  
-}
-
-function touchend(e) {
-
-}
-
-function touchmove(e) {
- 
-}
-}
+    }
 
 function animationLoop() { 
     requestAnimationFrame(animationLoop);     
@@ -176,11 +166,10 @@ function animationLoop() {
         score = 0;
       }
     } 
-    
-       
+           
 //*Possibly animate the spirit so it floating or use multi button movement contorls//
 function moveSpirit(e) {
-    if ((e.code == "Enter") && spirit.y == spiritY) {
+    if ((e.code === "Enter" || e.type === "touchstart") && spirit.y === spiritY) {
         //jump
         velocityY = -10;
     }
