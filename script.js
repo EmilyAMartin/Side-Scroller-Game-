@@ -57,21 +57,24 @@ let spirit = {
 } 
 
 let obstacleArray = [];
-//Bird//
-let obstacle1Width = 150;
-let obstacle1Height = 150;
-let obstacle1X = 980;
-let obstacle1Y = 500;
+//Plant//
+let obstacle1Width = 120;
 let obstacle1Img = new Image();
     obstacle1Img.src = "./img/obstacle1.png";
 
-//Plant//
-let obstacle2Width = 150;
-let obstacle2Height = 300;
-let obstacle2X = 980;
-let obstacle2Y = 700;
+//Butterfly//
+let obstacle2Width = 102;
 let obstacle2Img = new Image();
-    obstacle2Img.src = "./img/obstacle2.png";
+obstacle2Img.src = "./img/obstacle2.png";
+
+//Dragonfly//
+let obstacle3Width = 102;
+let obstacle3Img = new Image();
+obstacle3Img.src = "./img/obstacle3.png";
+
+let obstacleHeight = 250;//Height the same for all obstacles//
+let obstacleX = 980;
+let obstacleY = 500;
 
 //Game Physics and Operations//
 let velocityX = -8;
@@ -132,32 +135,30 @@ function placeObstacle() {
     //place obstacle
     let obstacle = {
         img : null,
-        x : obstacle1X,
-        y : obstacle1Y,
+        x : obstacleX,
+        y : obstacleY,
         width : null,
-        height: obstacle1Height, 
+        height: obstacleHeight
     }
     
-    let test = {
-        img : null,
-        x : obstacle2X,
-        y : obstacle2Y,
-        width : null,
-        height: obstacle2Height, 
-    }
-
     let placeObstacleChance = Math.random();
 
-    if (placeObstacleChance > .15) { 
-        obstacle.img = obstacle1Img;
-        obstacle.width = obstacle1Width;
-        obstacleArray.push(test);
+    if (placeObstacleChance > .75) { 
+        obstacle.img = obstacle3Img;
+        obstacle.width = obstacle3Width;
+        obstacleArray.push(obstacle);
     }
-    else if (placeObstacleChance > .15) { 
+    else if (placeObstacleChance > .50) { 
         obstacle.img = obstacle2Img;
         obstacle.width = obstacle2Width;
         obstacleArray.push(obstacle);
-    } 
+    }
+    else if (placeObstacleChance > .25) { 
+        obstacle.img = obstacle1Img;
+        obstacle.width = obstacle1Width;
+        obstacleArray.push(obstacle);
+    }
+
     if (obstacleArray.length > 5) {
         obstacleArray.shift(); //Keeps array from growing//
     }
@@ -190,6 +191,7 @@ function gameLoop() {
         let obstacle = obstacleArray[i];
         obstacle.x += velocityX;
         context.drawImage(obstacle.img, obstacle.x, obstacle.y, obstacle.width, obstacle.height)
+      
     
     //Object Collision//
     if (detectCollision(spirit, obstacle)) {
@@ -212,6 +214,3 @@ function gameLoop() {
         score = 0;  
       }
     } 
-
-
-
