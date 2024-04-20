@@ -39,7 +39,7 @@ let context;
 let backgroundimg = new Image();
     backgroundimg.src = "./img/bg.png";
 let backgroundWidth = 0;
-let scrollSpeed = 2;
+let scrollSpeed = 4;
 
 //Sprit//
 let spiritWidth = 75;
@@ -63,12 +63,12 @@ let obstacle1Img = new Image();
     obstacle1Img.src = "./img/obstacle1.png";
 
 //Butterfly//
-let obstacle2Width = 102;
+let obstacle2Width = 120;
 let obstacle2Img = new Image();
 obstacle2Img.src = "./img/obstacle2.png";
 
 //Dragonfly//
-let obstacle3Width = 102;
+let obstacle3Width = 120;
 let obstacle3Img = new Image();
 obstacle3Img.src = "./img/obstacle3.png";
 
@@ -77,7 +77,7 @@ let obstacleX = 980;
 let obstacleY = 500;
 
 //Game Physics and Operations//
-let velocityX = -8;
+let velocityX = -10
 let velocityY = 0;
 let gravity = .4;
 let adjustBy = 1.4; //Overlaps the characters collison//
@@ -153,7 +153,7 @@ function placeObstacle() {
         obstacle.width = obstacle2Width;
         obstacleArray.push(obstacle);
     }
-    else if (placeObstacleChance > .25) { 
+    else if (placeObstacleChance > .15) { 
         obstacle.img = obstacle1Img;
         obstacle.width = obstacle1Width;
         obstacleArray.push(obstacle);
