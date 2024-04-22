@@ -31,17 +31,26 @@ document.getElementById("soundBtn").muted = true;
 
 //Game Variables// 
 //Game Area & Background//
-let canvas;
+let canvas = document.getElementById("canvas");
 let canvasWidth = 1040;
 let canvasHeight = 740;
 let context;
+
+let backgroundimg = new Image();
+    backgroundimg.src = "./img/bg.png";
+let backgroundWidth = 0;
+let scrollSpeed = 4;
 
 //Sprit//
 let spiritWidth = 75;
 let spiritHeight = 75;
 let spiritX = 75;
 let spiritY = 500;
-let spiritImg;
+let spiritImg = new Image(); 
+spiritImg.src = "./img/spirit.png";
+spiritImg.onload = function() {
+    context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height); 
+}
 
 let spirit = {
     x : spiritX,
@@ -60,9 +69,14 @@ let obstacleHeight = 250;//Height the same for all obstacles//
 let obstacleX = 980;
 let obstacleY = 500;
 
-let obstacle1Img 
-let obstacle2Img;
-let obstacle3Img;
+let obstacle1Img = new Image(); 
+obstacle1Img.src = "./img/obstacle1.png";
+
+let obstacle2Img = new Image();
+obstacle2Img.src = "./img/obstacle2.png";
+
+let obstacle3Img = new Image();
+obstacle3Img.src = "./img/obstacle3.png";
 
 //Game Physics and Operations//
 let velocityX = -8
@@ -74,41 +88,27 @@ let adjustBy = 1.4; //Overlaps the characters collison//
 let gameOver = false;
 let score = 0;
 
+
 window.onload = function () {   
-//Draw Canvas//
-    canvas = document.getElementById("canvas");
+//Draw Canvas//   
+    document.getElementById("canvas");
     canvas.height = canvasHeight;
     canvas.width = canvasWidth;
-    
-    context = canvas.getContext("2d"); 
-
-    spiritImg = new Image(); 
-    spiritImg.src = "./img/spirit.png";
-    spiritImg.onload = function() {
-        context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height); 
-    }
-
-    obstacle1Img = new Image(); 
-    obstacle1Img.src = "./img/obstacle1.png";
-
-    obstacle2Img = new Image();
-    obstacle2Img.src = "./img/obstacle2.png";
-
-    obstacle3Img = new Image();
-    obstacle3Img.src = "./img/obstacle3.png";
+    context = canvas.getContext("2d");
 
     requestAnimationFrame(gameLoop);
     setInterval(placeObstacle, 1000); //1000 milliseconds = 1 second
     document.addEventListener("keydown", moveSpirit);  
     canvas.addEventListener("touchstart", moveSpirit); 
 }
-
+    
 function gameLoop() { 
     requestAnimationFrame(gameLoop);     
     if (gameOver) {
         return;
     }
     context.clearRect(0, 0, canvas.width, canvas.height);
+   
 
     //Draws Spirit Character & Mouvement// 
     velocityY += gravity;
@@ -135,20 +135,36 @@ function gameLoop() {
     context.fillStyle="white";
     context.font="20px courier";
     score++;
-    context.fillText(score, 15, 30);        
-    }       
+    context.fillText(score, 15, 30); 
+    
+    
+    if (gameOver) {
+        context.fillStyle="white";
+        context.font="50px courier";
+        context.fillText("GAME OVER", 360, 360,);
+        }
+    }      
        
 function moveSpirit(e) {
-    if (gameOver) {
-        return;
-    }
-
     if ((e.code === "Enter" || e.type === "touchstart") && spirit.y === spiritY) {
         //jump
         velocityY = -10;
     }
+    
+    // Resets the Game// 
+   if (gameOver){
+        spirit.y = spiritY;
+        obstacleArray = [];
+        score = 0;
+        gameOver = false;
+        spiritImg = new Image();
+        spiritImg.src = "./img/spirit.png";
+        spiritImg.onload = function() {
+        context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height); // This draws the spirit character//
+        }
+    }
 }
- 
+
 function placeObstacle() {
     if (gameOver) {
         return;
