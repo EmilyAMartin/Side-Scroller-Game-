@@ -36,18 +36,12 @@ let canvasWidth = 1040;
 let canvasHeight = 740;
 let context;
 
-let backgroundimg = new Image();
-    backgroundimg.src = "./img/bg.png";
-let backgroundWidth = 0;
-let scrollSpeed = 4;
-
 //Sprit//
 let spiritWidth = 75;
 let spiritHeight = 75;
 let spiritX = 75;
 let spiritY = 500;
-let spiritImg = new Image(); 
-    spiritImg.src = "./img/spirit.png";
+let spiritImg;
 
 let spirit = {
     x : spiritX,
@@ -57,93 +51,93 @@ let spirit = {
 } 
 
 let obstacleArray = [];
-//Plant//
+
 let obstacle1Width = 120;
-let obstacle1Img = new Image();
-    obstacle1Img.src = "./img/obstacle1.png";
-
-//Butterfly//
 let obstacle2Width = 120;
-let obstacle2Img = new Image();
-obstacle2Img.src = "./img/obstacle2.png";
-
-//Dragonfly//
 let obstacle3Width = 120;
-let obstacle3Img = new Image();
-obstacle3Img.src = "./img/obstacle3.png";
 
 let obstacleHeight = 250;//Height the same for all obstacles//
 let obstacleX = 980;
 let obstacleY = 500;
 
+let obstacle1Img 
+let obstacle2Img;
+let obstacle3Img;
+
 //Game Physics and Operations//
-let velocityX = -10
+let velocityX = -8
 let velocityY = 0;
 let gravity = .4;
-let adjustBy = 1.4; //Overlaps the characters collison//
-let gameOver = false;
-let pause = false;
-let score = 0;
 
+let adjustBy = 1.4; //Overlaps the characters collison//
+
+let gameOver = false;
+let score = 0;
 
 window.onload = function () {   
 //Draw Canvas//
     canvas = document.getElementById("canvas");
     canvas.height = canvasHeight;
     canvas.width = canvasWidth;
+    
     context = canvas.getContext("2d"); 
 
-//Draw Background//
-function background(){
-    context.drawImage(backgroundimg, -backgroundWidth, 0); //Background 1
-    context.drawImage(backgroundimg, -backgroundWidth + canvas.width, 0); //Background 2
-    backgroundWidth += scrollSpeed;
-             
-    if (backgroundWidth == canvas.width)
-    backgroundWidth = 0;
-    window.requestAnimationFrame(background);
-    } 
-    background();
+    spiritImg = new Image(); 
+    spiritImg.src = "./img/spirit.png";
+    spiritImg.onload = function() {
+        context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height); 
+    }
 
-//Events & Animation Request//
-    document.addEventListener("keydown", moveSpirit);  
-    canvas.addEventListener("touchstart", moveSpirit); 
+    obstacle1Img = new Image(); 
+    obstacle1Img.src = "./img/obstacle1.png";
+
+    obstacle2Img = new Image();
+    obstacle2Img.src = "./img/obstacle2.png";
+
+    obstacle3Img = new Image();
+    obstacle3Img.src = "./img/obstacle3.png";
+
     requestAnimationFrame(gameLoop);
     setInterval(placeObstacle, 1000); //1000 milliseconds = 1 second
-} 
+    document.addEventListener("keydown", moveSpirit);  
+    canvas.addEventListener("touchstart", moveSpirit); 
+}
+
 function gameLoop() { 
     requestAnimationFrame(gameLoop);     
     if (gameOver) {
         return;
     }
     context.clearRect(0, 0, canvas.width, canvas.height);
-    
+
     //Draws Spirit Character & Mouvement// 
     velocityY += gravity;
     spirit.y = Math.min(spirit.y + velocityY, spiritY); 
     context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height);
-    
+        
     //Drawing Obstacles//
     for (let i = 0; i < obstacleArray.length; i++) {
         let obstacle = obstacleArray[i];
         obstacle.x += velocityX;
         context.drawImage(obstacle.img, obstacle.x, obstacle.y, obstacle.width, obstacle.height)
-      
+          
+        
     //Object Collision//
     if (detectCollision(spirit, obstacle)) {
         gameOver = true;
         spiritImg.src = "./img/spirit-dead.png";
         spiritImg.onload = function() {
-        context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height); //Add a game over image and an option to try again//
+            context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height); //Add a game over image and an option to try again//
             }
-        }   
+        }
     }
-    //Score//
+    //Score on screen//
     context.fillStyle="white";
     context.font="20px courier";
     score++;
-    context.fillText(score, 15, 30);   
-}
+    context.fillText(score, 15, 30);        
+    }       
+       
 function moveSpirit(e) {
     if (gameOver) {
         return;
@@ -152,14 +146,14 @@ function moveSpirit(e) {
     if ((e.code === "Enter" || e.type === "touchstart") && spirit.y === spiritY) {
         //jump
         velocityY = -10;
-    } 
+    }
 }
-
+ 
 function placeObstacle() {
     if (gameOver) {
         return;
     }
-    
+
     let obstacle = {
         img : null,
         x : obstacleX,
@@ -170,17 +164,17 @@ function placeObstacle() {
     
     let placeObstacleChance = Math.random();
 
-    if (placeObstacleChance > .75) { 
+    if (placeObstacleChance > .90) { 
         obstacle.img = obstacle3Img;
         obstacle.width = obstacle3Width;
         obstacleArray.push(obstacle);
     }
-    else if (placeObstacleChance > .50) { 
+    else if (placeObstacleChance > .70) { 
         obstacle.img = obstacle2Img;
         obstacle.width = obstacle2Width;
         obstacleArray.push(obstacle);
     }
-    else if (placeObstacleChance > .15) { 
+    else if (placeObstacleChance > .50) { 
         obstacle.img = obstacle1Img;
         obstacle.width = obstacle1Width;
         obstacleArray.push(obstacle);
@@ -198,4 +192,3 @@ function detectCollision(a, b) {
            a.y + a.height / adjustBy > b.y;    
            
 }
-
