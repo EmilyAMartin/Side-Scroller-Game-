@@ -7,18 +7,15 @@ let runGame = function(){
     document.getElementById("main").style.display = "block";
     document.getElementById("instructionsBtn").style.display = "none";
     document.getElementById("soundBtn").style.display = "none";
-    document.getElementById("gameOverMenu").style.display = "block";
-   
-};
+    document.getElementById("gameOverMenu").style.display = "block";//Gameover goes back to main menu and returns to game over screen//
+} 
 let showInstructions = function(){
     document.getElementById("theHeader").style.display = "none";
     document.getElementById("instructionsBtn").style.display = "none";
     document.getElementById("newGame").style.display = "none";
     document.getElementById("instructions").style.display = "block";
     document.getElementById("soundBtn").style.display = "none";
-    document.getElementById("backBtn").style.display = "block";
-    document.getElementById("gameOverMenu").style.display = "none";
-  
+    document.getElementById("backBtn").style.display = "block"; 
 }; 
 let goBack = function(){
     document.getElementById("backBtn").style.display = "none";
@@ -27,12 +24,9 @@ let goBack = function(){
     document.getElementById("newGame").style.display = "block";
     document.getElementById("soundBtn").style.display = "block";
     document.getElementById("instructionsBtn").style.display = "block";
-    document.getElementById("gameOverMenu").style.display = "none";
 };
 let returnMain = function(){
     document.getElementById("main").style.display = "none";
-    document.getElementById("backBtn").style.display = "none";
-    document.getElementById("instructions").style.display = "none";
     document.getElementById("theHeader").style.display = "block";
     document.getElementById("newGame").style.display = "block";
     document.getElementById("soundBtn").style.display = "block";
@@ -120,6 +114,7 @@ function moveSpirit(e) {
     
     // Resets the Game// 
    if (gameOver){
+        document.getElementById("gameOverMenu").style.display = "none";//Removes Gameover Screen//
         spirit.y = spiritY;
         obstacleArray = [];
         score = 0;
@@ -201,14 +196,16 @@ function gameLoop() {
         obstacle.x += velocityX;
         context.drawImage(obstacle.img, obstacle.x, obstacle.y, obstacle.width, obstacle.height)
               
-    //Object Collision//
+    //Collision//
     if (detectCollision(spirit, obstacle)) {
         gameOver = true;
         spiritImg.src = "./img/spirit-dead.png";
         spiritImg.onload = function() {
             context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height); //Add a game over image and an option to try again//
             }
+            document.getElementById("gameOverMenu").style.display = "block"; //Add Gameover Screen//
         }
+        
     }
     //Score on screen//
     context.fillStyle="white";
