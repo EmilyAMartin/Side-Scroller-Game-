@@ -9,19 +9,31 @@
     <script src="script.js"></script>
 </head>
 <body>
-   <!--<div class="openBtn" onclick="openFullscreen();">Open Fullscreen</div>
-    <div class="closeBtn"onclick="closeFullscreen();">Close Fullscreen</div> -->
-    <div class="game" id="game">
+    
+    <div class="gameMenu" id="gameMenu">
         <div class="flex-container">
             <div class="theHeader" id="theHeader">Will-o-the-Wisp</div>
             <div class="newGame" id="newGame" onclick="runGame()">New Game</div>
             <div class="instructionsBtn" id="instructionsBtn" onclick="showInstructions()">Insturctions</div>
             <div class="soundBtn" id="soundBtn" onclick="toggleMuted()">Mute | Unmute</div>
         </div>
-    <div class="instructions" id="instructions"> write here </div>
-    <div class="backBtn" id="backBtn" onclick="goBack()">Back</div>
-    <div class="main" id="main">
-        <canvas class="canvas" id="canvas"></canvas>    
+    
+    <div class="instructionsMenu" id="instructionsMenu">    
+        <div class="instructions" id="instructions"> write here </div>
+        <div class="backBtn" id="backBtn" onclick="goBack()">Back</div>
     </div>
+
+    <div class="game" id="game">
+    <div class="main" id="main">
+        <canvas class="canvas" id="canvas"></canvas>  
+    </div>
+    </div>
+
+    <div class="gameOverMenu" id="gameOverMenu">
+        <div class="gameOver" id="gameOver">Gameover press Enter or Tap Screen to restart</div>
+        <div class="returnMainBtn" id="returnMainBtn" onclick="returnMain()">Main Menu</div>
+        </div>
+    </div>
+ 
 </body>
 </html

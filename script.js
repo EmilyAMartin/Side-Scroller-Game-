@@ -6,6 +6,7 @@ let runGame = function(){
     document.getElementById("main").style.display = "block";
     document.getElementById("instructionsBtn").style.display = "none";
     document.getElementById("soundBtn").style.display = "none";   
+    document.getElementById("returnMainBtn").style.display = "none";
 };
 let showInstructions = function(){
     document.getElementById("theHeader").style.display = "none";
@@ -13,8 +14,7 @@ let showInstructions = function(){
     document.getElementById("newGame").style.display = "none";
     document.getElementById("instructions").style.display = "block";
     document.getElementById("soundBtn").style.display = "none";
-    document.getElementById("backBtn").style.display = "block";
-  
+    document.getElementById("backBtn").style.display = "block"; 
 }; 
 let goBack = function(){
     document.getElementById("backBtn").style.display = "none";
@@ -22,12 +22,8 @@ let goBack = function(){
     document.getElementById("theHeader").style.display = "block";
     document.getElementById("newGame").style.display = "block";
     document.getElementById("soundBtn").style.display = "block";
-    document.getElementById("instructionsBtn").style.display = "block";
-   
+    document.getElementById("instructionsBtn").style.display = "block"; 
 };
-let toggleMuted = function(){
-document.getElementById("soundBtn").muted = true;
-}
 
 //Game Variables// 
 //Game Area & Background//
@@ -104,7 +100,6 @@ function gameLoop() {
     if (gameOver) {
         return;
     } 
-    
     context.clearRect(0, 0, canvas.width, canvas.height);
 
     //Draws Scrolling Background//
@@ -142,12 +137,6 @@ function gameLoop() {
     score++;
     context.fillText(score, 15, 30); 
     
-    
-    if (gameOver) {
-        context.fillStyle="white";
-        context.font="50px courier";
-        context.fillText("GAME OVER", 360, 360,);
-        }
     }      
        
 function moveSpirit(e) {
