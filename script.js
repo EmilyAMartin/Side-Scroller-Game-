@@ -1,12 +1,14 @@
 //Game Menu//
+//Game Menu//
 let runGame = function(){
     document.getElementById("newGame").style.display = "none";
     document.getElementById("theHeader").style.display = "none";    
     document.getElementById("instructions").style.display = "none";
     document.getElementById("main").style.display = "block";
     document.getElementById("instructionsBtn").style.display = "none";
-    document.getElementById("soundBtn").style.display = "none";   
-    document.getElementById("returnMainBtn").style.display = "none";
+    document.getElementById("soundBtn").style.display = "none";
+    document.getElementById("gameOverMenu").style.display = "block";
+   
 };
 let showInstructions = function(){
     document.getElementById("theHeader").style.display = "none";
@@ -14,7 +16,9 @@ let showInstructions = function(){
     document.getElementById("newGame").style.display = "none";
     document.getElementById("instructions").style.display = "block";
     document.getElementById("soundBtn").style.display = "none";
-    document.getElementById("backBtn").style.display = "block"; 
+    document.getElementById("backBtn").style.display = "block";
+    document.getElementById("gameOverMenu").style.display = "none";
+  
 }; 
 let goBack = function(){
     document.getElementById("backBtn").style.display = "none";
@@ -22,11 +26,25 @@ let goBack = function(){
     document.getElementById("theHeader").style.display = "block";
     document.getElementById("newGame").style.display = "block";
     document.getElementById("soundBtn").style.display = "block";
-    document.getElementById("instructionsBtn").style.display = "block"; 
+    document.getElementById("instructionsBtn").style.display = "block";
+    document.getElementById("gameOverMenu").style.display = "none";
 };
+let returnMain = function(){
+    document.getElementById("main").style.display = "none";
+    document.getElementById("backBtn").style.display = "none";
+    document.getElementById("instructions").style.display = "none";
+    document.getElementById("theHeader").style.display = "block";
+    document.getElementById("newGame").style.display = "block";
+    document.getElementById("soundBtn").style.display = "block";
+    document.getElementById("instructionsBtn").style.display = "block";
+    document.getElementById("gameOverMenu").style.display = "none";
+};
+
+
 
 //Game Variables// 
 //Game Area & Background//
+let test = document.getElementById("test");
 let canvas;
 let canvasWidth = 1040;
 let canvasHeight = 740;
@@ -186,15 +204,10 @@ function gameLoop() {
     //Object Collision//
     if (detectCollision(spirit, obstacle)) {
         gameOver = true;
-        //Previous Game Over
-        //context.fillStyle="white";
-        //context.font="50px courier";
-        //context.fillText("GAME OVER", 360, 360,);
         spiritImg.src = "./img/spirit-dead.png";
         spiritImg.onload = function() {
             context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height); //Add a game over image and an option to try again//
             }
-            context("test");
         }
     }
     //Score on screen//
@@ -202,5 +215,4 @@ function gameLoop() {
     context.font="20px courier";
     score++;
     context.fillText(score, 15, 30); 
-    
     }  

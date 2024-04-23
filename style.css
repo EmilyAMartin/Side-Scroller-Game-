@@ -10,8 +10,6 @@ body {
   font-family: "Amatic SC", sans-serif;
   font-size: 2em;
   text-align: center;
-  background-image: url(orb.png);
-  background-size: cover;
 }
 
 .main{
@@ -93,6 +91,8 @@ body {
   font-family: "Amatic SC", sans-serif;
   position: relative;
   display: none;
+  margin: 320px auto; 
+
 }
 .returnMainBtn{
   text-align: center;
