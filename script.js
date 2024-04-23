@@ -92,53 +92,8 @@ window.onload = function () {
     setInterval(placeObstacle, 1000); //1000 milliseconds = 1 second
     document.addEventListener("keydown", moveSpirit);  
     canvas.addEventListener("touchstart", moveSpirit); 
-    
 }
-    
-function gameLoop() { 
-    requestAnimationFrame(gameLoop);     
-    if (gameOver) {
-        return;
-    } 
-    context.clearRect(0, 0, canvas.width, canvas.height);
 
-    //Draws Scrolling Background//
-    context.drawImage(backgroundimg, -backgroundWidth, 0); //Background 1
-    context.drawImage(backgroundimg, -backgroundWidth + canvas.width, 0); //Background 2
-    backgroundWidth += scrollSpeed;
-    if (backgroundWidth == canvas.width)
-    backgroundWidth = 0;
-   
-
-    //Draws Spirit Character & Mouvement// 
-    velocityY += gravity;
-    spirit.y = Math.min(spirit.y + velocityY, spiritY); 
-    context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height);
-        
-    //Drawing Obstacles//
-    for (let i = 0; i < obstacleArray.length; i++) {
-        let obstacle = obstacleArray[i];
-        obstacle.x += velocityX;
-        context.drawImage(obstacle.img, obstacle.x, obstacle.y, obstacle.width, obstacle.height)
-          
-        
-    //Object Collision//
-    if (detectCollision(spirit, obstacle)) {
-        gameOver = true;
-        spiritImg.src = "./img/spirit-dead.png";
-        spiritImg.onload = function() {
-            context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height); //Add a game over image and an option to try again//
-            }
-        }
-    }
-    //Score on screen//
-    context.fillStyle="white";
-    context.font="20px courier";
-    score++;
-    context.fillText(score, 15, 30); 
-    
-    }      
-       
 function moveSpirit(e) {
     if ((e.code === "Enter" || e.type === "touchstart") && spirit.y === spiritY) {
         //jump
@@ -202,3 +157,50 @@ function detectCollision(a, b) {
            a.y + a.height / adjustBy > b.y;    
            
 }
+
+function gameLoop() { 
+    requestAnimationFrame(gameLoop);     
+    if (gameOver) {
+        return;
+}
+    context.clearRect(0, 0, canvas.width, canvas.height);
+
+    //Draws Scrolling Background//
+    context.drawImage(backgroundimg, -backgroundWidth, 0); //Background 1
+    context.drawImage(backgroundimg, -backgroundWidth + canvas.width, 0); //Background 2
+    backgroundWidth += scrollSpeed;
+    if (backgroundWidth == canvas.width)
+    backgroundWidth = 0;
+   
+    //Draws Spirit Character & Mouvement// 
+    velocityY += gravity;
+    spirit.y = Math.min(spirit.y + velocityY, spiritY); 
+    context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height);
+        
+    //Drawing Obstacles//
+    for (let i = 0; i < obstacleArray.length; i++) {
+        let obstacle = obstacleArray[i];
+        obstacle.x += velocityX;
+        context.drawImage(obstacle.img, obstacle.x, obstacle.y, obstacle.width, obstacle.height)
+              
+    //Object Collision//
+    if (detectCollision(spirit, obstacle)) {
+        gameOver = true;
+        //Previous Game Over
+        //context.fillStyle="white";
+        //context.font="50px courier";
+        //context.fillText("GAME OVER", 360, 360,);
+        spiritImg.src = "./img/spirit-dead.png";
+        spiritImg.onload = function() {
+            context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height); //Add a game over image and an option to try again//
+            }
+            context("test");
+        }
+    }
+    //Score on screen//
+    context.fillStyle="white";
+    context.font="20px courier";
+    score++;
+    context.fillText(score, 15, 30); 
+    
+    }  
