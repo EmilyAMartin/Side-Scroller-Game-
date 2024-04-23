@@ -19,8 +19,6 @@ body {
 }
 .canvas{
   position: absolute;
-  width:1040px;
-  height:740px;
   top:50%;
   left:50%;
   transform: translate(-50%, -50%);
@@ -98,7 +96,4 @@ body {
   font-family: "Amatic SC", sans-serif;
   display: none;
   background-color: inherit;
-}
-.gameover{
-  display: none;
 }

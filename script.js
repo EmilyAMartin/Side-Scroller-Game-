@@ -31,7 +31,7 @@ document.getElementById("soundBtn").muted = true;
 
 //Game Variables// 
 //Game Area & Background//
-let canvas = document.getElementById("canvas");
+let canvas;
 let canvasWidth = 1040;
 let canvasHeight = 740;
 let context;
@@ -48,9 +48,7 @@ let spiritX = 75;
 let spiritY = 500;
 let spiritImg = new Image(); 
 spiritImg.src = "./img/spirit.png";
-spiritImg.onload = function() {
-    context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height); 
-}
+
 
 let spirit = {
     x : spiritX,
@@ -82,32 +80,39 @@ obstacle3Img.src = "./img/obstacle3.png";
 let velocityX = -8
 let velocityY = 0;
 let gravity = .4;
-
-let adjustBy = 1.4; //Overlaps the characters collison//
-
+let adjustBy = 2.0; //Overlaps the characters collison//
 let gameOver = false;
 let score = 0;
 
 
 window.onload = function () {   
 //Draw Canvas//   
-    document.getElementById("canvas");
+    canvas = document.getElementById("canvas");
     canvas.height = canvasHeight;
     canvas.width = canvasWidth;
-    context = canvas.getContext("2d");
+    context = canvas.getContext("2d")
 
     requestAnimationFrame(gameLoop);
     setInterval(placeObstacle, 1000); //1000 milliseconds = 1 second
     document.addEventListener("keydown", moveSpirit);  
     canvas.addEventListener("touchstart", moveSpirit); 
+    
 }
     
 function gameLoop() { 
     requestAnimationFrame(gameLoop);     
     if (gameOver) {
         return;
-    }
+    } 
+    
     context.clearRect(0, 0, canvas.width, canvas.height);
+
+    //Draws Scrolling Background//
+    context.drawImage(backgroundimg, -backgroundWidth, 0); //Background 1
+    context.drawImage(backgroundimg, -backgroundWidth + canvas.width, 0); //Background 2
+    backgroundWidth += scrollSpeed;
+    if (backgroundWidth == canvas.width)
+    backgroundWidth = 0;
    
 
     //Draws Spirit Character & Mouvement// 
