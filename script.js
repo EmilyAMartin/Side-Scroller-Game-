@@ -105,9 +105,9 @@ window.onload = function () {
     //Events and Animation//
     requestAnimationFrame(gameLoop);
     setInterval(placeObstacle, 1000); //1000 milliseconds = 1 second
-    document.addEventListener("keydown", moveSpirit,);  
-    document.addEventListener("keydown", gameLoop,);  
-    canvas.addEventListener("touchstart", moveSpirit,);      
+    document.addEventListener("keydown", moveSpirit);   
+    canvas.addEventListener("touchstart", moveSpirit,);     
+    document.addEventListener("keydown", drawObstacles); 
 }
 
 function gameLoop() { 
@@ -128,30 +128,34 @@ function gameLoop() {
     velocityY += gravity;
     spirit.y = Math.min(spirit.y + velocityY, spiritY); 
     context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height);
-        
-    //Drawing Obstacles//
-    for (let i = 0; i < obstacleArray.length; i++) {
-        let obstacle = obstacleArray[i];
-        obstacle.x += velocityX;
-        context.drawImage(obstacle.img, obstacle.x, obstacle.y, obstacle.width, obstacle.height)
-              
-    //Collision//
-    if (detectCollision(spirit, obstacle)) {
-        gameOver = true;
-        document.getElementById("gameOverMenu").style.display = "block";
-        spiritImg.src = "./img/spirit-dead.png";
-        spiritImg.onload = function() {
-            context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height); //Add a game over image and an option to try again//
+
+    function drawObstacles () {
+        if (e.code === "Enter" || e.type === "touchstart"){
+        for (let i = 0; i < obstacleArray.length; i++) {
+            let obstacle = obstacleArray[i];
+            obstacle.x += velocityX;
+            context.drawImage(obstacle.img, obstacle.x, obstacle.y, obstacle.width, obstacle.height)
+            
+        if (detectCollision(spirit, obstacle)) {
+            gameOver = true;
+            document.getElementById("gameOverMenu").style.display = "block";
+            spiritImg.src = "./img/spirit-dead.png";
+            spiritImg.onload = function() {
+                context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height); //Add a game over image and an option to try again//
+                }
             }
         }
+    } drawObstacles();
+}
         
-    }
     //Score on screen//
     context.fillStyle="white";
     context.font="20px courier";
     score++;
     context.fillText(score, 15, 30); 
     }  
+
+
 
 function moveSpirit(e) {
     if ((e.code === "Enter" || e.type === "touchstart") && spirit.y === spiritY) {
@@ -178,7 +182,6 @@ function placeObstacle() {
     if (gameOver) {
         return;
     }
-
     let obstacle = {
         img : null,
         x : obstacleX,
@@ -209,7 +212,6 @@ function placeObstacle() {
         obstacleArray.shift(); //Keeps array from growing//
     }
 }
-
 function detectCollision(a, b) {
     return a.x < b.x + b.width / adjustBy &&   
            a.x + a.width / adjustBy > b.x &&   
