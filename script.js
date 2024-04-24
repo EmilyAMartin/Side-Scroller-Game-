@@ -7,7 +7,8 @@ let runGame = function(){
     document.getElementById("main").style.display = "block";
     document.getElementById("instructionsBtn").style.display = "none";
     document.getElementById("soundBtn").style.display = "none";
-    document.getElementById("gameOverMenu").style.display = "block";//Gameover goes back to main menu and returns to game over screen//
+    document.getElementById("gameOverMenu").style.display = "none";
+
 } 
 let showInstructions = function(){
     document.getElementById("theHeader").style.display = "none";
@@ -33,12 +34,7 @@ let returnMain = function(){
     document.getElementById("instructionsBtn").style.display = "block";
     document.getElementById("gameOverMenu").style.display = "none";
 };
-
-
-
 //Game Variables// 
-//Game Area & Background//
-let test = document.getElementById("test");
 let canvas;
 let canvasWidth = 1040;
 let canvasHeight = 740;
@@ -174,6 +170,7 @@ function detectCollision(a, b) {
 function gameLoop() { 
     requestAnimationFrame(gameLoop);     
     if (gameOver) {
+        document.getElementById("gameOverMenu").style.display = "block"; //Add Gameover Screen//
         return;
 }
     context.clearRect(0, 0, canvas.width, canvas.height);
@@ -203,7 +200,6 @@ function gameLoop() {
         spiritImg.onload = function() {
             context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height); //Add a game over image and an option to try again//
             }
-            document.getElementById("gameOverMenu").style.display = "block"; //Add Gameover Screen//
         }
         
     }
