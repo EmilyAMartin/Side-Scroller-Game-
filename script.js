@@ -17,6 +17,7 @@ let showInstructions = function(){
     document.getElementById("instructions").style.display = "block";
     document.getElementById("soundBtn").style.display = "none";
     document.getElementById("backBtn").style.display = "block"; 
+    document.getElementById("gameOverMenu").style.display = "none";
 }; 
 let goBack = function(){
     document.getElementById("backBtn").style.display = "none";
@@ -25,6 +26,7 @@ let goBack = function(){
     document.getElementById("newGame").style.display = "block";
     document.getElementById("soundBtn").style.display = "block";
     document.getElementById("instructionsBtn").style.display = "block";
+    document.getElementById("gameOverMenu").style.display = "none";
 };
 let returnMain = function(){
     document.getElementById("main").style.display = "none";
@@ -32,7 +34,7 @@ let returnMain = function(){
     document.getElementById("newGame").style.display = "block";
     document.getElementById("soundBtn").style.display = "block";
     document.getElementById("instructionsBtn").style.display = "block";
-    document.getElementById("gameOverMenu")
+    document.getElementById("gameOverMenu").style.display = "none";
 };
 //Game Variables// 
 let canvas;
@@ -85,27 +87,27 @@ let velocityX = -8
 let velocityY = 0;
 let gravity = .4;
 let adjustBy = 2.0; //Overlaps the characters collison//
+let gameStarted = false;
 let gameOver = false;
 let score = 0;
 
 
 window.onload = function () {   
-//Draw Canvas//   
-
-//Gameover//
+    //Draw Canvas//   
     canvas = document.getElementById("canvas");
     canvas.height = canvasHeight;
     canvas.width = canvasWidth;
     context = canvas.getContext("2d")
-    
- 
 
+    //Start Game Message//
+    document.getElementById("startMenu");
+
+    //Events and Animation//
     requestAnimationFrame(gameLoop);
     setInterval(placeObstacle, 1000); //1000 milliseconds = 1 second
-    document.addEventListener("keydown", moveSpirit);  
-    canvas.addEventListener("touchstart", moveSpirit); 
-    
-  
+    document.addEventListener("keydown", moveSpirit,);  
+    document.addEventListener("keydown", gameLoop,);  
+    canvas.addEventListener("touchstart", moveSpirit,);      
 }
 
 function gameLoop() { 
@@ -149,16 +151,12 @@ function gameLoop() {
     context.font="20px courier";
     score++;
     context.fillText(score, 15, 30); 
-
-    //Start Game Message and GameLoop//
-    document.getElementById("startMenu");
     }  
-
 
 function moveSpirit(e) {
     if ((e.code === "Enter" || e.type === "touchstart") && spirit.y === spiritY) {
-        //jump
         velocityY = -10;
+        document.getElementById("startMenu").style.display = "none";
     }
     
     // Resets the Game// 
