@@ -8,7 +8,7 @@ let runGame = function(){
     document.getElementById("instructionsBtn").style.display = "none";
     document.getElementById("soundBtn").style.display = "none";
     document.getElementById("gameOverMenu").style.display = "none";
-
+    document.getElementById("startMenu").style.display = "block"
 } 
 let showInstructions = function(){
     document.getElementById("theHeader").style.display = "none";
@@ -32,7 +32,7 @@ let returnMain = function(){
     document.getElementById("newGame").style.display = "block";
     document.getElementById("soundBtn").style.display = "block";
     document.getElementById("instructionsBtn").style.display = "block";
-    document.getElementById("gameOverMenu").style.display = "none";
+    document.getElementById("gameOverMenu")
 };
 //Game Variables// 
 let canvas;
@@ -91,16 +91,69 @@ let score = 0;
 
 window.onload = function () {   
 //Draw Canvas//   
+
+//Gameover//
     canvas = document.getElementById("canvas");
     canvas.height = canvasHeight;
     canvas.width = canvasWidth;
     context = canvas.getContext("2d")
+    
+ 
 
     requestAnimationFrame(gameLoop);
     setInterval(placeObstacle, 1000); //1000 milliseconds = 1 second
     document.addEventListener("keydown", moveSpirit);  
     canvas.addEventListener("touchstart", moveSpirit); 
+    
+  
 }
+
+function gameLoop() { 
+    requestAnimationFrame(gameLoop);     
+    if (gameOver) {
+        return;
+    }
+    context.clearRect(0, 0, canvas.width, canvas.height);
+
+    //Draws Scrolling Background//
+    context.drawImage(backgroundimg, -backgroundWidth, 0); //Background 1
+    context.drawImage(backgroundimg, -backgroundWidth + canvas.width, 0); //Background 2
+    backgroundWidth += scrollSpeed;
+    if (backgroundWidth == canvas.width)
+    backgroundWidth = 0;
+   
+    //Draws Spirit Character & Mouvement// 
+    velocityY += gravity;
+    spirit.y = Math.min(spirit.y + velocityY, spiritY); 
+    context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height);
+        
+    //Drawing Obstacles//
+    for (let i = 0; i < obstacleArray.length; i++) {
+        let obstacle = obstacleArray[i];
+        obstacle.x += velocityX;
+        context.drawImage(obstacle.img, obstacle.x, obstacle.y, obstacle.width, obstacle.height)
+              
+    //Collision//
+    if (detectCollision(spirit, obstacle)) {
+        gameOver = true;
+        document.getElementById("gameOverMenu").style.display = "block";
+        spiritImg.src = "./img/spirit-dead.png";
+        spiritImg.onload = function() {
+            context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height); //Add a game over image and an option to try again//
+            }
+        }
+        
+    }
+    //Score on screen//
+    context.fillStyle="white";
+    context.font="20px courier";
+    score++;
+    context.fillText(score, 15, 30); 
+
+    //Start Game Message and GameLoop//
+    document.getElementById("startMenu");
+    }  
+
 
 function moveSpirit(e) {
     if ((e.code === "Enter" || e.type === "touchstart") && spirit.y === spiritY) {
@@ -110,7 +163,7 @@ function moveSpirit(e) {
     
     // Resets the Game// 
    if (gameOver){
-        document.getElementById("gameOverMenu").style.display = "none";//Removes Gameover Screen//
+        document.getElementById("gameOverMenu").style.display = "none";
         spirit.y = spiritY;
         obstacleArray = [];
         score = 0;
@@ -167,45 +220,3 @@ function detectCollision(a, b) {
            
 }
 
-function gameLoop() { 
-    requestAnimationFrame(gameLoop);     
-    if (gameOver) {
-        document.getElementById("gameOverMenu").style.display = "block"; //Add Gameover Screen//
-        return;
-}
-    context.clearRect(0, 0, canvas.width, canvas.height);
-
-    //Draws Scrolling Background//
-    context.drawImage(backgroundimg, -backgroundWidth, 0); //Background 1
-    context.drawImage(backgroundimg, -backgroundWidth + canvas.width, 0); //Background 2
-    backgroundWidth += scrollSpeed;
-    if (backgroundWidth == canvas.width)
-    backgroundWidth = 0;
-   
-    //Draws Spirit Character & Mouvement// 
-    velocityY += gravity;
-    spirit.y = Math.min(spirit.y + velocityY, spiritY); 
-    context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height);
-        
-    //Drawing Obstacles//
-    for (let i = 0; i < obstacleArray.length; i++) {
-        let obstacle = obstacleArray[i];
-        obstacle.x += velocityX;
-        context.drawImage(obstacle.img, obstacle.x, obstacle.y, obstacle.width, obstacle.height)
-              
-    //Collision//
-    if (detectCollision(spirit, obstacle)) {
-        gameOver = true;
-        spiritImg.src = "./img/spirit-dead.png";
-        spiritImg.onload = function() {
-            context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height); //Add a game over image and an option to try again//
-            }
-        }
-        
-    }
-    //Score on screen//
-    context.fillStyle="white";
-    context.font="20px courier";
-    score++;
-    context.fillText(score, 15, 30); 
-    }  
