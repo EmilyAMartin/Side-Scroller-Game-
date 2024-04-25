@@ -104,14 +104,13 @@ window.onload = function () {
 
     //Events and Animation//
     requestAnimationFrame(gameLoop);
-    setInterval(placeObstacle, 1000); //1000 milliseconds = 1 second
     document.addEventListener("keydown", moveSpirit);   
-    canvas.addEventListener("touchstart", moveSpirit,);     
-    document.addEventListener("keydown", drawObstacles); 
+    canvas.addEventListener("touchstart", moveSpirit,);   
+    document.addEventListener("keydown", moveObstacles); 
 }
 
 function gameLoop() { 
-    requestAnimationFrame(gameLoop);     
+    requestAnimationFrame(gameLoop);   
     if (gameOver) {
         return;
     }
@@ -128,26 +127,24 @@ function gameLoop() {
     velocityY += gravity;
     spirit.y = Math.min(spirit.y + velocityY, spiritY); 
     context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height);
-
-    function drawObstacles () {
-        if (e.code === "Enter" || e.type === "touchstart"){
-        for (let i = 0; i < obstacleArray.length; i++) {
-            let obstacle = obstacleArray[i];
-            obstacle.x += velocityX;
-            context.drawImage(obstacle.img, obstacle.x, obstacle.y, obstacle.width, obstacle.height)
-            
-        if (detectCollision(spirit, obstacle)) {
-            gameOver = true;
-            document.getElementById("gameOverMenu").style.display = "block";
-            spiritImg.src = "./img/spirit-dead.png";
-            spiritImg.onload = function() {
-                context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height); //Add a game over image and an option to try again//
-                }
+        
+    //Drawing Obstacles//
+    for (let i = 0; i < obstacleArray.length; i++) {
+        let obstacle = obstacleArray[i];
+        obstacle.x += velocityX;
+        context.drawImage(obstacle.img, obstacle.x, obstacle.y, obstacle.width, obstacle.height)
+              
+    //Collision//
+    if (detectCollision(spirit, obstacle)) {
+        gameOver = true;
+        document.getElementById("gameOverMenu").style.display = "block";
+        spiritImg.src = "./img/spirit-dead.png";
+        spiritImg.onload = function() {
+            context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height); //Add a game over image and an option to try again//
             }
         }
-    } drawObstacles();
-}
         
+    }
     //Score on screen//
     context.fillStyle="white";
     context.font="20px courier";
@@ -155,12 +152,16 @@ function gameLoop() {
     context.fillText(score, 15, 30); 
     }  
 
-
+function moveObstacles (e){
+    if ((e.code === "Space"))
+    setInterval(placeObstacle, 1000,);
+    document.getElementById("startMenu").style.display = "none";
+}
 
 function moveSpirit(e) {
     if ((e.code === "Enter" || e.type === "touchstart") && spirit.y === spiritY) {
         velocityY = -10;
-        document.getElementById("startMenu").style.display = "none";
+    
     }
     
     // Resets the Game// 
