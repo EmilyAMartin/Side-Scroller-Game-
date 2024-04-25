@@ -48,6 +48,11 @@ let returnMain = function(){
     }
 }
 
+function play() {
+    const audio = document.getElementById("audio");
+    audio.play();
+}
+
 //Game Variables// 
 let canvas;
 let canvasWidth = 1040;
