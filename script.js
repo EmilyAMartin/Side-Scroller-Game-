@@ -1,6 +1,6 @@
 //Game Menu//
 let runGame = function(){
-    setInterval(placeObstacle, 1000,);
+    intervalID =  setInterval(placeObstacle, 1000,);//Starts the placement of obstacles onclick to New Game//
     document.getElementById("newGame").style.display = "none";
     document.getElementById("theHeader").style.display = "none";    
     document.getElementById("instructions").style.display = "none";
@@ -29,15 +29,24 @@ let goBack = function(){
     document.getElementById("gameOverMenu").style.display = "none";
 };
 let returnMain = function(){
-    gameLoop();
     document.getElementById("main").style.display = "none";
     document.getElementById("theHeader").style.display = "block";
     document.getElementById("newGame").style.display = "block";
     document.getElementById("soundBtn").style.display = "block";
     document.getElementById("instructionsBtn").style.display = "block";
     document.getElementById("gameOverMenu").style.display = "none";
-
-};
+    document.getElementById("gameOverMenu").style.display = "none";
+    clearInterval(intervalID); //Clears the gameloop and obstacle placement onclick to Main Menu//
+    spirit.y = spiritY;
+    obstacleArray = [];
+    score = 0;
+    gameOver = false;
+    spiritImg = new Image();
+    spiritImg.src = "./img/spirit.png";
+    spiritImg.onload = function() {
+    context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height); // This draws the spirit character//
+    }
+}
 
 //Game Variables// 
 let canvas;
@@ -86,13 +95,14 @@ let obstacle3Img = new Image();
 obstacle3Img.src = "./img/obstacle3.png";
 
 //Game Physics and Operations//
-let velocityX = -8
+let velocityX = -10
 let velocityY = 0;
 let gravity = .4;
 let adjustBy = 2.0; //Overlaps the characters collison//
 let gameStarted = false;
 let gameOver = false;
 let score = 0;
+let intervalID; //Starts the placement of object when new game is pressed//
 
 
 window.onload = function () {   
@@ -101,9 +111,6 @@ window.onload = function () {
     canvas.height = canvasHeight;
     canvas.width = canvasWidth;
     context = canvas.getContext("2d")
-
-    //Start Game Message//
-    document.getElementById("startMenu");
 
     //Events and Animation//
     requestAnimationFrame(gameLoop);
@@ -153,7 +160,6 @@ function gameLoop() {
     score++;
     context.fillText(score, 15, 30); 
     }  
-
 function moveSpirit(e) {
     if ((e.code === "Enter" || e.type === "touchstart") && spirit.y === spiritY) {
         velocityY = -10;
@@ -189,17 +195,17 @@ function placeObstacle() {
     
     let placeObstacleChance = Math.random();
 
-    if (placeObstacleChance > .90) { 
+    if (placeObstacleChance > .75) { 
         obstacle.img = obstacle3Img;
         obstacle.width = obstacle3Width;
         obstacleArray.push(obstacle);
     }
-    else if (placeObstacleChance > .70) { 
+    else if (placeObstacleChance > .50) { 
         obstacle.img = obstacle2Img;
         obstacle.width = obstacle2Width;
         obstacleArray.push(obstacle);
     }
-    else if (placeObstacleChance > .50) { 
+    else if (placeObstacleChance > .25) { 
         obstacle.img = obstacle1Img;
         obstacle.width = obstacle1Width;
         obstacleArray.push(obstacle);
