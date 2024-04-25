@@ -1,6 +1,6 @@
 //Game Menu//
-//Game Menu//
 let runGame = function(){
+    setInterval(placeObstacle, 1000,);
     document.getElementById("newGame").style.display = "none";
     document.getElementById("theHeader").style.display = "none";    
     document.getElementById("instructions").style.display = "none";
@@ -8,7 +8,7 @@ let runGame = function(){
     document.getElementById("instructionsBtn").style.display = "none";
     document.getElementById("soundBtn").style.display = "none";
     document.getElementById("gameOverMenu").style.display = "none";
-    document.getElementById("startMenu").style.display = "block"
+    document.getElementById("startMenu").style.display = "block";  
 } 
 let showInstructions = function(){
     document.getElementById("theHeader").style.display = "none";
@@ -29,13 +29,16 @@ let goBack = function(){
     document.getElementById("gameOverMenu").style.display = "none";
 };
 let returnMain = function(){
+    gameLoop();
     document.getElementById("main").style.display = "none";
     document.getElementById("theHeader").style.display = "block";
     document.getElementById("newGame").style.display = "block";
     document.getElementById("soundBtn").style.display = "block";
     document.getElementById("instructionsBtn").style.display = "block";
     document.getElementById("gameOverMenu").style.display = "none";
+
 };
+
 //Game Variables// 
 let canvas;
 let canvasWidth = 1040;
@@ -106,7 +109,6 @@ window.onload = function () {
     requestAnimationFrame(gameLoop);
     document.addEventListener("keydown", moveSpirit);   
     canvas.addEventListener("touchstart", moveSpirit,);   
-    document.addEventListener("keydown", moveObstacles); 
 }
 
 function gameLoop() { 
@@ -151,12 +153,6 @@ function gameLoop() {
     score++;
     context.fillText(score, 15, 30); 
     }  
-
-function moveObstacles (e){
-    if ((e.code === "Space"))
-    setInterval(placeObstacle, 1000,);
-    document.getElementById("startMenu").style.display = "none";
-}
 
 function moveSpirit(e) {
     if ((e.code === "Enter" || e.type === "touchstart") && spirit.y === spiritY) {
