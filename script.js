@@ -50,7 +50,6 @@ let returnMain = function(){
 
 function play() {
     const audio = document.getElementById("audio");
-    audio.play();
 }
 
 //Game Variables// 
@@ -130,6 +129,8 @@ function gameLoop() {
     }
     context.clearRect(0, 0, canvas.width, canvas.height);
 
+    audio.play();
+    
     //Draws Scrolling Background//
     context.drawImage(backgroundimg, -backgroundWidth, 0); //Background 1
     context.drawImage(backgroundimg, -backgroundWidth + canvas.width, 0); //Background 2
