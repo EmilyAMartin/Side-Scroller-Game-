@@ -1,5 +1,5 @@
 //Game Menu//
-let runGame = function(){
+function runGame() {
     intervalID =  setInterval(placeObstacle, 1000,);//Starts the placement of obstacles onclick to New Game//
     document.getElementById("newGame").style.display = "none";
     document.getElementById("theHeader").style.display = "none";    
@@ -9,26 +9,17 @@ let runGame = function(){
     document.getElementById("soundBtn").style.display = "none";
     document.getElementById("gameOverMenu").style.display = "none";
     document.getElementById("startMenu").style.display = "block";  
-} 
-let showInstructions = function(){
-    document.getElementById("theHeader").style.display = "none";
-    document.getElementById("instructionsBtn").style.display = "none";
-    document.getElementById("newGame").style.display = "none";
-    document.getElementById("instructions").style.display = "block";
-    document.getElementById("soundBtn").style.display = "none";
-    document.getElementById("backBtn").style.display = "block"; 
-    document.getElementById("gameOverMenu").style.display = "none";
-}; 
-let goBack = function(){
-    document.getElementById("backBtn").style.display = "none";
-    document.getElementById("instructions").style.display = "none";
-    document.getElementById("theHeader").style.display = "block";
-    document.getElementById("newGame").style.display = "block";
-    document.getElementById("soundBtn").style.display = "block";
-    document.getElementById("instructionsBtn").style.display = "block";
-    document.getElementById("gameOverMenu").style.display = "none";
 };
-let returnMain = function(){
+
+function showInstructions(){
+    window.location = "instructions.html"
+}; 
+
+function goBack(){
+    window.location = "index.html"
+};
+
+function returnMain(){
     document.getElementById("main").style.display = "none";
     document.getElementById("theHeader").style.display = "block";
     document.getElementById("newGame").style.display = "block";
@@ -130,7 +121,7 @@ function gameLoop() {
     context.clearRect(0, 0, canvas.width, canvas.height);
 
     audio.play();
-    
+
     //Draws Scrolling Background//
     context.drawImage(backgroundimg, -backgroundWidth, 0); //Background 1
     context.drawImage(backgroundimg, -backgroundWidth + canvas.width, 0); //Background 2
