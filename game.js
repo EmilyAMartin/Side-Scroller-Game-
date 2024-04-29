@@ -54,6 +54,7 @@ let gameStarted = false;
 let gameOver = false;
 let score = 0;
 let intervalID; //Starts the placement of object when new game is pressed//
+let audio;
 
 window.onload = function () {   
     //Draw Canvas//
@@ -61,6 +62,7 @@ window.onload = function () {
         canvas.height = canvasHeight;
         canvas.width = canvasWidth;
         context = canvas.getContext("2d"); 
+        audio = document.getElementById("audio").play();
             
     //Events & Animation Request//
         document.addEventListener("keydown", moveSpirit);  
@@ -74,7 +76,7 @@ function gameLoop() {
     if (gameOver) {
         return;
     }
-    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.clearRect(0, 0, canvas.width, canvas.height)
 
     //Draws Scrolling Background//
     context.drawImage(backgroundimg, -backgroundWidth, 0); //Background 1

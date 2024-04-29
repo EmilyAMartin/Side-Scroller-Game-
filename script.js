@@ -1,3 +1,4 @@
+
 function runGame() {   
     window.location ="game.html";
 }
@@ -9,6 +10,3 @@ function showInstructions(){
 function goBack(){
     window.location = "index.html"
 };
-
-
-
