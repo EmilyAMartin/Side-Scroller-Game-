@@ -16,7 +16,7 @@ let spiritHeight = 75;
 let spiritX = 75;
 let spiritY = 500;
 let spiritImg = new Image(); 
-spiritImg.src = "./img/spirit.png";
+spiritImg.src = "./img/spiritgif.gif";
 
 
 let spirit = {
@@ -63,6 +63,7 @@ window.onload = function () {
         canvas.width = canvasWidth;
         context = canvas.getContext("2d"); 
         audio = document.getElementById("audio").play();
+        audio.volume = 0.2;
             
     //Events & Animation Request//
         document.addEventListener("keydown", moveSpirit);  
@@ -81,9 +82,9 @@ function gameLoop() {
     //Draws Scrolling Background//
     context.drawImage(backgroundimg, -backgroundWidth, 0); //Background 1
     context.drawImage(backgroundimg, -backgroundWidth + canvas.width, 0); //Background 2
-    backgroundWidth += scrollSpeed;
-    if (backgroundWidth == canvas.width)
-    backgroundWidth = 0;
+    // backgroundWidth += scrollSpeed;
+    // if (backgroundWidth == canvas.width)
+    // backgroundWidth = 0;
    
     //Draws Spirit Character & Mouvement// 
     velocityY += gravity;

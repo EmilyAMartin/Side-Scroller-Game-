@@ -12,6 +12,14 @@ body {
   font-size: 2em;
   text-align: center;
 }
+.backgrounImg{
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%, -50%);
+  max-width: 100%;
+  max-height: 100%;
+}
  
 .canvas{
   position: absolute;
@@ -24,25 +32,12 @@ body {
 
 .theHeader{
   margin: auto;
-  color: #000000;
+  color:#ffffff;
   font-size: 5rem;
   font-family: "Amatic SC", sans-serif;
   position: relative;
 
 }
-.newGame, .instructionsBtn, .backBtn, .soundBtn, .restartBtn{
-  text-align: center;
-  vertical-align: middle;
-  border: 2px solid #39483c;
-  border-radius: 7px;
-  background-color:#638b7e;
-  color: #000000;
-  font-size: 2rem;
-  font-family: "Amatic SC", sans-serif;
-  width: 160px;
-  margin: 5px auto;  
-}
-
 .flex-container {
   display: flex;
   flex-direction: column;
@@ -56,6 +51,19 @@ body {
   max-height: 100%;
 }
 
+.newGame, .instructionsBtn, .backBtn, .settingsBtn, .restartBtn{
+  text-align: center;
+  vertical-align: middle;
+  border: 2px solid #39483c;
+  border-radius: 7px;
+  background-color:#638b7e;
+  color: #000000;
+  font-size: 2rem;
+  font-family: "Amatic SC", sans-serif;
+  width: 160px;
+  margin: 5px auto;  
+}
+
 .newGame:hover{
   background-color: #9cc1bb;
 }
@@ -64,8 +72,8 @@ body {
   background-color: #9cc1bb;
 }
 
-.soundBtn:active{
-  background-color: pink;
+.settingsBtn:hover{
+  background-color:#9cc1bb;
 }
 
 .backBtn:hover{
