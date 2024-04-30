@@ -16,7 +16,7 @@ let spiritHeight = 75;
 let spiritX = 75;
 let spiritY = 500;
 let spiritImg = new Image(); 
-spiritImg.src = "./img/spiritgif.gif";
+spiritImg.src = "./img/spirit.png";
 
 
 let spirit = {
@@ -40,7 +40,13 @@ let obstacle1Img = new Image();
 obstacle1Img.src = "./img/obstacle1.png";
 
 let obstacle2Img = new Image();
-obstacle2Img.src = "./img/obstacle2.png";
+obstacle2Img.src = "./img/obstacle2gif.gif";
+
+function animateButterfly() {
+    animationTimer = setInterval(() => {
+    obstacle2Img.style.display = 'flex';
+    }, 15000);
+  }
 
 let obstacle3Img = new Image();
 obstacle3Img.src = "./img/obstacle3.png";
@@ -55,6 +61,7 @@ let gameOver = false;
 let score = 0;
 let intervalID; //Starts the placement of object when new game is pressed//
 let audio;
+animation=null;
 
 window.onload = function () {   
     //Draw Canvas//
@@ -82,9 +89,9 @@ function gameLoop() {
     //Draws Scrolling Background//
     context.drawImage(backgroundimg, -backgroundWidth, 0); //Background 1
     context.drawImage(backgroundimg, -backgroundWidth + canvas.width, 0); //Background 2
-    // backgroundWidth += scrollSpeed;
-    // if (backgroundWidth == canvas.width)
-    // backgroundWidth = 0;
+    backgroundWidth += scrollSpeed;
+    if (backgroundWidth == canvas.width)
+    backgroundWidth = 0;
    
     //Draws Spirit Character & Mouvement// 
     velocityY += gravity;
@@ -114,6 +121,7 @@ function gameLoop() {
     score++;
     context.fillText(score, 15, 30); 
     }  
+
 function moveSpirit(e) {
     if ((e.code === "Enter" || e.type === "touchstart") && spirit.y === spiritY) {
         velocityY = -10;
