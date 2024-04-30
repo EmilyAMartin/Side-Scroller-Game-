@@ -40,13 +40,8 @@ let obstacle1Img = new Image();
 obstacle1Img.src = "./img/obstacle1.png";
 
 let obstacle2Img = new Image();
-obstacle2Img.src = "./img/obstacle2gif.gif";
+obstacle2Img.src = "./img/obstacle2.png";
 
-function animateButterfly() {
-    animationTimer = setInterval(() => {
-    obstacle2Img.style.display = 'flex';
-    }, 15000);
-  }
 
 let obstacle3Img = new Image();
 obstacle3Img.src = "./img/obstacle3.png";
@@ -60,8 +55,10 @@ let gameStarted = false;
 let gameOver = false;
 let score = 0;
 let intervalID; //Starts the placement of object when new game is pressed//
-let audio;
-animation=null;
+let audio = new Audio("./music/music.mp3");
+audio.volume = 1;
+audio.loop = true;
+
 
 window.onload = function () {   
     //Draw Canvas//
@@ -69,9 +66,7 @@ window.onload = function () {
         canvas.height = canvasHeight;
         canvas.width = canvasWidth;
         context = canvas.getContext("2d"); 
-        audio = document.getElementById("audio").play();
-        audio.volume = 0.2;
-            
+        audio.play();
     //Events & Animation Request//
         document.addEventListener("keydown", moveSpirit);  
         canvas.addEventListener("touchstart", moveSpirit); 
