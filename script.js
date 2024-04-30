@@ -11,9 +11,6 @@ function goBack(){
 function showSettings(){
     window.location = "settings.html"
 }; 
-
-function toggleMute(){
-toggleMute.addEventListener("click",() => {
-toggleMute.classList.toggle("active");  
-})
-}
+function toggleMuted(){
+    document.getElementById("soundBtn").muted = true;
+    };

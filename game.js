@@ -56,7 +56,7 @@ let gameOver = false;
 let score = 0;
 let intervalID; //Starts the placement of object when new game is pressed//
 let audio = new Audio("./music/music.mp3");
-audio.volume = 1;
+audio.volume = 0.05; //Volume of background music
 audio.loop = true;
 
 
@@ -73,7 +73,6 @@ window.onload = function () {
         requestAnimationFrame(gameLoop);
         setInterval(placeObstacle, 1000); //1000 milliseconds = 1 second
     } 
-
 function gameLoop() { 
     requestAnimationFrame(gameLoop);   
     if (gameOver) {
@@ -180,7 +179,7 @@ function detectCollision(a, b) {
            
 }
 
-function returnMain(){
+function resetGame(){
     window.location = "index.html"
     clearInterval(intervalID); //Clears the gameloop and obstacle placement onclick to Main Menu//
     spirit.y = spiritY;
