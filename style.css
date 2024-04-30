@@ -26,6 +26,20 @@ body{
   max-width: 100%;
   max-height: 100%;
 }
+button#playpausebtn{
+background-image: url(img/paused.png) no-repeat;
+border: none;
+width: 25px;
+height: 25px;
+cursor:default;
+}
+button#mutebtn{
+  background-image: url(img/speaker.png) no-repeat;
+  border: none;
+  width:25px;
+  height: 25px;
+  cursor: pointer;
+  }
 .theHeader{
   margin: auto;
   color:#ffffff;

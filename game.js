@@ -55,9 +55,17 @@ let gameStarted = false;
 let gameOver = false;
 let score = 0;
 let intervalID; //Starts the placement of object when new game is pressed//
-let audio = new Audio("./music/music.mp3");
-audio.volume = 0.05; //Volume of background music
-audio.loop = true;
+
+let audio, playbtn;
+function initAudioPlayer(){
+    audio = new Audio();
+    audio.src = "./music/music.mp3";
+    audio.volume = 0.05; //Volume of background music
+    audio.loop = true;
+    audio.play();    
+}
+window.addEventListener("load", initAudioPlayer);
+
 
 
 window.onload = function () {   
@@ -65,8 +73,7 @@ window.onload = function () {
         canvas = document.getElementById("canvas");
         canvas.height = canvasHeight;
         canvas.width = canvasWidth;
-        context = canvas.getContext("2d"); 
-        audio.play();
+        context = canvas.getContext("2d");
     //Events & Animation Request//
         document.addEventListener("keydown", moveSpirit);  
         canvas.addEventListener("touchstart", moveSpirit); 
