@@ -58,38 +58,28 @@ let intervalID; //Starts the placement of object when new game is pressed//
 
 //Background Audio and Buttons//
 let audio, playbtn;
+
 function initAudioPlayer(){
     audio = new Audio();
     audio.src = "./music/music.mp3";
     audio.volume = 0.05; //Volume of background music
     audio.loop = true;
     audio.play();
-    //Set object references//
     playbtn = document.getElementById("playpausebtn");
-    mutebtn = document.getElementById("mutebtn")
-    //Add event Handeling//
     playbtn.addEventListener("click", playPause);
-    mutebtn.addEventListener("click", mute);
     
-    function playPause(){
-        if(audio.paused){
-            audio.play();
-            playbtn.style.backgroundColor = "pink";
-        } else {
-            audio.pause();
-            playbtn.style.backgroundColor = "pink";
-        }
+function playPause(){
+    if(audio.paused){
+        audio.play();
+        playbtn.style.background = "url(music/pause.png) no-repeat";
+    } else {
+        audio.pause();
+        playbtn.style.background = "url(music/play.png) no-repeat";
+       }
+
     }
-    function mute(){
-        if (audio.muted){
-            audio.muted = false;
-            mutebtn.style.backgroundColor = "pink";
-        } else {
-            audio.muted = true;
-            mutebtn.style.backgroundColor = "pink";
-        }   
-    }
-} window.addEventListener("load", initAudioPlayer);
+} 
+window.addEventListener("load", initAudioPlayer);
 
 
 
