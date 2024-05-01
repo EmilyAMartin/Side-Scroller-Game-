@@ -108,13 +108,6 @@ body{
 .returnMainBtn:hover{
   background-color: #9cc1bb;
 }
-#playpausebtn{
-  position: absolute;
-  background: url(music/pause.png) no-repeat;
-  width: 25px;
-  height: 25px;
-  cursor: default;
-  }
 .settingsHeader{
   margin: auto;
   color:#39483c;
