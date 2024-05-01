@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 body{
-  background-color: #9cc1bb;
+  background-color:#9cc1bb;
   color:#39483c;
   font-family: "Amatic SC", sans-serif;
   font-size: 2em;
@@ -27,18 +27,18 @@ body{
   max-height: 100%;
 }
 button#playpausebtn{
-background-image: url(img/paused.png) no-repeat;
+background:#39483c;
 border: none;
 width: 25px;
 height: 25px;
-cursor:default;
+cursor: default;
 }
 button#mutebtn{
-  background-image: url(img/speaker.png) no-repeat;
+  background:#39483c;
   border: none;
   width:25px;
   height: 25px;
-  cursor: pointer;
+  cursor: default;
   }
 .theHeader{
   margin: auto;

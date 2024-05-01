@@ -56,15 +56,40 @@ let gameOver = false;
 let score = 0;
 let intervalID; //Starts the placement of object when new game is pressed//
 
+//Background Audio and Buttons//
 let audio, playbtn;
 function initAudioPlayer(){
     audio = new Audio();
     audio.src = "./music/music.mp3";
     audio.volume = 0.05; //Volume of background music
     audio.loop = true;
-    audio.play();    
-}
-window.addEventListener("load", initAudioPlayer);
+    audio.play();
+    //Set object references//
+    playbtn = document.getElementById("playpausebtn");
+    mutebtn = document.getElementById("mutebtn")
+    //Add event Handeling//
+    playbtn.addEventListener("click", playPause);
+    mutebtn.addEventListener("click", mute);
+    
+    function playPause(){
+        if(audio.paused){
+            audio.play();
+            playbtn.style.backgroundColor = "pink";
+        } else {
+            audio.pause();
+            playbtn.style.backgroundColor = "pink";
+        }
+    }
+    function mute(){
+        if (audio.muted){
+            audio.muted = false;
+            mutebtn.style.backgroundColor = "pink";
+        } else {
+            audio.muted = true;
+            mutebtn.style.backgroundColor = "pink";
+        }   
+    }
+} window.addEventListener("load", initAudioPlayer);
 
 
 
