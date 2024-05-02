@@ -43,8 +43,7 @@ let obstacle2Img = new Image();
 obstacle2Img.src = "./img/obstacle2.png";
 
 
-let obstacle3Img = new Image();
-obstacle3Img.src = "./img/obstacle3.png";
+const obstacle3Img = document.getElementById("dragonfly");
 
 //Game Physics and Operations//
 let velocityX = -12

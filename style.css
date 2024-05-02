@@ -108,7 +108,7 @@ body{
 }
 .playPauseBtn{
   position: absolute;
-  top:125%;
+  top:50%;
   left:50%;
   transform: translate(-50%, -50%);
   background: url(music/pause.png) no-repeat;
@@ -124,14 +124,14 @@ body{
   font-family: "Amatic SC", sans-serif;
   position: relative;
 }
-
 .flex-container2 {
-
-
- padding: 20px;
+  padding: 20px;
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;
  
+}
+#dragonfly{
+  display:none;
 }
