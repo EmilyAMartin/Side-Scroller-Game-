@@ -8,7 +8,7 @@ let context;
 let backgroundimg = new Image();
     backgroundimg.src = "./img/bg.png";
 let backgroundWidth = 0;
-let scrollSpeed = 4;
+let scrollSpeed = 4*(1+score/500);
 
 //Sprit//
 let spiritWidth = 75;
@@ -47,7 +47,7 @@ let obstacle3Img = new Image();
 obstacle3Img.src = "./img/obstacle3.png";
 
 //Game Physics and Operations//
-let velocityX = -10
+let velocityX = -12
 let velocityY = 0;
 let gravity = .4;
 let adjustBy = 2.0; //Overlaps the characters collison//
@@ -113,9 +113,11 @@ function gameLoop() {
     //Drawing Obstacles//
     for (let i = 0; i < obstacleArray.length; i++) {
         let obstacle = obstacleArray[i];
-        obstacle.x += velocityX;
+        obstacle.x += velocityX*(1+score/5000); //Speed up obstacles over time//
         context.drawImage(obstacle.img, obstacle.x, obstacle.y, obstacle.width, obstacle.height)
-              
+
+    
+
     //Collision//
     if (detectCollision(spirit, obstacle)) {
         gameOver = true;
@@ -132,9 +134,7 @@ function gameLoop() {
     context.font="20px courier";
     score++;
     context.fillText(score, 15, 30); 
-
 }  
-
 function moveSpirit(e) {
     if ((e.code === "Enter" || e.type === "touchstart") && spirit.y === spiritY) {
         velocityY = -10;
@@ -185,7 +185,6 @@ function placeObstacle() {
         obstacle.width = obstacle1Width;
         obstacleArray.push(obstacle);
     }
-
     if (obstacleArray.length > 5) {
         obstacleArray.shift(); //Keeps array from growing//
     }
