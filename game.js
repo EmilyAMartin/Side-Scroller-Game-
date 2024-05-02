@@ -8,7 +8,7 @@ let context;
 let backgroundimg = new Image();
     backgroundimg.src = "./img/bg.png";
 let backgroundWidth = 0;
-let scrollSpeed = 4*(1+score/500);
+let scrollSpeed = 8;
 
 //Sprit//
 let spiritWidth = 75;
