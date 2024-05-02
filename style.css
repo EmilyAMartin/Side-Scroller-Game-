@@ -108,10 +108,29 @@ body{
 .returnMainBtn:hover{
   background-color: #9cc1bb;
 }
+.playPauseBtn{
+  position: absolute;
+  top:125%;
+  left:50%;
+  transform: translate(-50%, -50%);
+  background: url(music/pause.png) no-repeat;
+  width: 25px;
+  height: 25px;
+  cursor: default;
+  }
+
 .settingsHeader{
   margin: auto;
   color:#39483c;
   font-size: 3rem;
   font-family: "Amatic SC", sans-serif;
   position: relative;
+}
+
+.flex-container2 {
+  padding: 20px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
 }

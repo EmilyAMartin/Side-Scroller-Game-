@@ -64,17 +64,6 @@ let audio = new Audio();
     audio.play();
     audio.pause();
 
-    
-    let playbtnWidth = 25;
-    let playbtnHeight = 25;
-    let playbtnX = 985;
-    let playbtnY = 25;
-    let playbtnImg = new Image(); 
-    playbtnImg.src = "./music/pause.png";
-    let playbtnImg2 = new Image(); 
-    playbtnImg.src = "./music/play.png";
-
-
 window.onload = function () {   
     //Draw Canvas//
         canvas = document.getElementById("canvas");
@@ -87,10 +76,19 @@ window.onload = function () {
         requestAnimationFrame(gameLoop);
         setInterval(placeObstacle, 1000); //1000 milliseconds = 1 second
         audio.play();    
-     
     } 
        
+function playPause(){
+    playbtn = document.getElementById("playPauseBtn");
+    if(audio.paused){
+        audio.play();
+        playbtn.style.background = "url(music/pause.png) no-repeat";
 
+    } else {
+        audio.pause();
+        playbtn.style.background = "url(music/play.png) no-repeat";
+        }
+    }
 
 function gameLoop() { 
     requestAnimationFrame(gameLoop);   
@@ -135,21 +133,7 @@ function gameLoop() {
     score++;
     context.fillText(score, 15, 30); 
 
-    context.drawImage(playbtnImg, playbtnX, playbtnY, playbtnWidth, playbtnHeight); 
-    playPause();
-
 }  
-function playPause(){
-    playbtn = document.getElementById("playPauseBtn");
-    if(audio.paused){
-        audio.play();
-        context.drawImage(playbtnImg, playbtnX, playbtnY, playbtnWidth, playbtnHeight); 
-    } else {
-        audio.pause();
-        context.drawImage(playbtnImg2, playbtnX, playbtnY, playbtnWidth, playbtnHeight); 
-       }
-}
-
 
 function moveSpirit(e) {
     if ((e.code === "Enter" || e.type === "touchstart") && spirit.y === spiritY) {

@@ -1,4 +1,3 @@
-
 function runGame() {   
     window.location ="game.html";
 }
@@ -11,3 +10,4 @@ function goBack(){
 function showSettings(){
     window.location = "settings.html"
 }; 
+
