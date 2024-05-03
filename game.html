@@ -1,20 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Game</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap" rel="stylesheet">
-    <script src="game.js"></script>
-</head>
-<body>
-    <canvas class="canvas" id="canvas"></canvas> 
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <canvas class="canvas" id="canvas"></canvas>
+    <div class="playPauseBtn" id="playPauseBtn" onclick="playPause()"></div>
     <div class="gameOverMenu" id="gameOverMenu">
-        <div class="gameOver" id="gameOver">Gameover press Enter or Tap Screen to restart</div>
-        <div class="returnMainBtn" id="returnMainBtn" onclick="resetGame()">Main Menu</div>  
-        <div class= "playPauseBtn" id="playPauseBtn" onclick="playPause()"></div>
+      <div class="gameOver" id="gameOver">
+        Gameover press Enter or Tap Screen to restart
+      </div>
+      <div class="returnMainBtn" id="returnMainBtn" onclick="resetGame()">
+        Main Menu
+      </div>
     </div>
-    <img src="img/obstacle3gif.gif" alt="dragonfly gif" id="dragonfly">
-</body>
+  </body>
+  <script src="game.js"></script>
 </html>
