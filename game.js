@@ -1,13 +1,11 @@
 //Game Variables//
-let canvas;
-let canvasWidth = 1040;
-let canvasHeight = 740;
-let context;
+let canvas = document.querySelector('canvas');
+let ctx = canvas.getContext('2d');
 
-let backgroundimg = new Image();
+const backgroundimg = new Image();
 backgroundimg.src = "./img/bg.png";
 let backgroundWidth = 0;
-let scrollSpeed = 8;
+const scrollSpeed = 8;
 
 //Sprit//
 let spiritWidth = 75;
@@ -27,14 +25,18 @@ let spirit = {
 let obstacleArray = [];
 
 let obstacle1Width = 120;
+let obstacle1Height = 250;
 let obstacle2Width = 120;
+let obstacle2Height = 120;
 let obstacle3Width = 120;
+let obstacle3Height = 100;
 
-let obstacleHeight = 250; //Height the same for all obstacles//
-let obstacleX = 980;
-let obstacleY = 500;
-// let obstacleX2 = 980;
-// let obstacleY2 = 400;
+let obstacle1X = 980;
+let obstacle1Y = 500;
+let obstacle2X = 980;
+let obstacle2Y = 475;
+let obstacle3X = 980;
+let obstacle3Y = 450;
 
 let obstacle1Img = new Image();
 obstacle1Img.src = "./img/obstacle1.png";
@@ -49,7 +51,7 @@ obstacle3Img.src = "./img/obstacle3.png";
 let velocityX = -12;
 let velocityY = 0;
 let gravity = 0.4;
-let adjustBy = 1.8; //Overlaps the characters collison//
+let adjustBy = 2.0; //Overlaps the characters collison//
 let gameStarted = false;
 let gameOver = false;
 let score = 0;
@@ -65,16 +67,14 @@ audio.pause();
 
 window.onload = function () {
   //Draw Canvas//
-  canvas = document.getElementById("canvas");
-  canvas.height = canvasHeight;
-  canvas.width = canvasWidth;
-  context = canvas.getContext("2d");
+  canvas;
+  canvas.height;
+  canvas.width;
   //Events & Animation Request//
   document.addEventListener("keydown", moveSpirit);
   canvas.addEventListener("touchstart", moveSpirit);
   requestAnimationFrame(gameLoop);
   setInterval(placeObstacle, 1000); //1000 milliseconds = 1 second
-  // setInterval(placeObstacleHigher, 1500); //1000 milliseconds = 1 second
 };
 
 function playPause() {
@@ -94,19 +94,19 @@ function gameLoop() {
     return;
   }
 
-  context.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   //Draws Scrolling Background//
-  context.drawImage(backgroundimg, -backgroundWidth, 0); //Background 1
-  context.drawImage(backgroundimg, -backgroundWidth + canvas.width, 0); //Background 2
+  ctx.drawImage(backgroundimg, -backgroundWidth, 0); //Background 1
+  ctx.drawImage(backgroundimg, -backgroundWidth + canvas.width, 0); //Background 2
   backgroundWidth += scrollSpeed;
   if (backgroundWidth == canvas.width) backgroundWidth = 0;
 
   //Draws Spirit Character & Mouvement//
   velocityY += gravity;
-  spirit.y = Math.max(spirit.y + velocityY, 400);
-  context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height);
-  
+  spirit.y = Math.max(spirit.y + velocityY, 350);
+  ctx.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height);
+
   if (spirit.y > canvas.height) {
     gameOver = true;
   }
@@ -115,7 +115,7 @@ function gameLoop() {
   for (let i = 0; i < obstacleArray.length; i++) {
     let obstacle = obstacleArray[i];
     obstacle.x += velocityX * (1 + score / 5000); //Speed up obstacles over time//
-    context.drawImage(
+    ctx.drawImage(
       obstacle.img,
       obstacle.x,
       obstacle.y,
@@ -129,7 +129,7 @@ function gameLoop() {
       document.getElementById("gameOverMenu").style.display = "block";
       spiritImg.src = "./img/spirit-dead.png";
       spiritImg.onload = function () {
-        context.drawImage(
+        ctx.drawImage(
           spiritImg,
           spirit.x,
           spirit.y,
@@ -140,15 +140,15 @@ function gameLoop() {
     }
   }
   //Score on screen//
-  context.fillStyle = "white";
-  context.font = "20px courier";
+  ctx.fillStyle = "white";
+  ctx.font = "20px courier";
   score++;
-  context.fillText(score, 15, 30);
+  ctx.fillText(score, 15, 30);
   audio.play();
 }
 
 function moveSpirit(e) {
-  if (e.code === "Enter" || e.type === "touchstart"){
+  if (e.code === "Enter" || e.type === "touchstart") {
     velocityY = -6;
   }
 
@@ -162,7 +162,7 @@ function moveSpirit(e) {
     spiritImg = new Image();
     spiritImg.src = "./img/spirit.png";
     spiritImg.onload = function () {
-      context.drawImage(
+      ctx.drawImage(
         spiritImg,
         spirit.x,
         spirit.y,
@@ -179,10 +179,10 @@ function placeObstacle() {
   }
   let obstacle = {
     img: null,
-    x: obstacleX,
-    y: obstacleY,
+    x: null,
+    y: null,
     width: null,
-    height: obstacleHeight,
+    height: null,
   };
 
   let placeObstacleChance = Math.random();
@@ -190,44 +190,29 @@ function placeObstacle() {
   if (placeObstacleChance > 0.75) {
     obstacle.img = obstacle3Img;
     obstacle.width = obstacle3Width;
+    obstacle.height = obstacle3Height;
+    obstacle.x = obstacle3X;
+    obstacle.y = obstacle3Y;
     obstacleArray.push(obstacle);
   } else if (placeObstacleChance > 0.5) {
     obstacle.img = obstacle2Img;
     obstacle.width = obstacle2Width;
+    obstacle.height = obstacle2Height;
+    obstacle.x = obstacle2X;
+    obstacle.y = obstacle2Y;
     obstacleArray.push(obstacle);
   } else if (placeObstacleChance > 0.25) {
     obstacle.img = obstacle1Img;
     obstacle.width = obstacle1Width;
+    obstacle.height = obstacle1Height;
+    obstacle.x = obstacle1X;
+    obstacle.y = obstacle1Y;
     obstacleArray.push(obstacle);
   }
   if (obstacleArray.length > 5) {
     obstacleArray.shift(); //Keeps array from growing//
   }
 }
-//Moves Obstacle Higher//
-// function placeObstacleHigher() { 
-//   if (gameOver) {
-//     return;
-//   }
-//   let obstacle = {
-//     img: null,
-//     x: obstacleX2,
-//     y: obstacleY2,
-//     width: null,
-//     height: obstacleHeight,
-//   };
-//   let placeObstacleChance = Math.random();
-  
-//   if (placeObstacleChance > 0.75) {
-//     obstacle.img = obstacle2Img;
-//     obstacle.width = obstacle2Width;
-//     obstacleArray.push(obstacle);
-  
-//   if (obstacleArray.length > 5) {
-//     obstacleArray.shift(); //Keeps array from growing//
-//     }
-//   }
-// }
 
 function detectCollision(a, b) {
   return (
@@ -248,7 +233,7 @@ function resetGame() {
   spiritImg = new Image();
   spiritImg.src = "./img/spirit.png";
   spiritImg.onload = function () {
-    context.drawImage(
+    ctx.drawImage(
       spiritImg,
       spirit.x,
       spirit.y,
