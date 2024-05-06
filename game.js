@@ -33,6 +33,8 @@ let obstacle3Width = 120;
 let obstacleHeight = 250; //Height the same for all obstacles//
 let obstacleX = 980;
 let obstacleY = 500;
+// let obstacleX2 = 980;
+// let obstacleY2 = 400;
 
 let obstacle1Img = new Image();
 obstacle1Img.src = "./img/obstacle1.png";
@@ -72,6 +74,7 @@ window.onload = function () {
   canvas.addEventListener("touchstart", moveSpirit);
   requestAnimationFrame(gameLoop);
   setInterval(placeObstacle, 1000); //1000 milliseconds = 1 second
+  // setInterval(placeObstacleHigher, 1500); //1000 milliseconds = 1 second
 };
 
 function playPause() {
@@ -101,7 +104,7 @@ function gameLoop() {
 
   //Draws Spirit Character & Mouvement//
   velocityY += gravity;
-  spirit.y = Math.max(spirit.y + velocityY, 350);
+  spirit.y = Math.max(spirit.y + velocityY, 400);
   context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height);
   
   if (spirit.y > canvas.height) {
@@ -177,7 +180,7 @@ function placeObstacle() {
   let obstacle = {
     img: null,
     x: obstacleX,
-    y: obstacleY * 1,
+    y: obstacleY,
     width: null,
     height: obstacleHeight,
   };
@@ -197,7 +200,34 @@ function placeObstacle() {
     obstacle.width = obstacle1Width;
     obstacleArray.push(obstacle);
   }
+  if (obstacleArray.length > 5) {
+    obstacleArray.shift(); //Keeps array from growing//
+  }
 }
+//Moves Obstacle Higher//
+// function placeObstacleHigher() { 
+//   if (gameOver) {
+//     return;
+//   }
+//   let obstacle = {
+//     img: null,
+//     x: obstacleX2,
+//     y: obstacleY2,
+//     width: null,
+//     height: obstacleHeight,
+//   };
+//   let placeObstacleChance = Math.random();
+  
+//   if (placeObstacleChance > 0.75) {
+//     obstacle.img = obstacle2Img;
+//     obstacle.width = obstacle2Width;
+//     obstacleArray.push(obstacle);
+  
+//   if (obstacleArray.length > 5) {
+//     obstacleArray.shift(); //Keeps array from growing//
+//     }
+//   }
+// }
 
 function detectCollision(a, b) {
   return (
