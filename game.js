@@ -47,7 +47,7 @@ obstacle3Img.src = "./img/obstacle3.png";
 let velocityX = -12;
 let velocityY = 0;
 let gravity = 0.4;
-let adjustBy = 2.0; //Overlaps the characters collison//
+let adjustBy = 1.8; //Overlaps the characters collison//
 let gameStarted = false;
 let gameOver = false;
 let score = 0;
@@ -72,7 +72,6 @@ window.onload = function () {
   canvas.addEventListener("touchstart", moveSpirit);
   requestAnimationFrame(gameLoop);
   setInterval(placeObstacle, 1000); //1000 milliseconds = 1 second
-  audio.play();
 };
 
 function playPause() {
@@ -102,8 +101,12 @@ function gameLoop() {
 
   //Draws Spirit Character & Mouvement//
   velocityY += gravity;
-  spirit.y = Math.min(spirit.y + velocityY, spiritY);
+  spirit.y = Math.max(spirit.y + velocityY, 350);
   context.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height);
+  
+  if (spirit.y > canvas.height) {
+    gameOver = true;
+  }
 
   //Drawing Obstacles//
   for (let i = 0; i < obstacleArray.length; i++) {
@@ -138,10 +141,12 @@ function gameLoop() {
   context.font = "20px courier";
   score++;
   context.fillText(score, 15, 30);
+  audio.play();
 }
+
 function moveSpirit(e) {
-  if ((e.code === "Enter" || e.type === "touchstart") && spirit.y === spiritY) {
-    velocityY = -10;
+  if (e.code === "Enter" || e.type === "touchstart"){
+    velocityY = -6;
   }
 
   // Resets the Game//
@@ -164,6 +169,7 @@ function moveSpirit(e) {
     };
   }
 }
+
 function placeObstacle() {
   if (gameOver) {
     return;
@@ -191,10 +197,8 @@ function placeObstacle() {
     obstacle.width = obstacle1Width;
     obstacleArray.push(obstacle);
   }
-  if (obstacleArray.length > 5) {
-    obstacleArray.shift(); //Keeps array from growing//
-  }
 }
+
 function detectCollision(a, b) {
   return (
     a.x < b.x + b.width / adjustBy &&
