@@ -7,12 +7,12 @@ img.onload = function() {
 let canvas = document.querySelector('canvas');
 let ctx = canvas.getContext('2d');
 
-const scale = 2;
+const scale = 1.5;
 const width = 72;
 const height = 300;
 const scaledWidth = scale * width;
 const scaledHeight = scale * height;
-const cycleLoop = [0, 1, 0, 2];
+const cycleLoop = [3, 2, 1, 0];
 let currentLoopIndex = 0;
 let frameCount = 0;
 

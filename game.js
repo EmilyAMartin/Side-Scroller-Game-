@@ -6,7 +6,6 @@ let backgroundimg = new Image();
 backgroundimg.src = "./img/bg.png";
 let backgroundWidth = 0;
 
-
 //Sprit//
 let spiritWidth = 75;
 let spiritHeight = 75;
@@ -26,8 +25,10 @@ let obstacleArray = [];
 
 let obstacle1Width = 120;
 let obstacle1Height = 250;
+
 let obstacle2Width = 120;
 let obstacle2Height = 120;
+
 let obstacle3Width = 120;
 let obstacle3Height = 100;
 
@@ -76,6 +77,13 @@ window.onload = function () {
   canvas.addEventListener("touchstart", moveSpirit);
   requestAnimationFrame(gameLoop);
   setInterval(placeObstacle, 1000); //1000 milliseconds = 1 second
+
+  document.fillStyle = "white";
+  document.font = "20px courier";
+  score++;
+  document.fillText(score, 15, 30);
+  x = 75;
+  y = 150;
 };
 
 function playPause() {
@@ -150,6 +158,8 @@ function gameLoop() {
   ctx.font = "20px courier";
   score++;
   ctx.fillText(score, 15, 30);
+  
+  //Audio//
   audio.play();
 }
 
@@ -177,6 +187,7 @@ function placeObstacle() {
   if (gameOver) {
     return;
   }
+ 
   let obstacle = {
     img: null,
     x: null,
