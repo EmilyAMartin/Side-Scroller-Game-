@@ -1,11 +1,11 @@
 //Game Variables//
-let canvas = document.querySelector('canvas');
-let ctx = canvas.getContext('2d');
+const canvas = document.querySelector("canvas");
+const ctx = canvas.getContext("2d");
 
-const backgroundimg = new Image();
+let backgroundimg = new Image();
 backgroundimg.src = "./img/bg.png";
 let backgroundWidth = 0;
-const scrollSpeed = 8;
+
 
 //Sprit//
 let spiritWidth = 75;
@@ -15,7 +15,7 @@ let spiritY = 500;
 let spiritImg = new Image();
 spiritImg.src = "./img/spirit.png";
 
-let spirit = {
+const spirit = {
   x: spiritX,
   y: spiritY,
   width: spiritWidth,
@@ -52,6 +52,7 @@ let velocityX = -12;
 let velocityY = 0;
 let gravity = 0.4;
 let adjustBy = 2.0; //Overlaps the characters collison//
+let scrollSpeed = 8;
 let gameStarted = false;
 let gameOver = false;
 let score = 0;
@@ -109,12 +110,17 @@ function gameLoop() {
 
   if (spirit.y > canvas.height) {
     gameOver = true;
+    document.getElementById("gameOverMenu").style.display = "block";
+    spiritImg.src = "./img/spirit-dead.png";
+    spiritImg.onload = function () {
+      ctx.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height);
+    };
   }
 
   //Drawing Obstacles//
   for (let i = 0; i < obstacleArray.length; i++) {
     let obstacle = obstacleArray[i];
-    obstacle.x += velocityX * (1 + score / 5000); //Speed up obstacles over time//
+    obstacle.x += velocityX * (1 + score / 2000); //Speed up obstacles over time//
     ctx.drawImage(
       obstacle.img,
       obstacle.x,
@@ -162,13 +168,7 @@ function moveSpirit(e) {
     spiritImg = new Image();
     spiritImg.src = "./img/spirit.png";
     spiritImg.onload = function () {
-      ctx.drawImage(
-        spiritImg,
-        spirit.x,
-        spirit.y,
-        spirit.width,
-        spirit.height
-      ); // This draws the spirit character//
+      ctx.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height); // This draws the spirit character//
     };
   }
 }
@@ -233,12 +233,6 @@ function resetGame() {
   spiritImg = new Image();
   spiritImg.src = "./img/spirit.png";
   spiritImg.onload = function () {
-    ctx.drawImage(
-      spiritImg,
-      spirit.x,
-      spirit.y,
-      spirit.width,
-      spirit.height
-    ); // This draws the spirit character//
+    ctx.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height);
   };
 }

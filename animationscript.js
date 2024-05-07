@@ -29,6 +29,7 @@ function step() {
     return;
   }
   frameCount = 0;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawFrame(cycleLoop[currentLoopIndex], 0, 0, 0);
   currentLoopIndex++;
   if (currentLoopIndex >= cycleLoop.length) {
