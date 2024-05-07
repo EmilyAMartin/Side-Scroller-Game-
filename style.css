@@ -137,3 +137,6 @@ body {
   justify-content: center;
   align-items: center;
 }
+#fireworkImg{
+display:none;
+}
