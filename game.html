@@ -11,15 +11,20 @@
     />
   </head>
   <body>
-    <canvas id="canvas" class="canvas" width="1040" height="740"></canvas>
+    <canvas class="canvas" class="canvas" width="1040" height="740"></canvas>
+    <div class="header" id="gameHeader">Will-o-the-Wisp</div>
     <div class="playPauseBtn" id="playPauseBtn" onclick="playPause()"></div>
     <div class="mainMenuBtn" id="mainMenuBtn" onclick="resetGame()"></div>
     <div><img id="fireworkImg" src="img/firework.png" alt="firework" ></div>
     <div class="gameOverMenu" id="gameOverMenu">
-      <div class="gameOver" id="gameOver">
-        Gameover press Enter or Tap Screen to restart
-      </div>
+      <div class="gameOver" id="gameOver">Gameover press Enter or Tap Screen to restart</div>
     </div>
-  </body>
+
+      <div class="flex-container3">
+        <div class="container" id="box">
+          <div class="header" id="scoreHeader">High Score</div>
+        </div>
+      </div>
+   </body>
   <script src="game.js"></script>
 </html>

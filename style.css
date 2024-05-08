@@ -97,32 +97,17 @@ body {
   font-family: "Amatic SC", sans-serif;
   display: none;
 }
-.returnMainBtn {
-  text-align: center;
-  vertical-align: middle;
-  border: 2px solid #39483c;
-  border-radius: 7px;
-  background-color: #638b7e;
-  color: #000000;
-  font-size: 2rem;
-  font-family: "Amatic SC", sans-serif;
-  width: 160px;
-  margin: 5px auto;
-}
-.returnMainBtn:hover {
-  background-color: #9cc1bb;
-}
 .playPauseBtn {
   background: url(music/pause.png) no-repeat;
   position: absolute;
-  top: 3%;
+  top: 2%;
   right: 2%;
   width: 25px;
   height: 25px;
   cursor: default;
 }
 .mainMenuBtn {
-  background: url(music/pause.png) no-repeat;
+  background: url(music/home.png) no-repeat;
   position: absolute;
   top: 2%;
   left: 2%;
@@ -145,7 +130,28 @@ body {
   justify-content: center;
   align-items: center;
 }
+.flex-container3 {
+  position: absolute;
+  padding-left: 35px;
+  display: flex;
+  flex-flow: column wrap;
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-family: "Amatic SC", sans-serif;
+}
+#box{
+  width:100px;
+  height:300px;
+  border: 2px solid white;
+}
+#gameHeader{
+  padding: 20px;
+  color: #ffffff;
+  font-size: 2.5rem;
+  font-family: "Amatic SC", sans-serif;
+}
 #fireworkImg {
   display: none;
   align-items: center;
 }
+
