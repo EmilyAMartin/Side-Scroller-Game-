@@ -76,8 +76,15 @@ window.onload = function () {
   document.addEventListener("keydown", moveSpirit);
   canvas.addEventListener("touchstart", moveSpirit);
   requestAnimationFrame(gameLoop);
-  setInterval(placeObstacle, 1000); //1000 milliseconds = 1 second  
+  setInterval(placeObstacle, 1000); //1000 milliseconds = 1 second
+  audio.play();
 };
+
+function firework() {
+  if (score / 500) {
+    document.getElementById("fireworkImg").style.display = "block";
+  }
+}
 
 function playPause() {
   playbtn = document.getElementById("playPauseBtn");
@@ -103,7 +110,7 @@ function gameLoop() {
   ctx.drawImage(backgroundimg, -backgroundWidth + canvas.width, 0); //Background 2
   backgroundWidth += scrollSpeed;
   if (backgroundWidth == canvas.width) backgroundWidth = 0;
-  
+
   //Draws Spirit Character & Mouvement//
   velocityY += gravity;
   spirit.y = Math.max(spirit.y + velocityY, 350);
@@ -134,7 +141,6 @@ function gameLoop() {
     if (detectCollision(spirit, obstacle)) {
       gameOver = true;
       document.getElementById("gameOverMenu").style.display = "block";
-      document.getElementById("fireworkImg").style.display = "block";
       spiritImg.src = "./img/spirit-dead.png";
       spiritImg.onload = function () {
         ctx.drawImage(
@@ -147,15 +153,11 @@ function gameLoop() {
       };
     }
   }
-//Score on screen//
-ctx.fillStyle = "white";
-ctx.font = "20px courier";
-score++;
-ctx.fillText(score, 15, 30);
-
-
-  //Audio//
-  audio.play();
+  //Score on screen//
+  ctx.fillStyle = "white";
+  ctx.font = "25px courier";
+  score++;
+  ctx.fillText(score, 15, 30);
 }
 
 function moveSpirit(e) {
@@ -182,7 +184,7 @@ function placeObstacle() {
   if (gameOver) {
     return;
   }
- 
+
   let obstacle = {
     img: null,
     x: null,

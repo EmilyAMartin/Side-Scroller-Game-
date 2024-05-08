@@ -113,11 +113,19 @@ body {
   background-color: #9cc1bb;
 }
 .playPauseBtn {
-  position: absolute;
-  top: 13%;
-  left: 74%;
-  transform: translate(-50%, -50%);
   background: url(music/pause.png) no-repeat;
+  position: absolute;
+  top: 3%;
+  right: 2%;
+  width: 25px;
+  height: 25px;
+  cursor: default;
+}
+.mainMenuBtn {
+  background: url(music/pause.png) no-repeat;
+  position: absolute;
+  top: 2%;
+  left: 2%;
   width: 25px;
   height: 25px;
   cursor: default;
@@ -137,6 +145,7 @@ body {
   justify-content: center;
   align-items: center;
 }
-#fireworkImg{
-display:none;
+#fireworkImg {
+  display: none;
+  align-items: center;
 }

@@ -13,15 +13,13 @@
   <body>
     <canvas id="canvas" class="canvas" width="1040" height="740"></canvas>
     <div class="playPauseBtn" id="playPauseBtn" onclick="playPause()"></div>
+    <div class="mainMenuBtn" id="mainMenuBtn" onclick="resetGame()"></div>
+    <div><img id="fireworkImg" src="img/firework.png" alt="firework" ></div>
     <div class="gameOverMenu" id="gameOverMenu">
       <div class="gameOver" id="gameOver">
         Gameover press Enter or Tap Screen to restart
       </div>
-      <div class="returnMainBtn" id="returnMainBtn" onclick="resetGame()">
-        Main Menu
-      </div>
     </div>
-    <div><img src="img/firework.png" alt="firework" id="fireworkImg"></div>
   </body>
   <script src="game.js"></script>
 </html>
