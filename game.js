@@ -96,6 +96,9 @@ function playPause() {
     playbtn.style.background = "url(music/play.png) no-repeat";
   }
 }
+function showHighScore(){
+document.getElementById("highScore").style.display = "block";
+}
 
 function gameLoop() {
   requestAnimationFrame(gameLoop);
@@ -155,7 +158,7 @@ function gameLoop() {
   }
   //Score on screen//
   ctx.fillStyle = "white";
-  ctx.font = "25px courier";
+  ctx.font = "20px courier";
   score++;
   ctx.fillText(score, 15, 30);
 }
