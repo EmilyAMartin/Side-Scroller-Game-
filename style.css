@@ -9,14 +9,9 @@ body {
   font-family: "Amatic SC", sans-serif;
   font-size: 2em;
   text-align: center;
-}
-.backgroundImg {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  max-width: 100%;
-  max-height: 100%;
+  background-image: url(img/orb.png);
+  background-repeat: no-repeat;
+
 }
 .canvas {
   position: absolute;
@@ -56,7 +51,7 @@ body {
   border: 2px solid #39483c;
   border-radius: 7px;
   background-color: #638b7e;
-  color: #000000;
+  color: #1d251f;
   font-size: 2rem;
   font-family: "Amatic SC", sans-serif;
   width: 160px;
@@ -97,32 +92,31 @@ body {
   font-family: "Amatic SC", sans-serif;
   display: none;
 }
+.flex-container4 {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-around;
+  padding-top: 25px;
+  padding-left: 300px;
+  padding-right: 300px;
+}
 .playPauseBtn {
   background: url(music/pause.png) no-repeat;
-  position: absolute;
-  top: 2%;
-  right: 8%;
   width: 25px;
   height: 25px;
-  cursor: default;
 }
 .highScoreBtn {
   background: url(music/highscore.png) no-repeat;
-  position: absolute;
-  top: 2%;
-  right: 2%;
   width: 25px;
   height: 25px;
-  cursor: default;
 }
 .mainMenuBtn {
   background: url(music/home.png) no-repeat;
-  position: absolute;
-  top: 2%;
-  left: 2%;
   width: 25px;
   height: 25px;
-  cursor: default;
+}
+p{
+  color: #ffffff;
 }
 .settingsHeader {
   margin: auto;
@@ -153,14 +147,4 @@ body {
   width: 100px;
   height: 300px;
   border: 2px solid white;
-}
-#gameHeader {
-  padding: 20px;
-  color: #ffffff;
-  font-size: 2.5rem;
-  font-family: "Amatic SC", sans-serif;
-}
-#fireworkImg {
-  display: none;
-  align-items: center;
 }

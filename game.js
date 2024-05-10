@@ -96,8 +96,10 @@ function playPause() {
     playbtn.style.background = "url(music/play.png) no-repeat";
   }
 }
+
 function showHighScore(){
 document.getElementById("highScore").style.display = "block";
+//How to toggle//
 }
 
 function gameLoop() {

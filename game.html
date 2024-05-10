@@ -12,20 +12,22 @@
   </head>
   <body>
     <canvas class="canvas" class="canvas" width="1040" height="740"></canvas>
-    <div class="header" id="gameHeader">Will-o-the-Wisp</div>
+    <div class="flex-container4">
+    <p>Will-o-the-Wisp</p>
     <div class="playPauseBtn" id="playPauseBtn" onclick="playPause()"></div>
     <div class="mainMenuBtn" id="mainMenuBtn" onclick="resetGame()"></div>
     <div class="highScoreBtn" id="highScoreBtn" onclick="showHighScore()"></div>
-    <div><img id="fireworkImg" src="img/firework.png" alt="firework" ></div>
+    </div>
+   
     <div class="gameOverMenu" id="gameOverMenu">
-      <div class="gameOver" id="gameOver">Gameover press Enter or Tap Screen to restart</div>
+    <div class="gameOver" id="gameOver">Gameover press Enter or Tap Screen to restart</div>
     </div>
 
-      <div class="flex-container3" id="highScore">
-        <div class="container" id="box">
-          <div class="header" id="scoreHeader">High Score</div>
-        </div>
-      </div>
+    <div class="flex-container3" id="highScore">
+    <div class="container" id="box">
+    <div class="header" id="scoreHeader">High Score</div>
+    </div>
+    </div>
    </body>
   <script src="game.js"></script>
 </html>
