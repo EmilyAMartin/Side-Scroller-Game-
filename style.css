@@ -94,11 +94,13 @@ body {
 }
 .flex-container4 {
   display: flex;
-  flex-flow: row;
-  justify-content: space-around;
+  flex-direction: row;
+  justify-content: space-evenly;
+  position:relative;
   padding-top: 25px;
-  padding-left: 300px;
-  padding-right: 300px;
+  top: 5%;
+  left: 5%;
+  transform: translate(-5%, 5%);
 }
 .playPauseBtn {
   background: url(music/pause.png) no-repeat;
