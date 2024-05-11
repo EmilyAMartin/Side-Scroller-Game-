@@ -92,7 +92,7 @@ function playPause() {
 }
 
 function toggleHighScore() {
-let showHighScore = document.getElementById("highScore");
+  let showHighScore = document.getElementById("highScore");
   if (showHighScore.style.display === "none") {
     showHighScore.style.display = "block";
   } else {
@@ -100,8 +100,7 @@ let showHighScore = document.getElementById("highScore");
   }
 }
 
-const saveScores = []
-
+const saveScores = [];
 
 function gameLoop() {
   requestAnimationFrame(gameLoop);
@@ -122,9 +121,9 @@ function gameLoop() {
   spirit.y = Math.max(spirit.y + velocityY, 350);
   ctx.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height);
 
+  //Sprit Drops off Canvas//
   if (spirit.y > canvas.height) {
     gameOver = true;
-    document.getElementById("gameOverMenu").style.display = "block";
     spiritImg.src = "./img/spirit-dead.png";
     spiritImg.onload = function () {
       ctx.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height);
@@ -146,7 +145,6 @@ function gameLoop() {
     //Collision//
     if (detectCollision(spirit, obstacle)) {
       gameOver = true;
-      document.getElementById("gameOverMenu").style.display = "block";
       spiritImg.src = "./img/spirit-dead.png";
       spiritImg.onload = function () {
         ctx.drawImage(
@@ -155,15 +153,23 @@ function gameLoop() {
           spirit.y,
           spirit.width,
           spirit.height
-        ); //Add a game over image and an option to try again//
+        );
       };
     }
   }
+
   //Score on screen//
   ctx.fillStyle = "white";
   ctx.font = "20px courier";
   score++;
   ctx.fillText(score, 15, 30);
+
+  //Gameover Screen//
+  if (gameOver) {
+    ctx.fillStyle = "white";
+    ctx.font = "2rem Amatic SC, sans-serif";
+    ctx.fillText("Gameover press Enter or Tap Screen to restart", 300, 350);
+  }
 }
 
 function moveSpirit(e) {
@@ -173,7 +179,6 @@ function moveSpirit(e) {
 
   // Resets the Game//
   if (gameOver) {
-    document.getElementById("gameOverMenu").style.display = "none";
     spirit.y = spiritY;
     obstacleArray = [];
     score = 0;
