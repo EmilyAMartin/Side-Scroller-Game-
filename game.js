@@ -100,6 +100,8 @@ let showHighScore = document.getElementById("highScore");
   }
 }
 
+const saveScores = []
+
 
 function gameLoop() {
   requestAnimationFrame(gameLoop);
