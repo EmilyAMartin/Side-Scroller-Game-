@@ -4,29 +4,35 @@
   box-sizing: border-box;
 }
 body {
-  background-color: #9cc1bb;
-  color: #39483c;
+  background-image: url(img/orb.png);
+  background-repeat: no-repeat;
+  color: #ffffff;
   font-family: "Amatic SC", sans-serif;
   font-size: 2em;
   text-align: center;
-  background-image: url(img/orb.png);
-  background-repeat: no-repeat;
 }
 canvas {
   max-width: 100%;
   max-height: 100%;
 }
-.theHeader {
+#mainHeader {
   margin: auto;
   color: #ffffff;
-  font-size: 5rem;
+  font-size: 4rem;
   font-family: "Amatic SC", sans-serif;
   position: relative;
 }
-.newGame,
-.instructionsBtn,
-.backBtn,
-.settingsBtn{
+#mainMenu {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 100%;
+  max-height: 100%;
+}
+#newGameBtn,
+#instructionsBtn,
+#backBtn {
   text-align: center;
   vertical-align: middle;
   border: 2px solid #39483c;
@@ -38,87 +44,58 @@ canvas {
   width: 160px;
   margin: 5px auto;
 }
-.newGame:hover {
+#newGameBtn:hover {
   background-color: #9cc1bb;
 }
-.instructionsBtn:hover {
+#instructionsBtn:hover {
   background-color: #9cc1bb;
 }
-.settingsBtn:hover {
+#backBtn:hover {
   background-color: #9cc1bb;
 }
-.backBtn:hover {
-  background-color: #9cc1bb;
-}
-.instructions {
+#instructions {
   margin: auto;
-  color: #39483c;
+  color: #ffffff;
   font-size: 1.5rem;
   font-family: "Amatic SC", sans-serif;
   background-color: inherit;
 }
-.flex-container{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  max-width: 100%;
-  max-height: 100%;
-}
-
-.flex-container4 {
+#gameMenu {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  position:relative;
+  position: relative;
   padding-top: 25px;
   padding-bottom: 25px;
   top: 5%;
   left: 5%;
   transform: translate(-5%, 5%);
 }
-.playPauseBtn {
+#playPauseBtn {
   background: url(music/pause.png) no-repeat;
   width: 25px;
   height: 25px;
 }
-.highScoreBtn {
+#highScoreBtn {
   background: url(music/highscore.png) no-repeat;
   width: 25px;
   height: 25px;
 }
-.mainMenuBtn {
+#mainMenuBtn {
   background: url(music/home.png) no-repeat;
   width: 25px;
   height: 25px;
 }
-p{
-  color: #ffffff;
-}
-.settingsHeader {
-  margin: auto;
-  color: #39483c;
-  font-size: 3rem;
-  font-family: "Amatic SC", sans-serif;
-  position: relative;
-}
-.flex-container2 {
-  padding: 20px;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  align-items: center;
-}
-#highScore {
+#highScoreBox {
   position: absolute;
   top: 10%;
   right: 2%;
   display: flex;
   flex-flow: column wrap;
-  color: #ffffff;
   font-size: 1.5rem;
   font-family: "Amatic SC", sans-serif;
   display: none;
+  background-color: #d3d3d350;
 }
 #box {
   width: 100px;

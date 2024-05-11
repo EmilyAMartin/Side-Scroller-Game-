@@ -11,23 +11,18 @@
     />
   </head>
   <body>
-  
-
-    <div class="flex-container4">
-    <p>Will-o-the-Wisp</p>
-    <div class="mainMenuBtn" id="mainMenuBtn" onclick="resetGame()"></div>
-    <div class="highScoreBtn" id="highScoreBtn" onclick="toggleHighScore()"></div>
-    <div class="playPauseBtn" id="playPauseBtn" onclick="playPause()"></div>
+    <div class="flex-container" id="gameMenu">
+      <div class="header" id="gameHeader">Willo-the-Wisp</div>
+      <div class="button" id="mainMenuBtn" onclick="resetGame()"></div>
+      <div class="button" id="highScoreBtn" onclick="toggleHighScore()"></div>
+      <div class="button" id="playPauseBtn" onclick="playPause()"></div>
     </div>
- 
     <canvas class="canvas" class="canvas" width="1040" height="740"></canvas>
-
-    <div class="flex-container3" id="highScore">
-    <div class="container" id="box">
-    <div class="header" id="scoreHeader">High Score</div>
+    <div class="flex-container" id="highScoreBox">
+      <div class="box" id="box">
+        <div class="header" id="highScoreHeader">High Score</div>
+      </div>
     </div>
-    </div>
-
-   </body>
+  </body>
   <script src="game.js"></script>
 </html>

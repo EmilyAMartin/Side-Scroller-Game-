@@ -92,7 +92,7 @@ function playPause() {
 }
 
 function toggleHighScore() {
-  let showHighScore = document.getElementById("highScore");
+  let showHighScore = document.getElementById("highScoreBox");
   if (showHighScore.style.display === "none") {
     showHighScore.style.display = "block";
   } else {
