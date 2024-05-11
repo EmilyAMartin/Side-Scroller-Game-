@@ -80,12 +80,6 @@ window.onload = function () {
   audio.play();
 };
 
-function firework() {
-  if (score / 500) {
-    document.getElementById("fireworkImg").style.display = "block";
-  }
-}
-
 function playPause() {
   playbtn = document.getElementById("playPauseBtn");
   if (audio.paused) {
@@ -97,10 +91,15 @@ function playPause() {
   }
 }
 
-function showHighScore(){
-document.getElementById("highScore").style.display = "block";
-//How to toggle//
+function toggleHighScore() {
+let showHighScore = document.getElementById("highScore");
+  if (showHighScore.style.display === "none") {
+    showHighScore.style.display = "block";
+  } else {
+    showHighScore.style.display = "none";
+  }
 }
+
 
 function gameLoop() {
   requestAnimationFrame(gameLoop);
