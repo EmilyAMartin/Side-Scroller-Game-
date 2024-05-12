@@ -57,6 +57,7 @@ let scrollSpeed = 8;
 let gameStarted = false;
 let gameOver = false;
 let score = 0;
+let highScore = 0;
 let intervalID; //Starts the placement of object when new game is pressed//
 
 //Background Audio and Buttons//
@@ -72,9 +73,10 @@ window.onload = function () {
   canvas;
   canvas.height;
   canvas.width;
+  
   //Events & Animation Request//
   document.addEventListener("keydown", moveSpirit);
-  canvas.addEventListener("touchstart", moveSpirit);
+  document.addEventListener("touchstart", moveSpirit);
   requestAnimationFrame(gameLoop);
   setInterval(placeObstacle, 1000); //1000 milliseconds = 1 second
   audio.play();
@@ -99,8 +101,43 @@ function toggleHighScore() {
     showHighScore.style.display = "none";
   }
 }
+//High Score Test//
+const highscores = JSON.parse(localStorage.getItem('highscores')) || [];
+const scoreList = document.querySelector('.scoretable');
 
-const saveScores = [];
+function populateTable() {
+  scoreList.innerHTML = highscores.map((row) => {
+    return `<tr><td>${row.clicker}</td><td>${row.score}</tr>`;
+  }).join('');
+}
+
+function checkScore() {
+  let worstScore = 0;
+  if (highscores.length > 4) {
+    worstScore = highscores[highscores.length - 1].score;
+  }
+
+  if (score > worstScore) {
+    const clicker = (score);
+    highscores.push({score, clicker});
+  }
+
+  highscores.sort((a, b) => a.score > b.score ? -1 : 1);
+
+  // Remove the worst score when table too long
+  if (highscores.length > 5) {
+    highscores.pop();
+  }
+
+  populateTable();
+  localStorage.setItem('hiscores', JSON.stringify(highscores));
+}
+
+function clearScores() {
+  highscores.splice(0, highscores.length);
+  localStorage.setItem('highscores', JSON.stringify(highscores));
+  populateTable(highscores, scoreList);
+}
 
 function gameLoop() {
   requestAnimationFrame(gameLoop);
@@ -124,6 +161,7 @@ function gameLoop() {
   //Sprit Drops off Canvas//
   if (spirit.y > canvas.height) {
     gameOver = true;
+    checkScore();
     spiritImg.src = "./img/spirit-dead.png";
     spiritImg.onload = function () {
       ctx.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height);
@@ -145,6 +183,7 @@ function gameLoop() {
     //Collision//
     if (detectCollision(spirit, obstacle)) {
       gameOver = true;
+      checkScore();
       spiritImg.src = "./img/spirit-dead.png";
       spiritImg.onload = function () {
         ctx.drawImage(
