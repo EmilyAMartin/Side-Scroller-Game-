@@ -57,8 +57,8 @@ let scrollSpeed = 8;
 let gameStarted = false;
 let gameOver = false;
 let score = 0;
-let highScore = 0;
 let intervalID; //Starts the placement of object when new game is pressed//
+
 
 //Background Audio and Buttons//
 let audio = new Audio();
@@ -104,13 +104,11 @@ function toggleHighScore() {
 //High Score Test//
 const highscores = JSON.parse(localStorage.getItem('highscores')) || [];
 const scoreList = document.querySelector('.scoretable');
-
-function populateTable() {
-  scoreList.innerHTML = highscores.map((row) => {
-    return `<tr><td>${row.clicker}</td><td>${row.score}</tr>`;
-  }).join('');
+function highScoreList() {
+  scoreList.innerHTML = highscores.map((score) => { //Try a diffrent method so that score goes down the page//
+    return (score);
+  });
 }
-
 function checkScore() {
   let worstScore = 0;
   if (highscores.length > 4) {
@@ -118,25 +116,21 @@ function checkScore() {
   }
 
   if (score > worstScore) {
-    const clicker = (score);
-    highscores.push({score, clicker});
+    highscores.push(score);
   }
-
-  highscores.sort((a, b) => a.score > b.score ? -1 : 1);
+ highscores.sort((a, b) => a.score > b.score ? -1 : 1);
 
   // Remove the worst score when table too long
   if (highscores.length > 5) {
     highscores.pop();
   }
-
-  populateTable();
+  highScoreList();
   localStorage.setItem('hiscores', JSON.stringify(highscores));
 }
-
 function clearScores() {
   highscores.splice(0, highscores.length);
   localStorage.setItem('highscores', JSON.stringify(highscores));
-  populateTable(highscores, scoreList);
+  highScoreList(highscores, scoreList);
 }
 
 function gameLoop() {
