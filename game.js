@@ -102,35 +102,33 @@ function toggleHighScore() {
   }
 }
 //High Score Test//
-const highscores = JSON.parse(localStorage.getItem('highscores')) || [];
-const scoreList = document.querySelector('.scoretable');
-function highScoreList() {
-  scoreList.innerHTML = highscores.map((score) => { //Try a diffrent method so that score goes down the page//
-    return (score);
+  const hiscores = [];
+  const scoreList = document.querySelector('.scoretable');
+
+function populateTable() {
+  scoreList.innerHTML = hiscores.map((row) => {
+  return `<tr>${row.score}</tr>`;
   });
 }
+
 function checkScore() {
   let worstScore = 0;
-  if (highscores.length > 4) {
-    worstScore = highscores[highscores.length - 1].score;
+  if (hiscores.length > 1) {
+    worstScore = hiscores[hiscores.length - 1].score;
+  }
+if (score > worstScore) {
+    hiscores.push({score});
   }
 
-  if (score > worstScore) {
-    highscores.push(score);
-  }
- highscores.sort((a, b) => a.score > b.score ? -1 : 1);
+ 
 
   // Remove the worst score when table too long
-  if (highscores.length > 5) {
-    highscores.pop();
+  if (hiscores.length > 1) {
+    hiscores.pop();
   }
-  highScoreList();
-  localStorage.setItem('hiscores', JSON.stringify(highscores));
-}
-function clearScores() {
-  highscores.splice(0, highscores.length);
-  localStorage.setItem('highscores', JSON.stringify(highscores));
-  highScoreList(highscores, scoreList);
+  hiscores.sort((a, b) => a.score > b.score ? -1 : 1);
+
+  populateTable();
 }
 
 function gameLoop() {

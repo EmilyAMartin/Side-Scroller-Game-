@@ -92,13 +92,13 @@ canvas {
   right: 2%;
   display: flex;
   flex-flow: column wrap;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-family: "Amatic SC", sans-serif;
   display: none;
   background-color: #d3d3d350;
 }
 #box {
-  width: 100px;
-  height: 300px;
+  width: 200px;
+  height: 100px;
   border: 2px solid white;
 }
