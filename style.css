@@ -86,19 +86,19 @@ canvas {
   width: 25px;
   height: 25px;
 }
-#highScoreBox {
-  position: absolute;
-  top: 10%;
-  right: 2%;
-  display: flex;
-  flex-flow: column wrap;
-  font-size: 1.2rem;
-  font-family: "Amatic SC", sans-serif;
+#highestScoreMenu{
   display: none;
-  background-color: #d3d3d350;
+  flex-direction: row;
+  justify-content: center;
+  position: relative;
+  top: 5%;
+  left: 5%;
+  transform: translate(-5%, 5%);
+  font-size: 1.5rem;
+  font-family: "Amatic SC", sans-serif;
 }
 #box {
   width: 200px;
-  height: 100px;
+  height: 75px;
   border: 2px solid white;
 }

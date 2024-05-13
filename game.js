@@ -58,6 +58,8 @@ let gameStarted = false;
 let gameOver = false;
 let score = 0;
 let intervalID; //Starts the placement of object when new game is pressed//
+const highestScores = [];
+const scoreList = document.querySelector(".scoretable");
 
 
 //Background Audio and Buttons//
@@ -73,7 +75,7 @@ window.onload = function () {
   canvas;
   canvas.height;
   canvas.width;
-  
+
   //Events & Animation Request//
   document.addEventListener("keydown", moveSpirit);
   document.addEventListener("touchstart", moveSpirit);
@@ -94,7 +96,7 @@ function playPause() {
 }
 
 function toggleHighScore() {
-  let showHighScore = document.getElementById("highScoreBox");
+  let showHighScore = document.getElementById("highestScoreMenu");
   if (showHighScore.style.display === "none") {
     showHighScore.style.display = "block";
   } else {
@@ -102,33 +104,25 @@ function toggleHighScore() {
   }
 }
 //High Score Test//
-  const hiscores = [];
-  const scoreList = document.querySelector('.scoretable');
-
-function populateTable() {
-  scoreList.innerHTML = hiscores.map((row) => {
-  return `<tr>${row.score}</tr>`;
+function highestScoresTable() {
+  scoreList.innerHTML = highestScores.map((row) => {
+    return `<tr>${row.score}</tr>`;
   });
 }
 
 function checkScore() {
   let worstScore = 0;
-  if (hiscores.length > 1) {
-    worstScore = hiscores[hiscores.length - 1].score;
+  if (highestScores.length > 1) {
+    worstScore = highestScores[highestScores.length - 1].score;
   }
-if (score > worstScore) {
-    hiscores.push({score});
+  if (score > worstScore) {
+    highestScores.push({ score });
   }
-
- 
-
-  // Remove the worst score when table too long
-  if (hiscores.length > 1) {
-    hiscores.pop();
+  highestScores.sort((a, b) => (a.score > b.score ? -1 : 1));
+  if (highestScores.length > 1) {
+    highestScores.pop();
   }
-  hiscores.sort((a, b) => a.score > b.score ? -1 : 1);
-
-  populateTable();
+  highestScoresTable();
 }
 
 function gameLoop() {
