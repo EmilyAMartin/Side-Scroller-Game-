@@ -10,6 +10,8 @@ Features
 Single player - Try your best to get the highest score you can!
 Desktop and Mobile- Use a keyboard or touch screen to play the game.
 Restrictions - The game currently only works  in profile mode on mobile. 
+Highest Score Count - View your highest score per run. This feature can be toggled on/off.
+Sound Effect - This feature can be toggled on/off. 
 
 Built with 
 Layout - Figma
