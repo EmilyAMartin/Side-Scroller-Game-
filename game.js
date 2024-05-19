@@ -2,15 +2,15 @@
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 
-let backgroundimg = new Image();
+const backgroundimg = new Image();
 backgroundimg.src = "./img/bg.png";
 let backgroundWidth = 0;
 
 //Sprit//
-let spiritWidth = 75;
-let spiritHeight = 75;
-let spiritX = 75;
-let spiritY = 500;
+const spiritWidth = 75;
+const spiritHeight = 75;
+const spiritX = 75;
+const spiritY = 500;
 let spiritImg = new Image();
 spiritImg.src = "./img/spirit.png";
 
@@ -23,29 +23,25 @@ const spirit = {
 
 let obstacleArray = [];
 
-let obstacle1Width = 120;
-let obstacle1Height = 250;
-
-let obstacle2Width = 120;
-let obstacle2Height = 120;
-
-let obstacle3Width = 120;
-let obstacle3Height = 100;
-
-let obstacle1X = 980;
-let obstacle1Y = 500;
-let obstacle2X = 980;
-let obstacle2Y = 475;
-let obstacle3X = 980;
-let obstacle3Y = 550;
-
-let obstacle1Img = new Image();
+const obstacle1Width = 120;
+const obstacle1Height = 250;
+const obstacle1X = 980;
+const obstacle1Y = 500;
+const obstacle1Img = new Image();
 obstacle1Img.src = "./img/obstacle1.png";
 
-let obstacle2Img = new Image();
+const obstacle2Width = 120;
+const obstacle2Height = 120;
+const obstacle2X = 980;
+const obstacle2Y = 475;
+const obstacle2Img = new Image();
 obstacle2Img.src = "./img/obstacle2.png";
 
-let obstacle3Img = new Image();
+const obstacle3Width = 120;
+const obstacle3Height = 100;
+const obstacle3X = 980;
+const obstacle3Y = 550;
+const obstacle3Img = new Image();
 obstacle3Img.src = "./img/obstacle3.png";
 
 //Game Physics and Operations//
@@ -54,13 +50,10 @@ let velocityY = 0;
 let gravity = 0.4;
 let adjustBy = 2.0; //Overlaps the characters collison//
 let scrollSpeed = 8;
-let gameStarted = false;
 let gameOver = false;
 let score = 0;
-let intervalID; //Starts the placement of object when new game is pressed//
-const highestScores = [];
-const scoreList = document.querySelector(".scoretable");
-
+let highestScores = [];
+let scoreList = document.getElementById("scoretable");
 
 //Background Audio and Buttons//
 let audio = new Audio();
@@ -71,11 +64,6 @@ audio.play();
 audio.pause();
 
 window.onload = function () {
-  //Draw Canvas//
-  canvas;
-  canvas.height;
-  canvas.width;
-
   //Events & Animation Request//
   document.addEventListener("keydown", moveSpirit);
   document.addEventListener("touchstart", moveSpirit);
@@ -83,68 +71,24 @@ window.onload = function () {
   setInterval(placeObstacle, 1000); //1000 milliseconds = 1 second
   audio.play();
 };
-
-function playPause() {
-  playbtn = document.getElementById("playPauseBtn");
-  if (audio.paused) {
-    audio.play();
-    playbtn.style.background = "url(music/pause.png) no-repeat";
-  } else {
-    audio.pause();
-    playbtn.style.background = "url(music/play.png) no-repeat";
-  }
-}
-
-function toggleHighScore() {
-  let showHighScore = document.getElementById("highestScoreMenu");
-  if (showHighScore.style.display === "none") {
-    showHighScore.style.display = "block";
-  } else {
-    showHighScore.style.display = "none";
-  }
-}
-//High Score Test//
-function highestScoresTable() {
-  scoreList.innerHTML = highestScores.map((row) => {
-    return `<tr>${row.score}</tr>`;
-  });
-}
-
-function checkScore() {
-  let worstScore = 0;
-  if (highestScores.length > 1) {
-    worstScore = highestScores[highestScores.length - 1].score;
-  }
-  if (score > worstScore) {
-    highestScores.push({ score });
-  }
-  highestScores.sort((a, b) => (a.score > b.score ? -1 : 1));
-  if (highestScores.length > 1) {
-    highestScores.pop();
-  }
-  highestScoresTable();
-}
-
 function gameLoop() {
   requestAnimationFrame(gameLoop);
   if (gameOver) {
     return;
   }
-
+  //Clear Canvas//
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  //Draws Scrolling Background//
-  ctx.drawImage(backgroundimg, -backgroundWidth, 0); //Background 1
-  ctx.drawImage(backgroundimg, -backgroundWidth + canvas.width, 0); //Background 2
+  //Draw Scrolling Background//
+  ctx.drawImage(backgroundimg, -backgroundWidth, 0);
+  ctx.drawImage(backgroundimg, -backgroundWidth + canvas.width, 0);
   backgroundWidth += scrollSpeed;
   if (backgroundWidth == canvas.width) backgroundWidth = 0;
 
-  //Draws Spirit Character & Mouvement//
+  //Draw Spirit//
   velocityY += gravity;
   spirit.y = Math.max(spirit.y + velocityY, 350);
   ctx.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height);
-
-  //Sprit Drops off Canvas//
   if (spirit.y > canvas.height) {
     gameOver = true;
     checkScore();
@@ -154,10 +98,10 @@ function gameLoop() {
     };
   }
 
-  //Drawing Obstacles//
+  //Draw Obstacles//
   for (let i = 0; i < obstacleArray.length; i++) {
     let obstacle = obstacleArray[i];
-    obstacle.x += velocityX * (1 + score / 2000); //Speed up obstacles over time//
+    obstacle.x += velocityX * (1 + score / 2000); //Speeds up the obstacles over time//
     ctx.drawImage(
       obstacle.img,
       obstacle.x,
@@ -166,7 +110,7 @@ function gameLoop() {
       obstacle.height
     );
 
-    //Collision//
+    //GameOver//
     if (detectCollision(spirit, obstacle)) {
       gameOver = true;
       checkScore();
@@ -182,27 +126,25 @@ function gameLoop() {
       };
     }
   }
-
-  //Score on screen//
-  ctx.fillStyle = "white";
-  ctx.font = "20px courier";
-  score++;
-  ctx.fillText(score, 15, 30);
-
-  //Gameover Screen//
+  //Gameover Message//
   if (gameOver) {
     ctx.fillStyle = "white";
     ctx.font = "2rem Amatic SC, sans-serif";
     ctx.fillText("Gameover press Enter or Tap Screen to restart", 300, 350);
   }
-}
 
+  //Score//
+  ctx.fillStyle = "white";
+  ctx.font = "20px courier";
+  score++;
+  ctx.fillText(score, 15, 30);
+}
 function moveSpirit(e) {
   if (e.code === "Enter" || e.type === "touchstart") {
     velocityY = -6;
   }
 
-  // Resets the Game//
+  // Use Event to Resets the Game//
   if (gameOver) {
     spirit.y = spiritY;
     obstacleArray = [];
@@ -215,7 +157,6 @@ function moveSpirit(e) {
     };
   }
 }
-
 function placeObstacle() {
   if (gameOver) {
     return;
@@ -257,7 +198,6 @@ function placeObstacle() {
     obstacleArray.shift(); //Keeps array from growing//
   }
 }
-
 function detectCollision(a, b) {
   return (
     a.x < b.x + b.width / adjustBy &&
@@ -266,17 +206,44 @@ function detectCollision(a, b) {
     a.y + a.height / adjustBy > b.y
   );
 }
-
-function resetGame() {
+//Game Menu Buttons//
+function mainMenu() {
   window.location = "index.html";
-  clearInterval(intervalID); //Clears the gameloop and obstacle placement onclick to Main Menu//
-  spirit.y = spiritY;
-  obstacleArray = [];
-  score = 0;
-  gameOver = false;
-  spiritImg = new Image();
-  spiritImg.src = "./img/spirit.png";
-  spiritImg.onload = function () {
-    ctx.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height);
-  };
+};
+function playPause() {
+  playbtn = document.getElementById("playPauseBtn");
+  if (audio.paused) {
+    audio.play();
+    playbtn.style.background = "url(music/pause.png) no-repeat";
+  } else {
+    audio.pause();
+    playbtn.style.background = "url(music/play.png) no-repeat";
+  }
+}
+function toggleHighScore() {
+  let showHighScore = document.getElementById("highestScoreMenu");
+  if (showHighScore.style.display === "none") {
+    showHighScore.style.display = "";
+  } else {
+    showHighScore.style.display = "none";
+  }
+}
+function highestScoresTable() {
+  scoreList.innerHTML = highestScores.map((row) => {
+    return (row.score);
+  });
+}
+function checkScore() {
+  let worstScore = 0;
+  if (highestScores.length > 1) {
+    worstScore = highestScores[highestScores.length - 1].score;
+  }
+  if (score > worstScore) {
+    highestScores.push({ score });
+  }
+  highestScores.sort((a, b) => (a.score > b.score ? -1 : 1));
+  if (highestScores.length > 1) {
+    highestScores.pop();
+  }
+  highestScoresTable();
 }

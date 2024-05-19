@@ -87,9 +87,9 @@ canvas {
   height: 25px;
 }
 #highestScoreMenu{
-  display: none;
+  display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-evenly;
   position: relative;
   top: 5%;
   left: 5%;

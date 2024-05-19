@@ -7,6 +7,3 @@ function showInstructions() {
 function goBack() {
   window.location = "index.html";
 }
-function showSettings() {
-  window.location = "settings.html";
-}
