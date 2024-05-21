@@ -17,6 +17,10 @@
       <div class="button" id="playPauseBtn" onclick="playPause()"></div>
       <div class="button" id="highScoreBtn" onclick="toggleHighScore()"></div>
     </div>
+       
+   
+     ​<div class="button" id="restartBtn" onclick="setTimeout(restartGame,1000);"></div>
+
     <canvas class="canvas" class="canvas" width="1040" height="740"></canvas>
     <div class="flex-container" id="highestScoreMenu">
       <div class="box" id="box">
@@ -25,9 +29,8 @@
         </div>
       </div>
     </div>
-      ​<div class="button" id="restartBtn" onclick="setTimeout(restartGame, 1000);">
-        <div class="image"><img src="music/restart.png" width="25" height="25" alt="restart"></div>
-    </div>
+
+  
   </body>
   <script src="game.js"></script>
 </html>

@@ -131,7 +131,12 @@ function gameLoop() {
     ctx.fillStyle = "white";
     ctx.font = "2rem Amatic SC, sans-serif";
     ctx.fillText("Gameover press Enter or Tap Screen to restart", 300, 350);
-    document.getElementById('restartBtn').style.display = "block";
+    let restartBtn = document.getElementById("restartBtn");
+    if (restartBtn.style.display === "none") {
+      restartBtn.style.display = "";
+    } else {
+      restartBtn.style.display = "none";
+    }
   }
   //Score//
   ctx.fillStyle = "white";
@@ -235,7 +240,7 @@ function checkScore() {
   highestScoresTable();
 }
 function restartGame() {
-  if (gameOver) {
+  if (gameOver){
     spirit.y = spiritY;
     obstacleArray = [];
     score = 0;
