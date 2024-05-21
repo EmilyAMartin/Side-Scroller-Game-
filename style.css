@@ -86,15 +86,6 @@ canvas {
   width: 25px;
   height: 25px;
 }
-#restartBtn{
-background: url(music/restart.png) no-repeat;
-width: 25px;
-height: 25px;
-position:absolute;
-top: 50%;
-left:50%;
-transform: translate(-95%, 95%);
-}
 #highestScoreMenu{
   display: flex;
   flex-direction: row;
@@ -111,4 +102,21 @@ transform: translate(-95%, 95%);
   height: 75px;
   border: 2px solid white;
   background-color: #80808075;
+}
+#restartBtn{
+  text-align: center;
+  vertical-align: middle;
+  border: 2px solid #39483c;
+  border-radius: 7px;
+  background-color: #638b7e;
+  color: #000000;
+  font-size: 2rem;
+  font-family: "Amatic SC", sans-serif;
+  width: 160px;
+  margin: 5px auto;
+  position: absolute;
+  top: 52%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
 }
