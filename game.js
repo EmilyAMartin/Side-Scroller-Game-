@@ -44,6 +44,9 @@ const obstacle3Y = 550;
 const obstacle3Img = new Image();
 obstacle3Img.src = "./img/obstacle3.png";
 
+const retartImg = new Image();
+retartImg.src = "./music/restart.png";
+
 //Game Physics and Operations//
 let velocityX = -12;
 let velocityY = 0;
@@ -131,8 +134,8 @@ function gameLoop() {
     ctx.fillStyle = "white";
     ctx.font = "2rem Amatic SC, sans-serif";
     ctx.fillText("Gameover press Enter or Tap Screen to restart", 300, 350);
+    ctx.drawImage(retartImg,500, 375);
   }
-
   //Score//
   ctx.fillStyle = "white";
   ctx.font = "20px courier";
@@ -142,19 +145,6 @@ function gameLoop() {
 function moveSpirit(e) {
   if (e.code === "Enter" || e.type === "touchstart") {
     velocityY = -6;
-  }
-
-  // Use Event to Resets the Game//
-  if (gameOver) {
-    spirit.y = spiritY;
-    obstacleArray = [];
-    score = 0;
-    gameOver = false;
-    spiritImg = new Image();
-    spiritImg.src = "./img/spirit.png";
-    spiritImg.onload = function () {
-      ctx.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height); // This draws the spirit character//
-    };
   }
 }
 function placeObstacle() {
@@ -246,4 +236,17 @@ function checkScore() {
     highestScores.pop();
   }
   highestScoresTable();
+}
+function restartGame() {
+  if (gameOver) {
+    spirit.y = spiritY;
+    obstacleArray = [];
+    score = 0;
+    gameOver = false;
+    spiritImg = new Image();
+    spiritImg.src = "./img/spirit.png";
+    spiritImg.onload = function () {
+      ctx.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height); // This draws the spirit character//
+    };
+  }
 }
