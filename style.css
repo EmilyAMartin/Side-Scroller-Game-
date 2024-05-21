@@ -86,6 +86,12 @@ canvas {
   width: 25px;
   height: 25px;
 }
+#restartBtn{
+display: none;
+position: absolute;
+top:12%;
+left:75%;
+}
 #highestScoreMenu{
   display: flex;
   flex-direction: row;

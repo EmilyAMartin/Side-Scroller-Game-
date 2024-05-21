@@ -44,9 +44,6 @@ const obstacle3Y = 550;
 const obstacle3Img = new Image();
 obstacle3Img.src = "./img/obstacle3.png";
 
-const retartImg = new Image();
-retartImg.src = "./music/restart.png";
-
 //Game Physics and Operations//
 let velocityX = -12;
 let velocityY = 0;
@@ -134,7 +131,7 @@ function gameLoop() {
     ctx.fillStyle = "white";
     ctx.font = "2rem Amatic SC, sans-serif";
     ctx.fillText("Gameover press Enter or Tap Screen to restart", 300, 350);
-    ctx.drawImage(retartImg,500, 375);
+    document.getElementById('restartBtn').style.display = "block";
   }
   //Score//
   ctx.fillStyle = "white";
