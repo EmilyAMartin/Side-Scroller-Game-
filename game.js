@@ -70,7 +70,7 @@ window.onload = function () {
   requestAnimationFrame(gameLoop);
   setInterval(placeObstacle, 1000); //1000 milliseconds = 1 second
   audio.play();
-};
+}
 function gameLoop() {
   requestAnimationFrame(gameLoop);
   if (gameOver) {
@@ -92,10 +92,6 @@ function gameLoop() {
   if (spirit.y > canvas.height) {
     gameOver = true;
     checkScore();
-    spiritImg.src = "./img/spirit-dead.png";
-    spiritImg.onload = function () {
-      ctx.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height);
-    };
   }
 
   //Draw Obstacles//
