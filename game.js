@@ -54,6 +54,8 @@ let gameOver = false;
 let score = 0;
 let highestScores = [];
 let scoreList = document.getElementById("scoretable");
+let hasAddedEventListnersForRestart = false;
+let waitingToStart = true;
 
 //Background Audio and Buttons//
 let audio = new Audio();
@@ -73,7 +75,7 @@ window.onload = function () {
 }
 function gameLoop() {
   requestAnimationFrame(gameLoop);
-  if (gameOver) {
+  if (gameOver && waitingToStart) {
     return;
   }
   //Clear Canvas//
@@ -91,6 +93,7 @@ function gameLoop() {
   ctx.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height);
   if (spirit.y > canvas.height) {
     gameOver = true;
+    gameReset();
     checkScore();
   }
 
@@ -109,6 +112,7 @@ function gameLoop() {
     //GameOver//
     if (detectCollision(spirit, obstacle)) {
       gameOver = true;
+      gameReset();
       checkScore();
       spiritImg.src = "./img/spirit-dead.png";
       spiritImg.onload = function () {
@@ -122,18 +126,20 @@ function gameLoop() {
       };
     }
   }
-  //Gameover Message//
+   //Score//
+   ctx.fillStyle = "white";
+   ctx.font = "20px courier";
+   score++;
+   ctx.fillText(score, 15, 30);
+ 
+   //Gameover Message//
   if (gameOver) {
-    ctx.fillStyle = "white";
-    ctx.font = "2rem Amatic SC, sans-serif";
-    ctx.fillText("Gameover press Enter or Tap Screen to restart", 300, 350);
-    document.getElementById("restartBtn").style.display = "block";
+    showGameover();
   }
-  //Score//
-  ctx.fillStyle = "white";
-  ctx.font = "20px courier";
-  score++;
-  ctx.fillText(score, 15, 30);
+  if (waitingToStart){
+    showStartGame();
+  }
+ 
 }
 function moveSpirit(e) {
   if (e.code === "Enter" || e.type === "touchstart") {
@@ -240,17 +246,32 @@ function toggletBtn (){
     restartBtn.style.display = "none";
   }
 }
-function restartGame() {
-  if (gameOver){
-    document.getElementById("restartBtn").style.display = "none";
-    spirit.y = spiritY;
+
+//Gameover Screen and Restart//
+function gameReset(){
+  if(!hasAddedEventListnersForRestart){
+    hasAddedEventListnersForRestart = true;
+    setTimeout(() => {
+      document.addEventListener("keydown", reset, {once:true});
+      document.addEventListener("touchstart",reset, {once:true}); 
+    }, 500);
+  }
+}
+function reset(){
+  hasAddedEventListnersForRestart = false;
+  gameOver = false; 
+  spirit.y = spiritY;
     obstacleArray = [];
     score = 0;
-    gameOver = false;
     spiritImg = new Image();
     spiritImg.src = "./img/spirit.png";
     spiritImg.onload = function () {
       ctx.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height); // This draws the spirit character//
-    };
-  }
+  };
+}
+function showGameover(){
+  ctx.fillStyle = "white";
+  ctx.font = "2rem Amatic SC, sans-serif";
+  ctx.fillText("Gameover press Enter or Tap Screen to restart", 300, 350);
+  document.getElementById("restartBtn").style.display = "block";
 }

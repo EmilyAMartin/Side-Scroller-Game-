@@ -4,24 +4,12 @@
   box-sizing: border-box;
 }
 body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  height: 100vh;
   background-image: url(img/orb.png);
   background-repeat: no-repeat;
-
-  user-select: none;
-  touch-action: none;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  outline: none;
-  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  color: #ffffff;
+  font-family: "Amatic SC", sans-serif;
+  font-size: 2em;
+  text-align: center;
 }
 canvas {
   max-width: 100%;
@@ -33,7 +21,6 @@ canvas {
   font-size: 4rem;
   font-family: "Amatic SC", sans-serif;
   position: relative;
-  text-align: center;
 }
 #mainMenu {
   position: absolute;
@@ -76,15 +63,13 @@ canvas {
 #gameMenu {
   display: flex;
   flex-direction: row;
-  justify-content:space-between;
+  justify-content: space-evenly;
   position: relative;
   padding-top: 25px;
   padding-bottom: 25px;
-  color: #ffffff;
-  font-size: 2rem;
-  font-family: "Amatic SC", sans-serif;
-  height: 100vh;
-
+  top: 5%;
+  left: 5%;
+  transform: translate(-5%, 5%);
 }
 #playPauseBtn {
   background: url(music/pause.png) no-repeat;
