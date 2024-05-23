@@ -236,17 +236,6 @@ function checkScore() {
   }
   highestScoresTable();
 }
-
-function toggletBtn (){
-  if (gameover){}
-  let restartBtn = document.getElementById("restartBtn");
-  if (restartBtn.style.display === "none") {
-    restartBtn.style.display = "block";
-  } else {
-    restartBtn.style.display = "none";
-  }
-}
-
 //Gameover Screen and Restart//
 function gameReset(){
   if(!hasAddedEventListnersForRestart){
