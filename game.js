@@ -2,8 +2,16 @@
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 
-const backgroundimg = new Image();
-backgroundimg.src = "./img/bg.png";
+//Audio//
+let audio = new Audio();
+audio.src = "./music/music.mp3";
+audio.volume = 0.05; //Volume of background music
+audio.loop = true;
+audio.play();
+audio.pause();
+
+//Background//
+const backgroundimg = document.getElementById("background");
 let backgroundWidth = 0;
 
 //Sprit//
@@ -11,8 +19,7 @@ const spiritWidth = 75;
 const spiritHeight = 75;
 const spiritX = 75;
 const spiritY = 500;
-let spiritImg = new Image();
-spiritImg.src = "./img/spirit.png";
+let spiritImg = document.getElementById("spirit");
 
 const spirit = {
   x: spiritX,
@@ -21,56 +28,46 @@ const spirit = {
   height: spiritHeight,
 };
 
+//Obstacles//
 let obstacleArray = [];
 
 const obstacle1Width = 120;
 const obstacle1Height = 250;
 const obstacle1X = 980;
 const obstacle1Y = 500;
-const obstacle1Img = new Image();
-obstacle1Img.src = "./img/obstacle1.png";
+const obstacle1Img = document.getElementById("plant");
 
 const obstacle2Width = 120;
 const obstacle2Height = 120;
 const obstacle2X = 980;
 const obstacle2Y = 475;
-const obstacle2Img = new Image();
-obstacle2Img.src = "./img/obstacle2.png";
+const obstacle2Img = document.getElementById("butterfly");
 
 const obstacle3Width = 120;
 const obstacle3Height = 100;
 const obstacle3X = 980;
 const obstacle3Y = 550;
-const obstacle3Img = new Image();
-obstacle3Img.src = "./img/obstacle3.png";
+const obstacle3Img = document.getElementById("dragonfly");
 
 const obstacle4Width = 75;
 const obstacle4Height = 75;
 const obstacle4X = 980;
 const obstacle4Y = 350;
-const obstacle4Img = new Image();
-obstacle4Img.src = "./img/obstacle4.png";
+const obstacle4Img = document.getElementById("firefly");
 
 //Game Physics and Operations//
 let velocityX = -12;
 let velocityY = 0;
 let gravity = 0.4;
 let adjustBy = 2.0; //Overlaps the characters collison//
-let scrollSpeed = 8;
-let gameOver = false;
+let backgroundScrollSpeed = 8;
 let score = 0;
 let highestScores = [];
 let scoreList = document.getElementById("scoretable");
-let hasAddedEventListnersForRestart = false;
-let waitingToStart = true;
+let restart = false;
+let gameOver = false;
 
-//Background Audio and Buttons//
-let audio = new Audio();
-audio.src = "./music/music.mp3";
-audio.volume = 0.05; //Volume of background music
-audio.loop = true;
-audio.play();
-audio.pause();
+
 
 window.onload = function () {
   //Events & Animation Request//
@@ -91,7 +88,7 @@ function gameLoop() {
   //Draw Scrolling Background//
   ctx.drawImage(backgroundimg, -backgroundWidth, 0);
   ctx.drawImage(backgroundimg, -backgroundWidth + canvas.width, 0);
-  backgroundWidth += scrollSpeed;
+  backgroundWidth += backgroundScrollSpeed;
   if (backgroundWidth == canvas.width) backgroundWidth = 0;
 
   //Draw Spirit//
@@ -142,11 +139,7 @@ function gameLoop() {
    //Gameover Message//
   if (gameOver) {
     showGameover();
-  }
-  if (waitingToStart){
-    showStartGame();
-  }
- 
+  } 
 }
 function moveSpirit(e) {
   if (e.code === "Enter" || e.type === "touchstart") {
@@ -252,8 +245,8 @@ function checkScore() {
 }
 //Gameover Screen and Restart//
 function gameReset(){
-  if(!hasAddedEventListnersForRestart){
-    hasAddedEventListnersForRestart = true;
+  if(!restart){
+    restart = true;
     setTimeout(() => {
       document.addEventListener("keydown", reset, {once:true});
       document.addEventListener("touchstart",reset, {once:true}); 
@@ -261,7 +254,7 @@ function gameReset(){
   }
 }
 function reset(){
-  hasAddedEventListnersForRestart = false;
+  restart = false;
   gameOver = false; 
   spirit.y = spiritY;
     obstacleArray = [];
