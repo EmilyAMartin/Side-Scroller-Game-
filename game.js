@@ -44,6 +44,13 @@ const obstacle3Y = 550;
 const obstacle3Img = new Image();
 obstacle3Img.src = "./img/obstacle3.png";
 
+const obstacle4Width = 75;
+const obstacle4Height = 75;
+const obstacle4X = 980;
+const obstacle4Y = 350;
+const obstacle4Img = new Image();
+obstacle4Img.src = "./img/obstacle4.png";
+
 //Game Physics and Operations//
 let velocityX = -12;
 let velocityY = 0;
@@ -162,6 +169,13 @@ function placeObstacle() {
   let placeObstacleChance = Math.random();
 
   if (placeObstacleChance > 0.75) {
+    obstacle.img = obstacle4Img;
+    obstacle.width = obstacle4Width;
+    obstacle.height = obstacle4Height;
+    obstacle.x = obstacle4X;
+    obstacle.y = obstacle4Y;
+    obstacleArray.push(obstacle);
+  } else if (placeObstacleChance > 0.75) {
     obstacle.img = obstacle3Img;
     obstacle.width = obstacle3Width;
     obstacle.height = obstacle3Height;
