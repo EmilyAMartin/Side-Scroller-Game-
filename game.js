@@ -203,7 +203,7 @@ function playPause() {
   playbtn = document.getElementById("playPauseBtn");
   if (audio.paused) {
     audio.play();
-    playbtn.style.background = "url(music/pause.png) no-repeat";
+    playbtn.style.background = "url(icons/pause.png) no-repeat";
   } else {
     audio.pause();
     playbtn.style.background = "url(music/play.png) no-repeat";

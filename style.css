@@ -55,6 +55,7 @@ canvas {
 }
 #instructions {
   margin: auto;
+  padding: 25px 150px;
   color: #ffffff;
   font-size: 1.5rem;
   font-family: "Amatic SC", sans-serif;
@@ -72,17 +73,17 @@ canvas {
   transform: translate(-5%, 5%);
 }
 #playPauseBtn {
-  background: url(music/pause.png) no-repeat;
+  background: url(icons/pause.png) no-repeat;
   width: 25px;
   height: 25px;
 }
 #highScoreBtn {
-  background: url(music/highscore.png) no-repeat;
+  background: url(icons/score.png) no-repeat;
   width: 25px;
   height: 25px;
 }
 #mainMenuBtn {
-  background: url(music/home.png) no-repeat;
+  background: url(icons/home.png) no-repeat;
   width: 25px;
   height: 25px;
 }
