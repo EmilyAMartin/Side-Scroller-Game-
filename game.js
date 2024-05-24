@@ -15,7 +15,7 @@ const backgroundimg = document.getElementById("background");
 let backgroundWidth = 0;
 
 //Level Complete//
-const levelOneScore = 200;
+const levelOneScore = 3000;
 const winImg = document.getElementById("win");
 
 //Sprit//
