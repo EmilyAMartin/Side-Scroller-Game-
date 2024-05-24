@@ -16,11 +16,7 @@ let backgroundWidth = 0;
 
 //Level Complete//
 const levelOneScore = 200;
-const fireworkWidth = 1040;
-const fireworkHeight = 740;
-const fireworkX = 0;
-const fireworkY = 0;
-const fireworkImg = document.getElementById("firework");
+const winImg = document.getElementById("win");
 
 //Sprit//
 const spiritWidth = 75;
@@ -58,8 +54,8 @@ const obstacle3X = 980;
 const obstacle3Y = 550;
 const obstacle3Img = document.getElementById("dragonfly");
 
-const obstacle4Width = 75;
-const obstacle4Height = 75;
+const obstacle4Width = 60;
+const obstacle4Height = 50;
 const obstacle4X = 980;
 const obstacle4Y = 350;
 const obstacle4Img = document.getElementById("firefly");
@@ -115,8 +111,8 @@ function gameLoop() {
       obstacle.width,
       obstacle.height
     );
-  
-  //GameOver//
+
+    //GameOver//
     if (detectCollision(spirit, obstacle)) {
       gameOver = true;
       gameReset();
@@ -141,13 +137,11 @@ function gameLoop() {
   }
   //Level One Completed//
   if (score > levelOneScore) {
-  gameOver = true;
-  obstacleArray = [];
-  ctx.drawImage(fireworkImg, fireworkX, fireworkY, fireworkWidth, fireworkHeight);
-  ctx.fillStyle = "white";
-  ctx.font = "2rem Amatic SC, sans-serif";
-  ctx.fillText("Level One Completed!!", 300, 350);
-  
+    gameOver = true;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    document.getElementById("win").style.display = "block";
+    document.getElementById("highestScoreMenu").style.display = "none";;
+   
   }
 }
 function moveSpirit(e) {
@@ -222,7 +216,7 @@ function playPause() {
     playbtn.style.background = "url(icons/pause.png) no-repeat";
   } else {
     audio.pause();
-    playbtn.style.background = "url(music/play.png) no-repeat";
+    playbtn.style.background = "url(icons/play.png) no-repeat";
   }
 }
 function toggleHighScore() {
@@ -282,8 +276,3 @@ function showScore() {
   score++;
   ctx.fillText(score, 15, 30);
 }
-
-function showLevelOne() {
- 
-}
-
