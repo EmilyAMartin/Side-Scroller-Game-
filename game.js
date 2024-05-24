@@ -14,12 +14,21 @@ audio.pause();
 const backgroundimg = document.getElementById("background");
 let backgroundWidth = 0;
 
+//Level Complete//
+const levelOneScore = 200;
+const fireworkWidth = 1040;
+const fireworkHeight = 740;
+const fireworkX = 0;
+const fireworkY = 0;
+const fireworkImg = document.getElementById("firework");
+
 //Sprit//
 const spiritWidth = 75;
 const spiritHeight = 75;
 const spiritX = 75;
 const spiritY = 500;
-let spiritImg = document.getElementById("spirit");
+const spiritImg = document.getElementById("spirit");
+const spriritImgDead = document.getElementById("spiritdead");
 
 const spirit = {
   x: spiritX,
@@ -67,8 +76,6 @@ let scoreList = document.getElementById("scoretable");
 let restart = false;
 let gameOver = false;
 
-
-
 window.onload = function () {
   //Events & Animation Request//
   document.addEventListener("keydown", moveSpirit);
@@ -76,30 +83,26 @@ window.onload = function () {
   requestAnimationFrame(gameLoop);
   setInterval(placeObstacle, 1000); //1000 milliseconds = 1 second
   audio.play();
-}
+};
 function gameLoop() {
   requestAnimationFrame(gameLoop);
-  if (gameOver && waitingToStart) {
+  if (gameOver) {
     return;
   }
   //Clear Canvas//
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  //Draw Scrolling Background//
+  //Background & Score//
   ctx.drawImage(backgroundimg, -backgroundWidth, 0);
   ctx.drawImage(backgroundimg, -backgroundWidth + canvas.width, 0);
   backgroundWidth += backgroundScrollSpeed;
   if (backgroundWidth == canvas.width) backgroundWidth = 0;
+  showScore();
 
   //Draw Spirit//
   velocityY += gravity;
   spirit.y = Math.max(spirit.y + velocityY, 350);
   ctx.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height);
-  if (spirit.y > canvas.height) {
-    gameOver = true;
-    gameReset();
-    checkScore();
-  }
 
   //Draw Obstacles//
   for (let i = 0; i < obstacleArray.length; i++) {
@@ -112,34 +115,40 @@ function gameLoop() {
       obstacle.width,
       obstacle.height
     );
-
-    //GameOver//
+  
+  //GameOver//
     if (detectCollision(spirit, obstacle)) {
       gameOver = true;
       gameReset();
       checkScore();
-      spiritImg.src = "./img/spirit-dead.png";
-      spiritImg.onload = function () {
-        ctx.drawImage(
-          spiritImg,
-          spirit.x,
-          spirit.y,
-          spirit.width,
-          spirit.height
-        );
-      };
+      ctx.drawImage(
+        spriritImgDead,
+        spirit.x,
+        spirit.y,
+        spirit.width,
+        spirit.height
+      );
     }
   }
-   //Score//
-   ctx.fillStyle = "white";
-   ctx.font = "20px courier";
-   score++;
-   ctx.fillText(score, 15, 30);
- 
-   //Gameover Message//
+  if (spirit.y > canvas.height) {
+    gameOver = true;
+    gameReset();
+    checkScore();
+  }
+  //Gameover Message//
   if (gameOver) {
     showGameover();
-  } 
+  }
+  //Level One Completed//
+  if (score > levelOneScore) {
+  gameOver = true;
+  obstacleArray = [];
+  ctx.drawImage(fireworkImg, fireworkX, fireworkY, fireworkWidth, fireworkHeight);
+  ctx.fillStyle = "white";
+  ctx.font = "2rem Amatic SC, sans-serif";
+  ctx.fillText("Level One Completed!!", 300, 350);
+  
+  }
 }
 function moveSpirit(e) {
   if (e.code === "Enter" || e.type === "touchstart") {
@@ -205,7 +214,7 @@ function detectCollision(a, b) {
 //Game Menu Buttons//
 function mainMenu() {
   window.location = "index.html";
-};
+}
 function playPause() {
   playbtn = document.getElementById("playPauseBtn");
   if (audio.paused) {
@@ -226,7 +235,7 @@ function toggleHighScore() {
 }
 function highestScoresTable() {
   scoreList.innerHTML = highestScores.map((row) => {
-    return (row.score);
+    return row.score;
   });
 }
 function checkScore() {
@@ -244,30 +253,37 @@ function checkScore() {
   highestScoresTable();
 }
 //Gameover Screen and Restart//
-function gameReset(){
-  if(!restart){
+function gameReset() {
+  if (!restart) {
     restart = true;
     setTimeout(() => {
-      document.addEventListener("keydown", reset, {once:true});
-      document.addEventListener("touchstart",reset, {once:true}); 
+      document.addEventListener("keydown", reset, { once: true });
+      document.addEventListener("touchstart", reset, { once: true });
     }, 500);
   }
 }
-function reset(){
+function reset() {
   restart = false;
-  gameOver = false; 
+  gameOver = false;
   spirit.y = spiritY;
-    obstacleArray = [];
-    score = 0;
-    spiritImg = new Image();
-    spiritImg.src = "./img/spirit.png";
-    spiritImg.onload = function () {
-      ctx.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height); // This draws the spirit character//
-  };
+  obstacleArray = [];
+  score = 0;
+  ctx.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height);
 }
-function showGameover(){
+function showGameover() {
   ctx.fillStyle = "white";
   ctx.font = "2rem Amatic SC, sans-serif";
   ctx.fillText("Gameover press Enter or Tap Screen to restart", 300, 350);
-  document.getElementById("restartBtn").style.display = "block";
 }
+
+function showScore() {
+  ctx.fillStyle = "white";
+  ctx.font = "20px courier";
+  score++;
+  ctx.fillText(score, 15, 30);
+}
+
+function showLevelOne() {
+ 
+}
+
