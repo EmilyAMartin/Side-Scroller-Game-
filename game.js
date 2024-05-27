@@ -13,7 +13,7 @@ let highestScores = [];
 let scoreList = document.getElementById("scoretable");
 let restart = false;
 let gameOver = false;
-const levelOneScore = 1000;
+const levelOneScore = 2000;
 const winImg = document.getElementById("win");
 
 //Audio//
@@ -78,8 +78,20 @@ window.onload = function () {
   setInterval(placeObstacle, 1000); //1000 milliseconds = 1 second
   audio.play();
 };
+
+let msPrev = window.performance.now()
+const fps = 60
+const msPerFrame = 1000 / fps
+
 function gameLoop() {
   requestAnimationFrame(gameLoop);
+  //Fix issues with 120 fps//
+  const msNow = window.performance.now()
+  const msPassed = msNow - msPrev
+  if (msPassed < msPerFrame) return
+  const excessTime = msPassed % msPerFrame
+  msPrev = msNow - excessTime
+  
   if (gameOver) {
     return;}
   clearScreen()
