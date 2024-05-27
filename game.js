@@ -2,6 +2,20 @@
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 
+//Game Physics and Operations//
+let velocityX = -12;
+let velocityY = 0;
+let gravity = 0.4;
+let adjustBy = 2.0; //Overlaps the characters collison//
+let backgroundScrollSpeed = 8;
+let score = 0;
+let highestScores = [];
+let scoreList = document.getElementById("scoretable");
+let restart = false;
+let gameOver = false;
+const levelOneScore = 1000;
+const winImg = document.getElementById("win");
+
 //Audio//
 let audio = new Audio();
 audio.src = "./music/music.mp3";
@@ -13,10 +27,6 @@ audio.pause();
 //Background//
 const backgroundimg = document.getElementById("background");
 let backgroundWidth = 0;
-
-//Level Complete//
-const levelOneScore = 3000;
-const winImg = document.getElementById("win");
 
 //Sprit//
 const spiritWidth = 75;
@@ -60,18 +70,6 @@ const obstacle4X = 980;
 const obstacle4Y = 350;
 const obstacle4Img = document.getElementById("firefly");
 
-//Game Physics and Operations//
-let velocityX = -12;
-let velocityY = 0;
-let gravity = 0.4;
-let adjustBy = 2.0; //Overlaps the characters collison//
-let backgroundScrollSpeed = 8;
-let score = 0;
-let highestScores = [];
-let scoreList = document.getElementById("scoretable");
-let restart = false;
-let gameOver = false;
-
 window.onload = function () {
   //Events & Animation Request//
   document.addEventListener("keydown", moveSpirit);
@@ -83,10 +81,8 @@ window.onload = function () {
 function gameLoop() {
   requestAnimationFrame(gameLoop);
   if (gameOver) {
-    return;
-  }
-  //Clear Canvas//
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+    return;}
+  clearScreen()
 
   //Background & Score//
   ctx.drawImage(backgroundimg, -backgroundWidth, 0);
@@ -112,7 +108,7 @@ function gameLoop() {
       obstacle.height
     );
 
-    //GameOver//
+    //Gameover Collision//
     if (detectCollision(spirit, obstacle)) {
       gameOver = true;
       gameReset();
@@ -126,6 +122,7 @@ function gameLoop() {
       );
     }
   }
+  //Gameover Falling off Screen//
   if (spirit.y > canvas.height) {
     gameOver = true;
     gameReset();
@@ -135,10 +132,9 @@ function gameLoop() {
   if (gameOver) {
     showGameover();
   }
-  //Level One Completed//
+  //Gameove Completed Level One //
   if (score > levelOneScore) {
     gameOver = true;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
     document.getElementById("win").style.display = "block";
     document.getElementById("highestScoreMenu").style.display = "none";;
    
@@ -275,4 +271,7 @@ function showScore() {
   ctx.font = "20px courier";
   score++;
   ctx.fillText(score, 15, 30);
+}
+function clearScreen() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
