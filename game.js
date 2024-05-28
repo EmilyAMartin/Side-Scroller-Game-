@@ -13,8 +13,11 @@ let highestScores = [];
 let scoreList = document.getElementById("scoretable");
 let restart = false;
 let gameOver = false;
-const levelOneScore = 2000;
+const levelOneScore = 200;
 const winImg = document.getElementById("win");
+const fps = 60
+const msPerFrame = 1000 / fps
+let msPrev = window.performance.now()
 
 //Audio//
 let audio = new Audio();
@@ -79,16 +82,13 @@ window.onload = function () {
   audio.play();
 };
 
-let msPrev = window.performance.now()
-const fps = 60
-const msPerFrame = 1000 / fps
-
 function gameLoop() {
   requestAnimationFrame(gameLoop);
-  //Fix issues with 120 fps//
+  //This section resolves the issues with 120 fps//
   const msNow = window.performance.now()
   const msPassed = msNow - msPrev
-  if (msPassed < msPerFrame) return
+  if (msPassed < msPerFrame) return;
+  
   const excessTime = msPassed % msPerFrame
   msPrev = msNow - excessTime
   
@@ -147,9 +147,7 @@ function gameLoop() {
   //Gameove Completed Level One //
   if (score > levelOneScore) {
     gameOver = true;
-    document.getElementById("win").style.display = "block";
-    document.getElementById("highestScoreMenu").style.display = "none";;
-   
+    showWin();
   }
 }
 function moveSpirit(e) {
@@ -283,6 +281,10 @@ function showScore() {
   ctx.font = "20px courier";
   score++;
   ctx.fillText(score, 15, 30);
+}
+function showWin(){
+  document.getElementById("win").style.display = "block";
+  document.getElementById("highestScoreMenu").style.display = "none";;
 }
 function clearScreen() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
