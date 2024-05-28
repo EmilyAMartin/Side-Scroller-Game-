@@ -1,8 +1,12 @@
 //Game Variables//
+//Game Physics and Operations//
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
-
-//Game Physics and Operations//
+const levelOneScore = 200;
+const winImg = document.getElementById("win");
+const fps = 60
+const msPerFrame = 1000 / fps
+let msPrev = window.performance.now()
 let velocityX = -12;
 let velocityY = 0;
 let gravity = 0.4;
@@ -13,15 +17,9 @@ let highestScores = [];
 let scoreList = document.getElementById("scoretable");
 let restart = false;
 let gameOver = false;
-const levelOneScore = 200;
-const winImg = document.getElementById("win");
-const fps = 60
-const msPerFrame = 1000 / fps
-let msPrev = window.performance.now()
 
 //Audio//
-let audio = new Audio();
-audio.src = "./music/music.mp3";
+let audio = document.getElementById("backgroundmusic");
 audio.volume = 0.05; //Volume of background music
 audio.loop = true;
 audio.play();
@@ -81,7 +79,6 @@ window.onload = function () {
   setInterval(placeObstacle, 1000); //1000 milliseconds = 1 second
   audio.play();
 };
-
 function gameLoop() {
   requestAnimationFrame(gameLoop);
   //This section resolves the issues with 120 fps//
@@ -150,7 +147,7 @@ function gameLoop() {
     clearScreen();
     showWin();
     setInterval(() => {
-    window.location = "index.html";
+    mainMenu();
     }, 4000);
   }
 }
@@ -220,13 +217,14 @@ function mainMenu() {
   window.location = "index.html";
 }
 function playPause() {
-  playbtn = document.getElementById("playPauseBtn");
   if (audio.paused) {
     audio.play();
-    playbtn.style.background = "url(icons/pause.png) no-repeat";
+    document.getElementById("pause").style.display = "block";
+    document.getElementById("play").style.display = "none";
   } else {
     audio.pause();
-    playbtn.style.background = "url(icons/play.png) no-repeat";
+    document.getElementById("play").style.display = "block";
+    document.getElementById("pause").style.display = "none";
   }
 }
 function toggleHighScore() {

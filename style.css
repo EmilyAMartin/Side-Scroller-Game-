@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 body {
-  background-image: url(img/orb.png);
+  background:#1d251f;
   background-repeat: no-repeat;
   color: #ffffff;
   font-family: "Amatic SC", sans-serif;
@@ -32,7 +32,6 @@ canvas {
 #win{
   display: none;
   position: absolute;
-  padding-top: 50px;
   top: 15%;
   left: 50%;
   transform: translate(-50%, -15%);
@@ -95,20 +94,8 @@ canvas {
   left: 5%;
   transform: translate(-5%, 5%);
 }
-#playPauseBtn {
-  background: url(icons/pause.png) no-repeat;
-  width: 25px;
-  height: 25px;
-}
-#highScoreBtn {
-  background: url(icons/score.png) no-repeat;
-  width: 25px;
-  height: 25px;
-}
-#mainMenuBtn {
-  background: url(icons/home.png) no-repeat;
-  width: 25px;
-  height: 25px;
+#play{
+  display:none;
 }
 #highestScoreMenu{
   display: flex;
