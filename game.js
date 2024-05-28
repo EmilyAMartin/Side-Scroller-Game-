@@ -147,7 +147,11 @@ function gameLoop() {
   //Gameove Completed Level One //
   if (score > levelOneScore) {
     gameOver = true;
+    clearScreen();
     showWin();
+    setInterval(() => {
+    window.location = "index.html";
+    }, 4000);
   }
 }
 function moveSpirit(e) {
@@ -284,7 +288,8 @@ function showScore() {
 }
 function showWin(){
   document.getElementById("win").style.display = "block";
-  document.getElementById("highestScoreMenu").style.display = "none";;
+  document.getElementById("highestScoreMenu").style.display = "none";
+  document.getElementById("gameMenu").style.display = "none";
 }
 function clearScreen() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
