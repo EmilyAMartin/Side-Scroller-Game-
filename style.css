@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 body {
-  background:#1d251f;
+  background:url(img/orb.png);
   background-repeat: no-repeat;
   color: #ffffff;
   font-family: "Amatic SC", sans-serif;
@@ -28,15 +28,6 @@ canvas {
 }
 #gameImages{
   display: none;
-}
-#win{
-  display: none;
-  position: absolute;
-  top: 15%;
-  left: 50%;
-  transform: translate(-50%, -15%);
-  max-width: 100%;
-  max-height: 100%;
 }
 #mainHeader {
   margin: auto;
@@ -79,6 +70,7 @@ canvas {
 #instructions {
   margin: auto;
   color: #ffffff;
+  padding-top: 25px;
   font-size: 2rem;
   font-family: "Amatic SC", sans-serif;
   background-color: inherit;
@@ -130,4 +122,13 @@ canvas {
   left: 50%;
   transform: translate(-50%, -50%);
   display: none;
+}
+#win{
+  display: none;
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -15%);
+  max-width: 100%;
+  max-height: 100%;
 }

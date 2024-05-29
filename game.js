@@ -2,7 +2,7 @@
 //Game Physics and Operations//
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
-const levelOneScore = 5000;
+const levelOneScore = 2000;
 const winImg = document.getElementById("win");
 const fps = 60
 const msPerFrame = 1000 / fps
