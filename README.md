@@ -19,3 +19,5 @@ Artwork - ProCreate
 Languages - HTML/CSS/JavaScript 
 
 Artwork created by Emily Martin 
+Photo by Adam Kring on Unsplash
+  
