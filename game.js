@@ -277,7 +277,6 @@ function showGameover() {
   ctx.font = "34px Amatic SC, sans-serif";
   ctx.fillText("Gameover press Enter or Tap Screen to restart", 300, 350);
 }
-
 function showScore() {
   ctx.fillStyle = "white";
   ctx.font = "20px courier";
