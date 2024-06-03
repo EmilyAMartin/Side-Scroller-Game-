@@ -72,17 +72,16 @@ canvas {
   flex-direction: column;
   justify-content: space-evenly;
   position: relative;
-  padding:25px;
   margin: auto;
-  width:75%;
+  width:65%;
   top: 5%;
   left: 5%;
+  padding:25px;
   transform: translate(-5%, 10%);
   color: #ffffff;
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-family: "Amatic SC", sans-serif;
   background-color: inherit;
-  border: 2px solid #9cc1bb;
 }
 #gameMenu {
   display: flex;
