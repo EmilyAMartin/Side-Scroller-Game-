@@ -12,7 +12,6 @@ body {
   text-align: center;
  
   user-select: none;
-  touch-action: none;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -116,6 +115,10 @@ canvas {
 }
 #play{
   display:none;
+  position: absolute;
+}
+#pause{
+  position: absolute;
 }
 #highestScoreMenu{
   display: flex;
