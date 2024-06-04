@@ -8,7 +8,7 @@ body {
   background-repeat: no-repeat;
   color: #ffffff;
   font-family: "Amatic SC", sans-serif;
-  font-size: 2em;
+  font-size: 1.5rem;
   text-align: center;
  
   user-select: none;
@@ -25,7 +25,8 @@ body {
 canvas {
   max-width: 100%;
   max-height: 100%;
-}
+  }
+  
 #gameImages{
   display: none;
 }
@@ -121,7 +122,6 @@ canvas {
   flex-direction: row;
   justify-content: space-evenly;
   position: relative;
-  padding-top: 25px;
   top: 5%;
   left: 5%;
   transform: translate(-5%, 5%);
@@ -160,3 +160,4 @@ canvas {
   max-width: 100%;
   max-height: 100%;
 }
+
