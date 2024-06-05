@@ -4,8 +4,7 @@
   box-sizing: border-box;
 }
 body {
-  background:url(img/orb.png);
-  background-repeat: no-repeat;
+  background-color: #000000;
   color: #ffffff;
   font-family: "Amatic SC", sans-serif;
   font-size: 2rem;
@@ -25,9 +24,14 @@ canvas {
   max-width: 100%;
   max-height: 100%;
   }
-  
 #gameImages{
   display: none;
+}
+#mainBackground{
+  position: absolute;
+  top: 25%;
+  left: 95%;
+  transform: translate(-95%, -25%);
 }
 #mainHeader {
   margin: auto;
@@ -49,14 +53,14 @@ canvas {
 #backBtn, #aboutBtn {
   text-align: center;
   vertical-align: middle;
-  border: 2px solid #39483c;
-  border-radius: 7px;
+  border: 0.1rem solid #39483c;
+  border-radius: 0.4rem;
   background-color: #638b7e;
   color: #1d251f;
   font-size: 2rem;
   font-family: "Amatic SC", sans-serif;
-  width: 160px;
-  margin: 5px auto;
+  width: 10rem;
+  margin: 0.3rem auto;
 }
 #newGameBtn:hover {
   background-color: #9cc1bb;
@@ -82,7 +86,6 @@ canvas {
   color: #ffffff;
   font-size: 1.4rem;
   font-family: "Amatic SC", sans-serif;
-  background-color: #00000075;
 }
 #about{
   display: flex;
@@ -97,23 +100,49 @@ canvas {
   font-size: 1.4rem;
   font-family: "Amatic SC", sans-serif;
 }
+#footer {
+  padding-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+#footer-text {
+  display: flex;
+  justify-content: center;
+}
+#footer-links {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  gap: 1rem;
+}
+#github {
+  width:2rem;
+  height:2rem;
+}
+#linkedin {
+  height: 1.9rem;
+  width: 1.9rem;
+}
 #gameMenu {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   position: relative;
-  padding-top: 25px;
-  padding-bottom: 25px;
+  padding-top: 1.5rem;
+  padding-bottom:1.5rem;
   top: 5%;
   left: 5%;
   transform: translate(-5%, 5%);
 }
 #play{
   display:none;
-  position: absolute;
+  position: relative;
 }
 #pause{
-  position: absolute;
+  position: relative;
 }
 #highestScoreMenu{
   display: flex;
@@ -127,27 +156,11 @@ canvas {
   font-family: "Amatic SC", sans-serif;
 }
 #box {
-  width: 200px;
-  height: 75px;
-  border: 2px solid white;
+  width: 12rem;
+  height: 4rem;
+  border: 0.1rem solid white;
+  border-radius: 0.2rem;
   background-color: #80808075;
-}
-#restartBtn{
-  text-align: center;
-  vertical-align: middle;
-  border: 2px solid #39483c;
-  border-radius: 7px;
-  background-color: #638b7e;
-  color: #000000;
-  font-size: 2rem;
-  font-family: "Amatic SC", sans-serif;
-  width: 160px;
-  margin: 5px auto;
-  position: absolute;
-  top: 52%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: none;
 }
 #win{
   display: none;
@@ -158,4 +171,3 @@ canvas {
   max-width: 100%;
   max-height: 100%;
 }
-
