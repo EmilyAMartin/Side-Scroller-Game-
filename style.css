@@ -8,7 +8,7 @@ body {
   background-repeat: no-repeat;
   color: #ffffff;
   font-family: "Amatic SC", sans-serif;
-  font-size: 1.5rem;
+  font-size: 2rem;
   text-align: center;
  
   user-select: none;
@@ -80,8 +80,9 @@ canvas {
   margin: auto;
   width:65%;
   color: #ffffff;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-family: "Amatic SC", sans-serif;
+  background-color: #00000075;
 }
 #about{
   display: flex;
@@ -93,9 +94,8 @@ canvas {
   margin: auto;
   width:75%;
   color: #ffffff;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-family: "Amatic SC", sans-serif;
-  background:none;
 }
 #gameMenu {
   display: flex;
