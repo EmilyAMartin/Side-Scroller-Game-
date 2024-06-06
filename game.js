@@ -4,9 +4,9 @@ const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 const levelOneScore = 2000;
 const winImg = document.getElementById("win");
-const fps = 60
-const msPerFrame = 1000 / fps
-let msPrev = window.performance.now()
+const fps = 60;
+const msPerFrame = 1000 / fps;
+let msPrev = window.performance.now();
 let velocityX = -12;
 let velocityY = 0;
 let gravity = 0.4;
@@ -82,16 +82,17 @@ window.onload = function () {
 function gameLoop() {
   requestAnimationFrame(gameLoop);
   //This section resolves the issues with 120 fps//
-  const msNow = window.performance.now()
-  const msPassed = msNow - msPrev
+  const msNow = window.performance.now();
+  const msPassed = msNow - msPrev;
   if (msPassed < msPerFrame) return;
-  
-  const excessTime = msPassed % msPerFrame
-  msPrev = msNow - excessTime
-  
+
+  const excessTime = msPassed % msPerFrame;
+  msPrev = msNow - excessTime;
+
   if (gameOver) {
-    return;}
-  clearScreen()
+    return;
+  }
+  clearScreen();
 
   //Background & Score//
   ctx.drawImage(backgroundimg, -backgroundWidth, 0);
@@ -147,7 +148,7 @@ function gameLoop() {
     clearScreen();
     showWin();
     setInterval(() => {
-    mainMenu();
+      mainMenu();
     }, 4000);
   }
 }
@@ -283,7 +284,7 @@ function showScore() {
   score++;
   ctx.fillText(score, 15, 30);
 }
-function showWin(){
+function showWin() {
   document.getElementById("win").style.display = "block";
   document.getElementById("highestScoreMenu").style.display = "none";
   document.getElementById("gameMenu").style.display = "none";

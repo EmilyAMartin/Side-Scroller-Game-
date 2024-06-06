@@ -84,7 +84,7 @@ canvas {
   margin: auto;
   width:65%;
   color: #ffffff;
-  font-size: 1.4rem;
+  font-size: 1.8rem;
   font-family: "Amatic SC", sans-serif;
 }
 #about{
@@ -97,7 +97,7 @@ canvas {
   margin: auto;
   width:75%;
   color: #ffffff;
-  font-size: 1.4rem;
+  font-size: 1.8rem;
   font-family: "Amatic SC", sans-serif;
 }
 #footer {
@@ -111,6 +111,14 @@ canvas {
   justify-content: center;
 }
 #footer-links {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  gap: 1rem;
+}
+#footer-controls {
   display: flex;
   flex-direction: row;
   justify-content: center;
