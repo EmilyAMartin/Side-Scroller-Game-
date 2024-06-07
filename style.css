@@ -53,7 +53,7 @@ canvas {
 #backBtn, #aboutBtn {
   text-align: center;
   vertical-align: middle;
-  border: 0.1rem solid #39483c;
+  border: 0.2rem solid #39483c;
   border-radius: 0.4rem;
   background-color: #638b7e;
   color: #1d251f;
@@ -79,6 +79,7 @@ canvas {
   height: 100vh;
   flex-direction: column;
   justify-content: center;
+  gap:1rem;
   align-items: center;
   position: relative;
   margin: auto;
@@ -86,6 +87,9 @@ canvas {
   color: #ffffff;
   font-size: 1.5rem;
   font-family: "Amatic SC", sans-serif;
+}
+#controls{
+  color:#9cc1bb;
 }
 #about{
   display: flex;

@@ -153,7 +153,7 @@ function gameLoop() {
   }
 }
 function moveSpirit(e) {
-  const keyCodes = ["Enter", "Space", "touchstart"]
+  const keyCodes = ["Space", "touchstart"]
   if (keyCodes.includes(e.code)) {
     velocityY = -6;
   }
@@ -267,7 +267,7 @@ function gameReset() {
   }
 }
 function reset(e) {
-  const keyCodes = ["Enter", "Space", "touchstart"]
+  const keyCodes = ["Space", "touchstart"]
   if (keyCodes.includes(e.code)) {
   document.removeEventListener("keydown", reset);
   restart = false;
