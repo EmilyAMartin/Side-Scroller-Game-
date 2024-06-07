@@ -153,7 +153,8 @@ function gameLoop() {
   }
 }
 function moveSpirit(e) {
-  if (e.code === "Enter" || e.type === "touchstart") {
+  const keyCodes = ["Enter", "Space", "touchstart"]
+  if (keyCodes.includes(e.code)) {
     velocityY = -6;
   }
 }
@@ -260,18 +261,22 @@ function gameReset() {
   if (!restart) {
     restart = true;
     setTimeout(() => {
-      document.addEventListener("keydown", reset, { once: true });
+      document.addEventListener("keydown", reset);
       document.addEventListener("touchstart", reset, { once: true });
     }, 500);
   }
 }
-function reset() {
+function reset(e) {
+  const keyCodes = ["Enter", "Space", "touchstart"]
+  if (keyCodes.includes(e.code)) {
+  document.removeEventListener("keydown", reset);
   restart = false;
   gameOver = false;
   spirit.y = spiritY;
   obstacleArray = [];
   score = 0;
   ctx.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height);
+  }
 }
 function showGameover() {
   ctx.fillStyle = "white";
