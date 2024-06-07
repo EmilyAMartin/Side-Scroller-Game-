@@ -35,7 +35,7 @@ const spiritHeight = 75;
 const spiritX = 75;
 const spiritY = 500;
 const spiritImg = document.getElementById("spirit");
-const spriritImgDead = document.getElementById("spiritdead");
+const spiritImgDead = document.getElementById("spiritdead");
 
 const spirit = {
   x: spiritX,
@@ -124,7 +124,7 @@ function gameLoop() {
       gameReset();
       checkScore();
       ctx.drawImage(
-        spriritImgDead,
+        spiritImgDead,
         spirit.x,
         spirit.y,
         spirit.width,
@@ -132,17 +132,17 @@ function gameLoop() {
       );
     }
   }
-  //Gameover Falling off Screen//
+  //Game over Falling off Screen//
   if (spirit.y > canvas.height) {
     gameOver = true;
     gameReset();
     checkScore();
   }
-  //Gameover Message//
+  //Game over Message//
   if (gameOver) {
     showGameover();
   }
-  //Gameove Completed Level One //
+  //Game over Completed Level One //
   if (score > levelOneScore) {
     gameOver = true;
     clearScreen();
