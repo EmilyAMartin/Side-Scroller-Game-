@@ -98,7 +98,7 @@ canvas {
   justify-content: center;
   align-items: center;
   position: relative;
-  margin: 4rem auto 4rem auto;
+  margin: auto;
   width:75%;
   color: #ffffff;
   font-size: 1.5rem;
@@ -191,4 +191,9 @@ canvas {
  canvas{
   padding-bottom: 5rem;
  }
+}
+@media only screen and (max-width: 375px) {
+  #about{
+    margin: 6rem auto;
+  }
 }

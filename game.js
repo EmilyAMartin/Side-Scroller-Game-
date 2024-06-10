@@ -74,7 +74,7 @@ const obstacle4Img = document.getElementById("firefly");
 window.onload = function () {
   //Events & Animation Request//
   document.addEventListener("keydown", moveSpirit);
-  document.addEventListener("touchstart", moveSpirit);
+  document.addEventListener("touchstart", moveSpiritTouch);
   requestAnimationFrame(gameLoop);
   setInterval(placeObstacle, 1000); //1000 milliseconds = 1 second
   audio.play();
@@ -152,10 +152,15 @@ function gameLoop() {
     }, 4000);
   }
 }
-function moveSpirit(e){
+function moveSpirit(e) {
   const keyCodes = ["Space"]
-  const keyCodesTouch = ["touchstart"]
   if (keyCodes.includes(e.code)) {
+    velocityY = -6;
+  }
+}
+function moveSpiritTouch(e) {
+  const keyCodesTouch = ["touchstart"]
+  if (keyCodesTouch.includes(e.type)) {
     velocityY = -6;
   }
 }
@@ -263,7 +268,7 @@ function gameReset() {
     restart = true;
     setTimeout(() => {
       document.addEventListener("keydown", reset);
-      document.addEventListener("touchstart", reset, { once: true });
+      document.addEventListener("touchstart", resetMobile, { once: true });
     }, 500);
   }
 }
@@ -271,6 +276,18 @@ function reset(e) {
   const keyCodes = ["Space"]
   if (keyCodes.includes(e.code)) {
   document.removeEventListener("keydown", reset);
+  restart = false;
+  gameOver = false;
+  spirit.y = spiritY;
+  obstacleArray = [];
+  score = 0;
+  ctx.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height);
+  }
+}
+function resetMobile(e) {
+  const keyCodesTouch = ["touchstart"]
+  if (keyCodesTouch.includes(e.type)) {
+  document.removeEventListener("touchstart", resetMobile);
   restart = false;
   gameOver = false;
   spirit.y = spiritY;
