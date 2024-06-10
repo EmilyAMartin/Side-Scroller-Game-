@@ -152,8 +152,9 @@ function gameLoop() {
     }, 4000);
   }
 }
-function moveSpirit(e) {
-  const keyCodes = ["Space", "touchstart"]
+function moveSpirit(e){
+  const keyCodes = ["Space"]
+  const keyCodesTouch = ["touchstart"]
   if (keyCodes.includes(e.code)) {
     velocityY = -6;
   }
@@ -267,7 +268,7 @@ function gameReset() {
   }
 }
 function reset(e) {
-  const keyCodes = ["Space", "touchstart"]
+  const keyCodes = ["Space"]
   if (keyCodes.includes(e.code)) {
   document.removeEventListener("keydown", reset);
   restart = false;
@@ -281,7 +282,7 @@ function reset(e) {
 function showGameover() {
   ctx.fillStyle = "white";
   ctx.font = "34px Amatic SC, sans-serif";
-  ctx.fillText("Gameover press Enter or Tap Screen to restart", 300, 350);
+  ctx.fillText("Gameover press Space or Tap Screen to restart", 300, 350);
 }
 function showScore() {
   ctx.fillStyle = "white";
