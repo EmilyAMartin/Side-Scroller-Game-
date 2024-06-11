@@ -191,9 +191,17 @@ canvas {
  canvas{
   padding-bottom: 5rem;
  }
+ #win{
+  top: 25%;
+  left: 50%;
+ }
 }
 @media only screen and (max-width: 375px) {
   #about{
     margin: 6rem auto;
   }
+  #win{
+    top: 35%;
+    left: 50%;
+   }
 }
