@@ -2,6 +2,8 @@
 //Game Physics and Operations//
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
+const backgroundimg = document.getElementById("background");
+let backgroundWidth = 0;
 const levelOneScore = 10000;
 const winImg = document.getElementById("win");
 const fps = 60;
@@ -24,10 +26,6 @@ audio.volume = 0.05; //Volume of background music
 audio.loop = true;
 audio.play();
 audio.pause();
-
-//Background//
-const backgroundimg = document.getElementById("background");
-let backgroundWidth = 0;
 
 //Sprit//
 const spiritWidth = 75;
@@ -81,11 +79,10 @@ window.onload = function () {
 };
 function gameLoop() {
   requestAnimationFrame(gameLoop);
-  //This section resolves the issues with 120 fps//
+  //Frames per second//
   const msNow = window.performance.now();
   const msPassed = msNow - msPrev;
   if (msPassed < msPerFrame) return;
-
   const excessTime = msPassed % msPerFrame;
   msPrev = msNow - excessTime;
 
@@ -118,7 +115,7 @@ function gameLoop() {
       obstacle.height
     );
 
-    //Gameover Collision//
+    //Game over by collision//
     if (detectCollision(spirit, obstacle)) {
       gameOver = true;
       gameReset();
@@ -132,17 +129,17 @@ function gameLoop() {
       );
     }
   }
-  //Game over Falling off Screen//
+  //Game over by falling off screen//
   if (spirit.y > canvas.height) {
     gameOver = true;
     gameReset();
     checkScore();
   }
-  //Game over Message//
+  //Game over message//
   if (gameOver) {
     showGameover();
   }
-  //Game over Completed Level One //
+  //Game over by completing level//
   if (score > levelOneScore) {
     gameOver = true;
     clearScreen();
@@ -152,6 +149,7 @@ function gameLoop() {
     }, 4000);
   }
 }
+//Game Functions//
 function moveSpirit(e) {
   const keyCodes = ["Space"]
   if (keyCodes.includes(e.code)) {
@@ -220,7 +218,7 @@ function detectCollision(a, b) {
     a.y + a.height / adjustBy > b.y
   );
 }
-//Game Menu Buttons//
+//Game Menu Functions//
 function mainMenu() {
   window.location = "index.html";
 }
@@ -262,7 +260,7 @@ function checkScore() {
   }
   highestScoresTable();
 }
-//Gameover Screen and Restart//
+//Gameover, Restart and Win//
 function gameReset() {
   if (!restart) {
     restart = true;
