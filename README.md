@@ -8,11 +8,11 @@ Spirit Realm is an endless side scroller game based on the folklore ledgends. Th
 My motivation for creating Spirit Realm comes from my love of playing endless side scroller games and my interest in folklore and ghost stories. In the future I hope to expand on the game and create more levels based on other spirits and folklore legends. 
 
 ## Features 
-Single player - Try your best to get the highest score you can!
-Desktop and Mobile- Use a keyboard or touch screen to play the game.
-Restrictions - The game currently only works in profile mode on mobile. 
-Highest Score Count - View your highest score per run. This feature can be toggled on/off.
-Sound Effect - This feature can be toggled on/off. 
+- Single player - Try your best to get the highest score you can!
+- Desktop and Mobile- Use a keyboard or touch screen to play the game.
+- Restrictions - The game currently only works in profile mode on mobile. 
+- Highest Score Count - View your highest score per run. This feature can be toggled on/off.
+- Sound Effect - This feature can be toggled on/off. 
 
 ## Built with 
 - Layout - Figma
