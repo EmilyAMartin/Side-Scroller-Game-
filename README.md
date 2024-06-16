@@ -15,9 +15,9 @@ Highest Score Count - View your highest score per run. This feature can be toggl
 Sound Effect - This feature can be toggled on/off. 
 
 ## Built with 
-# Layout - Figma
-# Artwork - ProCreate
-# Languages - HTML/CSS/JavaScript 
+- Layout - Figma
+- Artwork - ProCreate
+- Languages - HTML/CSS/JavaScript 
 
 Artwork created by Emily Martin 
 Home screen photo by Adam Kring on Unsplash
