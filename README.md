@@ -1,4 +1,4 @@
-# Play here 
+## Play here 
 https://emilyamartin.github.io/Side-Scroller-Game-/
 
 ## Description
@@ -17,8 +17,9 @@ My motivation for creating Spirit Realm comes from my love of playing endless si
 ## Built with 
 - Layout - Figma
 - Artwork - ProCreate
-- Languages - HTML/CSS/JavaScript 
+- Languages - HTML/CSS/JavaScript
 
-Artwork created by Emily Martin 
-Home screen photo by Adam Kring on Unsplash
+## Artwork
+- Game assets and artwork created by Emily Martin
+- Home screen photo by Adam Kring on Unsplash
   
