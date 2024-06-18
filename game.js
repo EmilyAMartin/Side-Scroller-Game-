@@ -301,9 +301,9 @@ function showGameover() {
 }
 function showScore() {
   ctx.fillStyle = "white";
-  ctx.font = "20px courier";
+  ctx.font = "30px courier";
   score++;
-  ctx.fillText(score, 15, 30);
+  ctx.fillText(score, 15, 35);
 }
 function showWin() {
   document.getElementById("win").style.display = "block";
