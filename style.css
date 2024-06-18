@@ -19,6 +19,7 @@ body {
   user-select: none;
   outline: none;
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  max-width: 100%;
 }
 canvas {
   max-width: 100%;
@@ -199,7 +200,7 @@ canvas {
 }
 @media only screen and (max-width: 375px) {
   #about{
-    margin: auto;
+    margin: 1rem auto;
   }
   #win{
     top: 35%;
