@@ -199,7 +199,7 @@ canvas {
 }
 @media only screen and (max-width: 375px) {
   #about{
-    margin: 6rem auto;
+    margin: auto;
   }
   #win{
     top: 35%;
