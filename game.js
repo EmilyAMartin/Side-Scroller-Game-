@@ -155,6 +155,9 @@ function moveSpirit(e) {
   if (keyCodes.includes(e.code)) {
     velocityY = -6;
   }
+  setTimeout((moveSpirit) => {
+    
+  }, 1000);
 }
 function moveSpiritTouch(e) {
   const keyCodesTouch = ["touchstart"]
