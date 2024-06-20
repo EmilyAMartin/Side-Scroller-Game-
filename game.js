@@ -19,6 +19,7 @@ let highestScores = [];
 let scoreList = document.getElementById("scoretable");
 let restart = false;
 let gameOver = false;
+const keyCodes = ["Space", "touchstart"];
 
 //Audio//
 let audio = document.getElementById("backgroundmusic");
@@ -69,99 +70,19 @@ const obstacle4X = 980;
 const obstacle4Y = 350;
 const obstacle4Img = document.getElementById("firefly");
 
-window.onload = function () {
-  //Events & Animation Request//
-  document.addEventListener("keydown", moveSpirit);
-  document.addEventListener("touchstart", moveSpiritTouch);
-  requestAnimationFrame(gameLoop);
-  setInterval(placeObstacle, 1000); //1000 milliseconds = 1 second
-  audio.play();
-};
-function gameLoop() {
-  requestAnimationFrame(gameLoop);
-  //Frames per second//
-  const msNow = window.performance.now();
-  const msPassed = msNow - msPrev;
-  if (msPassed < msPerFrame) return;
-  const excessTime = msPassed % msPerFrame;
-  msPrev = msNow - excessTime;
-
-  if (gameOver) {
-    return;
-  }
-  clearScreen();
-
+//Game Functions//
+function drawBackground() {
   //Background & Score//
   ctx.drawImage(backgroundimg, -backgroundWidth, 0);
   ctx.drawImage(backgroundimg, -backgroundWidth + canvas.width, 0);
   backgroundWidth += backgroundScrollSpeed;
   if (backgroundWidth == canvas.width) backgroundWidth = 0;
-  showScore();
-
-  //Draw Spirit//
-  velocityY += gravity;
-  spirit.y = Math.max(spirit.y + velocityY, 350);
+}
+function drawSpirit() {
   ctx.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height);
-
-  //Draw Obstacles//
-  for (let i = 0; i < obstacleArray.length; i++) {
-    let obstacle = obstacleArray[i];
-    obstacle.x += velocityX * (1 + score / 2000); //Speeds up the obstacles over time//
-    ctx.drawImage(
-      obstacle.img,
-      obstacle.x,
-      obstacle.y,
-      obstacle.width,
-      obstacle.height
-    );
-
-    //Game over by collision//
-    if (detectCollision(spirit, obstacle)) {
-      gameOver = true;
-      gameReset();
-      checkScore();
-      ctx.drawImage(
-        spiritImgDead,
-        spirit.x,
-        spirit.y,
-        spirit.width,
-        spirit.height
-      );
-    }
-  }
-  //Game over by falling off screen//
-  if (spirit.y > canvas.height) {
-    gameOver = true;
-    gameReset();
-    checkScore();
-  }
-  //Game over message//
-  if (gameOver) {
-    showGameover();
-  }
-  //Game over by completing level//
-  if (score > levelOneScore) {
-    gameOver = true;
-    clearScreen();
-    showWin();
-    setInterval(() => {
-      mainMenu();
-    }, 4000);
-  }
 }
-//Game Functions//
 function moveSpirit(e) {
-  const keyCodes = ["Space"]
-  if (keyCodes.includes(e.code)) {
-    velocityY = -6;
-  }
-  setTimeout((moveSpirit) => {
-    
-  }, 1000);
-}
-function moveSpiritTouch(e) {
-  const keyCodesTouch = ["touchstart"]
-  if (keyCodesTouch.includes(e.type)) {
+  if (keyCodes.includes(e.code) || keyCodes.includes(e.type)) {
     velocityY = -6;
   }
 }
@@ -269,38 +190,30 @@ function gameReset() {
     restart = true;
     setTimeout(() => {
       document.addEventListener("keydown", reset);
-      document.addEventListener("touchstart", resetMobile, { once: true });
+      document.addEventListener("touchstart", reset, { once: true });
     }, 500);
   }
 }
 function reset(e) {
-  const keyCodes = ["Space"]
-  if (keyCodes.includes(e.code)) {
-  document.removeEventListener("keydown", reset);
-  restart = false;
-  gameOver = false;
-  spirit.y = spiritY;
-  obstacleArray = [];
-  score = 0;
-  ctx.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height);
-  }
-}
-function resetMobile(e) {
-  const keyCodesTouch = ["touchstart"]
-  if (keyCodesTouch.includes(e.type)) {
-  document.removeEventListener("touchstart", resetMobile);
-  restart = false;
-  gameOver = false;
-  spirit.y = spiritY;
-  obstacleArray = [];
-  score = 0;
-  ctx.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height);
+  if (keyCodes.includes(e.code) || keyCodes.includes(e.type)) {
+    document.removeEventListener("keydown", reset);
+    restart = false;
+    gameOver = false;
+    spirit.y = spiritY;
+    obstacleArray = [];
+    score = 0;
+    ctx.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height);
   }
 }
 function showGameover() {
   ctx.fillStyle = "white";
-  ctx.font = "34px Amatic SC, sans-serif";
-  ctx.fillText("Gameover press Space or Tap Screen to restart", 300, 350);
+  ctx.font = "40px Amatic SC, sans-serif";
+  ctx.fillText("Gameover press Space or Tap Screen to restart", 280, 350);
+}
+function showGamestart() {
+  ctx.fillStyle = "white";
+  ctx.font = "40px Amatic SC, sans-serif";
+  ctx.fillText("Press Space or Tap Screen to start", 340, 350);
 }
 function showScore() {
   ctx.fillStyle = "white";
@@ -315,4 +228,92 @@ function showWin() {
 }
 function clearScreen() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+window.onload = function () {
+  //Events & Animation Request//
+  document.addEventListener("keydown", moveSpirit);
+  document.addEventListener("touchstart", moveSpirit);
+  audio.play();
+  drawBackground();
+  drawSpirit();
+  showGamestart();
+};
+
+document.addEventListener("keydown", startGame, { once: true });
+document.addEventListener("touchstart", startGame, { once: true });
+
+function startGame(e) {
+  if (keyCodes.includes(e.code) || keyCodes.includes(e.type)) {
+    requestAnimationFrame(gameLoop);
+    setInterval(placeObstacle, 1000); //1000 milliseconds = 1 second
+  }
+}
+
+function gameLoop() {
+  requestAnimationFrame(gameLoop);
+  //Frames per second//
+  const msNow = window.performance.now();
+  const msPassed = msNow - msPrev;
+  if (msPassed < msPerFrame) return;
+  const excessTime = msPassed % msPerFrame;
+  msPrev = msNow - excessTime;
+
+  if (gameOver) {
+    return;
+  }
+  clearScreen();
+  drawBackground();
+  drawSpirit();
+  showScore();
+
+  //Draw Spirit//
+  velocityY += gravity;
+  spirit.y = Math.max(spirit.y + velocityY, 350);
+
+  //Draw Obstacles//
+  for (let i = 0; i < obstacleArray.length; i++) {
+    let obstacle = obstacleArray[i];
+    obstacle.x += velocityX * (1 + score / 2000); //Speeds up the obstacles over time//
+    ctx.drawImage(
+      obstacle.img,
+      obstacle.x,
+      obstacle.y,
+      obstacle.width,
+      obstacle.height
+    );
+
+    //Game over by collision//
+    if (detectCollision(spirit, obstacle)) {
+      gameOver = true;
+      gameReset();
+      checkScore();
+      ctx.drawImage(
+        spiritImgDead,
+        spirit.x,
+        spirit.y,
+        spirit.width,
+        spirit.height
+      );
+    }
+  }
+  //Game over by falling off screen//
+  if (spirit.y > canvas.height) {
+    gameOver = true;
+    gameReset();
+    checkScore();
+  }
+  //Game over message//
+  if (gameOver) {
+    showGameover();
+  }
+  //Game over by completing level//
+  if (score > levelOneScore) {
+    gameOver = true;
+    clearScreen();
+    showWin();
+    setInterval(() => {
+      mainMenu();
+    }, 4000);
+  }
 }
