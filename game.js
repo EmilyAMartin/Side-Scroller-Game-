@@ -184,7 +184,20 @@ function checkScore() {
   }
   highestScoresTable();
 }
-//Gameover, Restart and Win//
+function highScoreBox(){
+  //box//
+    ctx.fillStyle = "#00000075";
+    ctx.fillRect(825,15,200,70);
+    ctx.strokeStyle = "white";
+    ctx.beginPath();
+    ctx.roundRect(825, 15, 200, 70, 5);
+    ctx.stroke();   
+  //text//
+    ctx.fillStyle = "white";
+    ctx.font = "25px Amatic SC, sans-serif";
+    ctx.fillText("Highest Score", 875, 40);
+}
+//Start, Restart, Win & Game Over //
 function gameReset() {
   if (!restart) {
     restart = true;
@@ -229,9 +242,11 @@ function showWin() {
 function clearScreen() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
-
+//Loading Game//
 window.onload = function () {
   //Events & Animation Request//
+  document.addEventListener("keydown", startGame, { once: true });
+  document.addEventListener("touchstart", startGame, { once: true });
   document.addEventListener("keydown", moveSpirit);
   document.addEventListener("touchstart", moveSpirit);
   audio.play();
@@ -239,17 +254,12 @@ window.onload = function () {
   drawSpirit();
   showGamestart();
 };
-
-document.addEventListener("keydown", startGame, { once: true });
-document.addEventListener("touchstart", startGame, { once: true });
-
 function startGame(e) {
   if (keyCodes.includes(e.code) || keyCodes.includes(e.type)) {
     requestAnimationFrame(gameLoop);
     setInterval(placeObstacle, 1000); //1000 milliseconds = 1 second
   }
 }
-
 function gameLoop() {
   requestAnimationFrame(gameLoop);
   //Frames per second//
@@ -266,7 +276,7 @@ function gameLoop() {
   drawBackground();
   drawSpirit();
   showScore();
-
+  highScoreBox();
   //Draw Spirit//
   velocityY += gravity;
   spirit.y = Math.max(spirit.y + velocityY, 350);
