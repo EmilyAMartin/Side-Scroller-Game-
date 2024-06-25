@@ -157,14 +157,14 @@ function playPause() {
     document.getElementById("pause").style.display = "none";
   }
 }
-function toggleHighScore() {
-  let showHighScore = document.getElementById("highestScoreMenu");
-  if (showHighScore.style.display === "none") {
-    showHighScore.style.display = "";
-  } else {
-    showHighScore.style.display = "none";
-  }
-}
+// function toggleHighScore() {
+//   let showHighScore = document.getElementById("highestScoreMenu");
+//   if (showHighScore.style.display === "none") {
+//     showHighScore.style.display = "";
+//   } else {
+//     showHighScore.style.display = "none";
+//   }
+// }
 function highestScoresTable() {
   scoreList.innerHTML = highestScores.map((row) => {
     return row.score;
@@ -195,8 +195,17 @@ function highScoreBox(){
   //text//
     ctx.fillStyle = "white";
     ctx.font = "25px Amatic SC, sans-serif";
-    ctx.fillText("Highest Score", 875, 40);
+    ctx.fillText("Highest Score", 875, 40);  
+  
+    //score//
+    ctx.fillStyle = "white";
+    ctx.font = "25px Amatic SC, sans-serif";
+    score;
+    ctx.fillText(score, 925 , 70);
 }
+function highScoreBoxToggle (){
+
+}    
 //Start, Restart, Win & Game Over //
 function gameReset() {
   if (!restart) {
@@ -253,6 +262,7 @@ window.onload = function () {
   drawBackground();
   drawSpirit();
   showGamestart();
+
 };
 function startGame(e) {
   if (keyCodes.includes(e.code) || keyCodes.includes(e.type)) {
