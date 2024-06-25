@@ -276,7 +276,6 @@ function gameLoop() {
   drawBackground();
   drawSpirit();
   showScore();
-  highScoreBox();
   //Draw Spirit//
   velocityY += gravity;
   spirit.y = Math.max(spirit.y + velocityY, 350);
