@@ -170,6 +170,7 @@ function highestScoresTable() {
     return row.score;
   });
 }
+ 
 function checkScore() {
   let worstScore = 0;
   if (highestScores.length > 1) {
@@ -195,14 +196,16 @@ function highScoreBox(){
   //text//
     ctx.fillStyle = "white";
     ctx.font = "25px Amatic SC, sans-serif";
-    ctx.fillText("Highest Score", 875, 40);  
+    ctx.fillText("Highest Score", 880 , 40);  
   
     //score//
     ctx.fillStyle = "white";
     ctx.font = "25px Amatic SC, sans-serif";
-    score;
-    ctx.fillText(score, 925 , 70);
-}
+    let highScore = highestScores.map((row) => {
+      return row.score;
+    });
+    ctx.fillText(highScore, 920  , 70);   
+}   
 function highScoreBoxToggle (){
 
 }    
