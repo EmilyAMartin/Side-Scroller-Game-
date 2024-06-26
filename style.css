@@ -158,24 +158,7 @@ canvas {
 #pause{
   position: relative;
 }
-#highestScoreMenu{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  position: relative;
-  top: 5%;
-  left: 5%;
-  transform: translate(-5%, 5%);
-  font-size: 1.5rem;
-  font-family: "Amatic SC", sans-serif;
-}
-#box {
-  width: 12rem;
-  height: 4rem;
-  border: 0.1rem solid white;
-  border-radius: 0.2rem;
-  background-color: #80808075;
-}
+
 #win{
   display: none;
   position: absolute;

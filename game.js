@@ -208,7 +208,7 @@ function highScoreBox(){
 }   
 function highScoreBoxToggle (){
 
-}    
+}
 //Start, Restart, Win & Game Over //
 function gameReset() {
   if (!restart) {
@@ -264,8 +264,7 @@ window.onload = function () {
   audio.play();
   drawBackground();
   drawSpirit();
-  showGamestart();
-
+  showGamestart();  
 };
 function startGame(e) {
   if (keyCodes.includes(e.code) || keyCodes.includes(e.type)) {
@@ -274,7 +273,9 @@ function startGame(e) {
   }
 }
 function gameLoop() {
+ 
   requestAnimationFrame(gameLoop);
+  
   //Frames per second//
   const msNow = window.performance.now();
   const msPassed = msNow - msPrev;
@@ -285,10 +286,12 @@ function gameLoop() {
   if (gameOver) {
     return;
   }
+  
   clearScreen();
   drawBackground();
   drawSpirit();
   showScore();
+  highScoreBox();
   //Draw Spirit//
   velocityY += gravity;
   spirit.y = Math.max(spirit.y + velocityY, 350);
@@ -304,19 +307,10 @@ function gameLoop() {
       obstacle.width,
       obstacle.height
     );
-
-    //Game over by collision//
-    if (detectCollision(spirit, obstacle)) {
+    if(detectCollision (spirit,obstacle)) {
       gameOver = true;
       gameReset();
       checkScore();
-      ctx.drawImage(
-        spiritImgDead,
-        spirit.x,
-        spirit.y,
-        spirit.width,
-        spirit.height
-      );
     }
   }
   //Game over by falling off screen//
@@ -325,8 +319,8 @@ function gameLoop() {
     gameReset();
     checkScore();
   }
-  //Game over message//
-  if (gameOver) {
+  //Game over message// 
+  if (gameOver) { 
     showGameover();
   }
   //Game over by completing level//
