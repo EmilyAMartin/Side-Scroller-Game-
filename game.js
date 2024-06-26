@@ -174,7 +174,7 @@ function checkScore() {
   }
 }
 function highScoreBoxToggle(){
- drawBackground()
+
 }
 function highScoreBox(){
   //box//
