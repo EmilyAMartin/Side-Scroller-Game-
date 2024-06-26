@@ -150,7 +150,6 @@ canvas {
   left: 5%;
   transform: translate(-5%, 5%);
 }
-
 #play{
   display:none;
   position: relative;
@@ -158,7 +157,6 @@ canvas {
 #pause{
   position: relative;
 }
-
 #win{
   display: none;
   position: absolute;

@@ -81,6 +81,9 @@ function drawBackground() {
 function drawSpirit() {
   ctx.drawImage(spiritImg, spirit.x, spirit.y, spirit.width, spirit.height);
 }
+function drawSpiritDead() {
+  ctx.drawImage(spiritImgDead, spirit.x, spirit.y, spirit.width, spirit.height);
+}
 function moveSpirit(e) {
   if (keyCodes.includes(e.code) || keyCodes.includes(e.type)) {
     velocityY = -6;
@@ -157,20 +160,6 @@ function playPause() {
     document.getElementById("pause").style.display = "none";
   }
 }
-// function toggleHighScore() {
-//   let showHighScore = document.getElementById("highestScoreMenu");
-//   if (showHighScore.style.display === "none") {
-//     showHighScore.style.display = "";
-//   } else {
-//     showHighScore.style.display = "none";
-//   }
-// }
-function highestScoresTable() {
-  scoreList.innerHTML = highestScores.map((row) => {
-    return row.score;
-  });
-}
- 
 function checkScore() {
   let worstScore = 0;
   if (highestScores.length > 1) {
@@ -183,32 +172,30 @@ function checkScore() {
   if (highestScores.length > 1) {
     highestScores.pop();
   }
-  highestScoresTable();
+}
+function highScoreBoxToggle(){
+ drawBackground()
 }
 function highScoreBox(){
   //box//
     ctx.fillStyle = "#00000075";
-    ctx.fillRect(825,15,200,70);
+    ctx.fillRect(870,15,150,70);
     ctx.strokeStyle = "white";
     ctx.beginPath();
-    ctx.roundRect(825, 15, 200, 70, 5);
+    ctx.roundRect(870, 15, 150, 70, 5);
     ctx.stroke();   
   //text//
     ctx.fillStyle = "white";
     ctx.font = "25px Amatic SC, sans-serif";
-    ctx.fillText("Highest Score", 880 , 40);  
-  
-    //score//
+    ctx.fillText("High Score", 910, 40);  
+  //score//
     ctx.fillStyle = "white";
     ctx.font = "25px Amatic SC, sans-serif";
     let highScore = highestScores.map((row) => {
       return row.score;
     });
-    ctx.fillText(highScore, 920  , 70);   
+    ctx.fillText(highScore, 935  , 70);   
 }   
-function highScoreBoxToggle (){
-
-}
 //Start, Restart, Win & Game Over //
 function gameReset() {
   if (!restart) {
@@ -273,9 +260,7 @@ function startGame(e) {
   }
 }
 function gameLoop() {
- 
   requestAnimationFrame(gameLoop);
-  
   //Frames per second//
   const msNow = window.performance.now();
   const msPassed = msNow - msPrev;
@@ -285,8 +270,7 @@ function gameLoop() {
 
   if (gameOver) {
     return;
-  }
-  
+  } 
   clearScreen();
   drawBackground();
   drawSpirit();
@@ -310,7 +294,8 @@ function gameLoop() {
     if(detectCollision (spirit,obstacle)) {
       gameOver = true;
       gameReset();
-      checkScore();
+      checkScore(); 
+      drawSpiritDead();
     }
   }
   //Game over by falling off screen//
