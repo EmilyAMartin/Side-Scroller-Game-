@@ -160,7 +160,9 @@ function playPause() {
     document.getElementById("pause").style.display = "none";
   }
 }
+let showHighScore = false
 function highScoreBox(){
+  if (showHighScore) {
   //box//
     ctx.fillStyle = "#00000075";
     ctx.fillRect(870,15,150,70);
@@ -178,8 +180,16 @@ function highScoreBox(){
     let highScore = highestScores.map((row) => {
       return row.score;
     });
-    ctx.fillText(highScore, 935  , 70);   
-}   
+    ctx.fillText(highScore, 935  , 70);  
+  }  
+}
+function highScoreBoxToggle(){
+  showHighScore = !showHighScore;
+
+  if (showHighScore){
+    highScoreBox();
+  }
+}
 function checkScore() {
   let worstScore = 0;
   if (highestScores.length > 1) {
@@ -256,6 +266,7 @@ function startGame(e) {
     requestAnimationFrame(gameLoop);
     setInterval(placeObstacle, 1000); //1000 milliseconds = 1 second
   }
+  showHighScore = true;
 }
 function gameLoop() {
   requestAnimationFrame(gameLoop);
