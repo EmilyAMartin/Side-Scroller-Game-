@@ -160,22 +160,6 @@ function playPause() {
     document.getElementById("pause").style.display = "none";
   }
 }
-function checkScore() {
-  let worstScore = 0;
-  if (highestScores.length > 1) {
-    worstScore = highestScores[highestScores.length - 1].score;
-  }
-  if (score > worstScore) {
-    highestScores.push({ score });
-  }
-  highestScores.sort((a, b) => (a.score > b.score ? -1 : 1));
-  if (highestScores.length > 1) {
-    highestScores.pop();
-  }
-}
-function highScoreBoxToggle(){
-
-}
 function highScoreBox(){
   //box//
     ctx.fillStyle = "#00000075";
@@ -196,6 +180,20 @@ function highScoreBox(){
     });
     ctx.fillText(highScore, 935  , 70);   
 }   
+function checkScore() {
+  let worstScore = 0;
+  if (highestScores.length > 1) {
+    worstScore = highestScores[highestScores.length - 1].score;
+  }
+  if (score > worstScore) {
+    highestScores.push({ score });
+  }
+  highestScores.sort((a, b) => (a.score > b.score ? -1 : 1));
+  if (highestScores.length > 1) {
+    highestScores.pop();
+  }
+}
+
 //Start, Restart, Win & Game Over //
 function gameReset() {
   if (!restart) {
@@ -276,6 +274,7 @@ function gameLoop() {
   drawSpirit();
   showScore();
   highScoreBox();
+
   //Draw Spirit//
   velocityY += gravity;
   spirit.y = Math.max(spirit.y + velocityY, 350);

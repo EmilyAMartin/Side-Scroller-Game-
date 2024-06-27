@@ -1,4 +1,4 @@
-# Play here 
+## Play here 
 https://emilyamartin.github.io/Side-Scroller-Game-/
 
 ## Description
@@ -21,4 +21,5 @@ Languages - HTML/CSS/JavaScript
 
 Artwork and game assets created by Emily Martin 
 Photo by Adam Kring on Unsplash
+Fonts by Google Fonts
   
