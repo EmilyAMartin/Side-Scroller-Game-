@@ -9,17 +9,27 @@ My motivation for creating Spirit Realm comes from my love of playing endless si
 
 ## Features 
 Single player - Try your best to get the highest score you can!
+<br>
 Desktop and Mobile- Use a keyboard or touch screen to play the game.
+<br>
 Restrictions - The game currently only works in profile mode on mobile. 
+<br>
 Highest Score Count - View your highest score per run. This feature can be toggled on/off.
+<br>
 Sound Effect - This feature can be toggled on/off. 
 
 ## Built with 
 Layout - Figma
+<br>
 Artwork - ProCreate
+<br>
 Languages - HTML/CSS/JavaScript 
+<br>
 
+## Resources
 Artwork and game assets created by Emily Martin 
-Photo by Adam Kring on Unsplash
+<br>
+Photo by Adam Kring on Unsplash 
+<br>
 Fonts by Google Fonts
   
