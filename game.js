@@ -4,7 +4,7 @@ const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 const backgroundimg = document.getElementById("background");
 let backgroundWidth = 0;
-const levelOneScore = 10000;
+const levelOneScore = 500;
 const winImg = document.getElementById("win");
 const fps = 60;
 const msPerFrame = 1000 / fps;
@@ -160,33 +160,33 @@ function playPause() {
     document.getElementById("pause").style.display = "none";
   }
 }
-let showHighScore = false
-function highScoreBox(){
+let showHighScore = false;
+function highScoreBox() {
   if (showHighScore) {
-  //box//
+    //box//
     ctx.fillStyle = "#00000075";
-    ctx.fillRect(870,15,150,70);
+    ctx.fillRect(870, 15, 150, 70);
     ctx.strokeStyle = "white";
     ctx.beginPath();
     ctx.roundRect(870, 15, 150, 70, 5);
-    ctx.stroke();   
-  //text//
+    ctx.stroke();
+    //text//
     ctx.fillStyle = "white";
     ctx.font = "25px Amatic SC, sans-serif";
-    ctx.fillText("High Score", 910, 40);  
-  //score//
+    ctx.fillText("High Score", 910, 40);
+    //score//
     ctx.fillStyle = "white";
     ctx.font = "25px Amatic SC, sans-serif";
     let highScore = highestScores.map((row) => {
       return row.score;
     });
-    ctx.fillText(highScore, 935  , 70);  
-  }  
+    ctx.fillText(highScore, 935, 70);
+  }
 }
-function highScoreBoxToggle(){
+function highScoreBoxToggle() {
   showHighScore = !showHighScore;
 
-  if (showHighScore){
+  if (showHighScore) {
     highScoreBox();
   }
 }
@@ -259,7 +259,7 @@ window.onload = function () {
   audio.play();
   drawBackground();
   drawSpirit();
-  showGamestart();  
+  showGamestart();
 };
 function startGame(e) {
   if (keyCodes.includes(e.code) || keyCodes.includes(e.type)) {
@@ -279,7 +279,7 @@ function gameLoop() {
 
   if (gameOver) {
     return;
-  } 
+  }
   clearScreen();
   drawBackground();
   drawSpirit();
@@ -301,10 +301,10 @@ function gameLoop() {
       obstacle.width,
       obstacle.height
     );
-    if(detectCollision (spirit,obstacle)) {
+    if (detectCollision(spirit, obstacle)) {
       gameOver = true;
       gameReset();
-      checkScore(); 
+      checkScore();
       drawSpiritDead();
     }
   }
@@ -314,8 +314,8 @@ function gameLoop() {
     gameReset();
     checkScore();
   }
-  //Game over message// 
-  if (gameOver) { 
+  //Game over message//
+  if (gameOver) {
     showGameover();
   }
   //Game over by completing level//
